@@ -1,0 +1,17 @@
+.specific {
+  margin: 100px;
+}
+
+.newArticle {
+  border: 1px solid gray;
+  background-color: bisque;
+  z-index: 5;
+}
+
+/* .newbtn {
+  position: absolute;
+} */
+
+.form {
+  margin: 20px;
+}
