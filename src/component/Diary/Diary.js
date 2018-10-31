@@ -62,7 +62,6 @@ class Diary extends Component {
               tags={this.state.hashtag}
               clickFunc={this._onClick.bind(this)}
             />
-            {console.log(this.state.filterData.length)}
             {this.state.filterData.length ? (
               <SpecificDiaryList articles={this.state.filterData} />
             ) : null}
