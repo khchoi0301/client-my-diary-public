@@ -13,7 +13,6 @@ class Diary extends Component {
     data: sampledata,
     hashtag: tagTable,
     filterData: [],
-    newarticle: false,
   };
 
   _onClick(e) {
@@ -27,26 +26,18 @@ class Diary extends Component {
     });
   }
 
-  newArticle() {
-    console.log(1, this);
-    this.setState({
-      newarticle: true,
-    });
-    console.log(this.state.newarticle);
+  componentDidMount() {
+    axios
+      .get('')
+      .then(response => {
+        this.setState({
+          data: response.data,
+        });
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
-  // componentDidMount() {
-  //   axios
-  //     .get('https://jsonplaceholder.typicode.com/posts/1/comments')
-  //     .then(response => {
-  //       this.setState({
-  //         data: response.data,
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.error(err);
-  //     });
-  //   console.log(this.state.data);
-  // }
 
   render() {
     return (
