@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 var loginPost = function(email, password) {
   axios
@@ -7,11 +8,16 @@ var loginPost = function(email, password) {
       password: password,
     })
     .then(res => {
-      console.log(res);
+      if (res.status === 200) {
+        const token = res.data.token;
+        localStorage.setItem('token', token);
+
+        window.location = '/';
+      }
     })
     .catch(err => {
       throw err;
     });
 };
 
-module.exports = { loginPost };
+export default loginPost;

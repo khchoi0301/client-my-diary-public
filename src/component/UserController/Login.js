@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { loginPost } from '../../../api/api';
+import loginPost from '../../api/api';
 
 export default class Login extends Component {
   state = {
@@ -26,6 +26,7 @@ export default class Login extends Component {
         <Form
           onSubmit={e => {
             e.preventDefault();
+            console.log(this.state.email, this.state.password);
             loginPost(this.state.email, this.state.password);
           }}
         >
