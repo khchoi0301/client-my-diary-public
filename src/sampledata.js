@@ -7,7 +7,7 @@ var sampledata = [
     email: 'Eliseo@gardner.biz',
     content:
       'laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium',
-    weather: '123',
+    weather: 'sunny',
     image: 'https://via.placeholder.com/600/92c952',
     tag: 'code',
   },
@@ -19,7 +19,7 @@ var sampledata = [
     email: 'Jayne_Kuhic@sydney.com',
     content:
       'est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et',
-    weather: '123',
+    weather: 'sunny',
     image: 'https://via.placeholder.com/600/92c952',
     tag: 'travel',
   },
@@ -31,7 +31,7 @@ var sampledata = [
     email: 'Nikita@garfield.biz',
     content:
       'quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione',
-    weather: '123',
+    weather: 'sunny',
     image: 'https://via.placeholder.com/600/51aa97',
     tag: 'hello',
   },
@@ -43,7 +43,7 @@ var sampledata = [
     email: 'Lew@alysha.tv',
     content:
       'non et atque\noccaecati deserunt quas accusantium unde odit nobis qui voluptatem\nquia voluptas consequuntur itaque dolor\net qui rerum deleniti ut occaecati',
-    weather: '123',
+    weather: 'sunny',
     image: 'ttps://via.placeholder.com/600/40591',
     tag: 'wow',
   },
@@ -55,7 +55,7 @@ var sampledata = [
     email: 'Hayden@althea.biz',
     content:
       'harum non quasi et ratione\ntempore iure ex voluptates in ratione\nharum architecto fugit inventore cupiditate\nvoluptates magni quo et',
-    weather: '123',
+    weather: 'sunny',
     image: 'https://via.placeholder.com/600/ca6196',
     tag: 'code',
   },
@@ -67,7 +67,7 @@ var sampledata = [
     email: 'Hayden@althea.biz',
     content:
       'harum non quasi et ratione\ntempore iure ex voluptates in ratione\nharum architecto fugit inventore cupiditate\nvoluptates magni quo et',
-    weather: '123',
+    weather: 'sunny',
     image: 'https://via.placeholder.com/600/ca6196',
     tag: 'states',
   },
