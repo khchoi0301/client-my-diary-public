@@ -5,7 +5,7 @@ class SignUp extends Component {
   render() {
     return (
       <div>
-        <Form action="http://10.130.151.17:3001/user/join" method="post">
+        <Form action="http://10.130.151.17:3001/auth/join" method="post">
           <FormGroup>
             <Label for="exampleEmail">Email</Label>
             <Input
