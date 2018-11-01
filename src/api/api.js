@@ -1,7 +1,7 @@
+// window.location 문제 해결해야함!!
 import axios from 'axios';
-// import { BrowserRouter, Route, Link } from 'react-router-dom';
 
-var loginPost = function(email, password) {
+const loginPost = (email, password) => {
   axios
     .post('http://10.130.151.17:3001/auth/login', {
       email: email,
@@ -20,4 +20,24 @@ var loginPost = function(email, password) {
     });
 };
 
-export default loginPost;
+const signupPost = (email, nick, password) => {
+  axios
+    .post(
+      'http://ec2-13-209-41-118.ap-northeast-2.compute.amazonaws.com:3001/auth/join',
+      {
+        email: email,
+        nick: nick,
+        password: password,
+      },
+    )
+    .then(res => {
+      if (res.status === 200) {
+        window.location = '/';
+      }
+    })
+    .catch(err => {
+      throw err;
+    });
+};
+
+export default { loginPost, signupPost };
