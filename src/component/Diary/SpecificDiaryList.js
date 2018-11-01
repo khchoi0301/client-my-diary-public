@@ -23,33 +23,34 @@ class SpecificDiaryList extends Component {
     this._selectIndex = this._selectIndex.bind(this);
   }
 
-  toggle() {
+
+  toggle = () => {
     this.setState({
       modal: !this.state.modal,
     });
-  }
+  };
 
-  toggleModify() {
+  toggleModify = () => {
     this.setState({
       modify: !this.state.modify,
     });
-  }
+  };
 
-  toggleNested() {
+  toggleNested = () => {
     this.setState({
       nestedModal: !this.state.nestedModal,
       closeAll: false,
     });
-  }
+  };
 
-  toggleAll() {
+  toggleAll = () => {
     this.setState({
       nestedModal: !this.state.nestedModal,
       closeAll: true,
     });
-  }
+  };
 
-  modify(arg, width) {    // 
+  modify(arg, width) {
     return !this.state.modify ? (
       this.state.current[arg]
     ) : (
@@ -64,7 +65,7 @@ class SpecificDiaryList extends Component {
         style={{ width: width }}
       />
     );
-  }
+  };
 
   _selectIndex(e) {
     this.setState({
@@ -155,14 +156,3 @@ class SpecificDiaryList extends Component {
 }
 
 export default SpecificDiaryList;
-
-// const SpecificDiarylist = props => (
-//   <div className="specific">
-//     {props.articles.map((article, idx) => {
-//       return <SpecificDiary article={article} key={idx} />;
-//     })}
-
-//   </div>
-// );
-
-// export default SpecificDiarylist;
