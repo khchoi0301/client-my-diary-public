@@ -8,7 +8,9 @@ class UserController extends Component {
       <div>
         <Nav>
           <NavItem>
-            <NavLink href="/login">Login</NavLink>
+            <NavLink>
+              <Link to="/login">Login</Link>
+            </NavLink>
           </NavItem>
           <NavItem>
             <NavLink>
@@ -16,7 +18,7 @@ class UserController extends Component {
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="#">
+            <NavLink>
               <Link to="/diary">Diary Link</Link>
             </NavLink>
           </NavItem>
