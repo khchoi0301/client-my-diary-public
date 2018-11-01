@@ -2,30 +2,29 @@ import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import SpecificDiaryList from './SpecificDiaryList';
 import { Button } from 'reactstrap';
-
 import BubbleList from './BubbleList';
 import axios from 'axios';
 import { sampledata, tagTable } from '../../sampledata';
 // import { resolveComponents } from 'uri-js';
 import { Link, Route } from 'react-router-dom';
 import NewArticle from './newarticle';
+import api from '../../api/api';
 
 class Diary extends Component {
   state = {
-    data: sampledata,
-    hashtag: tagTable,
-    filterData: [],
-    isClicked: false,
+    data: null,
+    hashtag: null,
+    selectedTag: null,
+    isClicked: false
   };
 
-  _onClick(e) {
-    const filteredData = this.state.data.filter(data => {
-      return data.tag === e;
-    });
+  _onClick(tag) {
+    api.getData(tag, 'data', (res, state) => {
+      this.setState({
+        [state]: res.data,
+        selectedTag: tag
 
-    this.setState({
-      // 비동기구나
-      filterData: filteredData,
+      });
     });
   }
 
@@ -35,23 +34,18 @@ class Diary extends Component {
     });
   };
 
-  // componentDidMount() {
-  //   axios
-  //     .get('')
-  //     .then(response => {
-  //       this.setState({
-  //         data: response.data,
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.error(err);
-  //     });
-  // }
+  componentDidMount() {
+    api.getData('tag', 'hashtag', (res, state) => {
+      this.setState({
+        [state]: res.data,
+      });
+    });
+  }
 
   render() {
     return (
       <div>
-        {!this.state.data.length ? (
+        {!this.state.hashtag ? (
           <p> loading... </p>
         ) : (
           <span>
@@ -65,8 +59,9 @@ class Diary extends Component {
               tags={this.state.hashtag}
               clickFunc={this._onClick.bind(this)}
             />
-            {this.state.filterData.length ? (
-              <SpecificDiaryList articles={this.state.filterData} />
+            {console.log('render', this.state.data)}
+            {this.state.data ? (
+              < SpecificDiaryList articles={this.state.data} tag={this.state.selectedTag} clickFunc={this._onClick.bind(this)} />
             ) : null}
           </span>
         )}
