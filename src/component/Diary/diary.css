@@ -15,3 +15,8 @@
 .form {
   margin: 20px;
 }
+
+.bubble {
+  position: relative;
+  left: 45%
+}
