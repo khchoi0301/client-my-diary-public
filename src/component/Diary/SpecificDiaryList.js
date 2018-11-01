@@ -4,51 +4,41 @@ import SpecificDiary from './SpecificDiary';
 import './diary.css';
 
 class SpecificDiaryList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modal: false,
-      modify: false,
-      nestedModal: false,
-      closeAll: false,
-      current: [],
-    };
+  state = {
+    modal: false,
+    modify: false,
+    nestedModal: false,
+    closeAll: false,
+    current: [],
+  };
 
-    this.toggle = this.toggle.bind(this);
-    this.modify = this.modify.bind(this);
-    this.toggleModify = this.toggleModify.bind(this);
-    this.toggleNested = this.toggleNested.bind(this);
-    this.toggleAll = this.toggleAll.bind(this);
-    this._selectIndex = this._selectIndex.bind(this);
-  }
-
-  toggle() {
+  toggle = () => {
     this.setState({
       modal: !this.state.modal,
     });
-  }
+  };
 
-  toggleModify() {
+  toggleModify = () => {
     this.setState({
       modify: !this.state.modify,
     });
-  }
+  };
 
-  toggleNested() {
+  toggleNested = () => {
     this.setState({
       nestedModal: !this.state.nestedModal,
       closeAll: false,
     });
-  }
+  };
 
-  toggleAll() {
+  toggleAll = () => {
     this.setState({
       nestedModal: !this.state.nestedModal,
       closeAll: true,
     });
-  }
+  };
 
-  modify(arg, width) {
+  modify = (arg, width) => {
     return !this.state.modify ? (
       this.state.current[arg]
     ) : (
@@ -58,16 +48,13 @@ class SpecificDiaryList extends Component {
         style={{ width: width }}
       />
     );
-  }
+  };
 
-  _selectIndex(e) {
-    // console.dir(e.currentTarget);
-    console.log(e, this.props.articles[e.idx]);
+  _selectIndex = e => {
     this.setState({
       current: this.props.articles[e.idx],
     });
-    console.log(e, this.state.current);
-  }
+  };
 
   render() {
     return (
@@ -148,14 +135,3 @@ class SpecificDiaryList extends Component {
 }
 
 export default SpecificDiaryList;
-
-// const SpecificDiarylist = props => (
-//   <div className="specific">
-//     {props.articles.map((article, idx) => {
-//       return <SpecificDiary article={article} key={idx} />;
-//     })}
-
-//   </div>
-// );
-
-// export default SpecificDiarylist;
