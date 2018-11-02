@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import loginPost from '../../api/api';
+import { Link } from 'react-router-dom';
 
 export default class Login extends Component {
   state = {
@@ -52,12 +53,10 @@ export default class Login extends Component {
           </FormGroup>
           <Button>Submit</Button>
         </Form>
+        <Link to="/signup">회원가입</Link>
         <div>
-          {' '}
-          <a href="/signup">회원가입</a>
+          <Link to="/">메인</Link>
         </div>
-
-        <a href="/">메인</a>
       </div>
     );
   }

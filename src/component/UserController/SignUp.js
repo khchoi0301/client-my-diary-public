@@ -73,9 +73,10 @@ class SignUp extends Component {
           </FormGroup>
           <Button>Submit</Button>
         </Form>
-        <Link to href="/">
-          main
-        </Link>
+        <Link to="/">메인</Link>
+        <div>
+          <Link to="/login">로그인</Link>
+        </div>
       </div>
     );
   }
