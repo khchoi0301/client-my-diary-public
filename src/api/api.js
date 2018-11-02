@@ -4,13 +4,11 @@ import axios from 'axios';
 //13.209.41.118:3306  mysql
 //http://10.130.151.17:3001 bong
 //'http://13.125.244.228:3001'
-
 // http://ec2-13-209-41-118.ap-northeast-2.compute.amazonaws.com:3001/post  get
 // http://ec2-13-209-41-118.ap-northeast-2.compute.amazonaws.com:3001/post/id  put jooyeon
 const url = 'http://54.191.92.219';
 
-
-const loginPost = function (email, password) {
+const loginPost = (email, password) => {
   axios
     .post('http://10.130.151.17:3001/auth/login', {
       email: email,
@@ -27,6 +25,23 @@ const loginPost = function (email, password) {
       throw err;
     });
 };
+
+const mockPost = data => {
+  axios
+    .post(`${url}/post`, {
+      ...data,
+      image: 'https://picsum.photos/200/300/?random',
+      email: email,
+      userId: '8',
+      id_post: 2,
+    })
+    .then(res => {
+      res.status === 201 ? alert('성공') : alert('실패');
+    })
+    .catch(err => {
+      throw err;
+    });
+  };
 
 const modifyDiary = function (obj, callback) {
   console.log('modifyDiary', obj);
@@ -73,4 +88,5 @@ const getData = (url, state, callback) => {
     });
 };
 
-export default { loginPost, modifyDiary, getData, deleteDiary };
+export default { loginPost, modifyDiary, getData, deleteDiary, mockPost };
+

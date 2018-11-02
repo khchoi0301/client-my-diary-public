@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import SpecificDiaryList from './SpecificDiaryList';
+import { Button } from 'reactstrap';
 import BubbleList from './BubbleList';
 import axios from 'axios';
 import { sampledata, tagTable } from '../../sampledata';
-import NewArticle from './newarticle';
 // import { resolveComponents } from 'uri-js';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
+import NewArticle from './newarticle';
 import api from '../../api/api';
 
 class Diary extends Component {
   state = {
     data: null,
     hashtag: null,
-    selectedTag: null
+    selectedTag: null,
+    isClicked: false
   };
 
   _onClick(tag) {
@@ -25,6 +27,12 @@ class Diary extends Component {
       });
     });
   }
+
+  _toggle = () => {
+    this.setState({
+      isClicked: !this.state.isClicked,
+    });
+  };
 
   componentDidMount() {
     console.log('mount');
@@ -42,9 +50,13 @@ class Diary extends Component {
           <p> loading... </p>
         ) : (
           <span>
-            <Link to="/newarticle">
-              <div className='newbtn'><button className="newbtn">새글쓰기</button></div>
-            </Link>
+
+            <Button className="newbtn" onClick={this._toggle}>
+              새글쓰기
+            </Button>
+            {this.state.isClicked ? (
+              <NewArticle toToggle={this._toggle} />
+            ) : null}
             <BubbleList
               tags={this.state.hashtag}
               clickFunc={this._onClick.bind(this)}
