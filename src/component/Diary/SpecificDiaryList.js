@@ -12,7 +12,7 @@ class SpecificDiaryList extends Component {
       modify: false,
       nestedModal: false,
       closeAll: false,
-      current: {},  //
+      current: {}, //
     };
 
     this.toggle = this.toggle.bind(this);
@@ -22,7 +22,6 @@ class SpecificDiaryList extends Component {
     this.toggleAll = this.toggleAll.bind(this);
     this._selectIndex = this._selectIndex.bind(this);
   }
-
 
   toggle = () => {
     this.setState({
@@ -58,7 +57,7 @@ class SpecificDiaryList extends Component {
       <input
         type="text"
         value={this.state.current[arg]}
-        onChange={(e) => {
+        onChange={e => {
           this.setState({
             current: { ...this.state.current, [arg]: e.target.value },
           });
@@ -66,7 +65,7 @@ class SpecificDiaryList extends Component {
         style={{ width: width }}
       />
     );
-  };
+  }
 
   _selectIndex(e) {
     this.setState({
@@ -102,7 +101,11 @@ class SpecificDiaryList extends Component {
             {this.modify('title', '300px')}
           </ModalHeader>
           <ModalBody>
-            <img src={this.state.current.image} width="400px" />
+            <img
+              alt="User Upload Page"
+              src={this.state.current.image}
+              width="400px"
+            />
             <br />
           </ModalBody>
           <ModalBody>
@@ -116,14 +119,22 @@ class SpecificDiaryList extends Component {
           </ModalBody>
           <ModalFooter>
             <Button color="success" onClick={this.toggleModify}>
-              {!this.state.modify ? '수정' : <span onClick={() => {
-                console.log('modifySubmit');
-                api.modifyDiary(this.state.current, () => {
-                  console.log('tag', this.props.tag);
-                  this.props.clickFunc(this.props.tag);
-                });
-                this.toggle();
-              }}>완료</span>/**/}
+              {!this.state.modify ? (
+                '수정'
+              ) : (
+                <span
+                  onClick={() => {
+                    console.log('modifySubmit');
+                    api.modifyDiary(this.state.current, () => {
+                      console.log('tag', this.props.tag);
+                      this.props.clickFunc(this.props.tag);
+                    });
+                    this.toggle();
+                  }}
+                >
+                  완료
+                </span>
+              ) /**/}
             </Button>{' '}
             <Button color="danger" onClick={this.toggleNested}>
               삭제
@@ -136,13 +147,16 @@ class SpecificDiaryList extends Component {
               <ModalHeader>삭제</ModalHeader>
               <ModalBody>정말 삭제 하시겠습니까??</ModalBody>
               <ModalFooter>
-                <Button color="danger" onClick={() => {
-                  this.toggleAll();
-                  api.deleteDiary(this.state.current, () => {
-                    console.log('tag', this.props.tag);
-                    this.props.clickFunc(this.props.tag);
-                  });
-                }}>
+                <Button
+                  color="danger"
+                  onClick={() => {
+                    this.toggleAll();
+                    api.deleteDiary(this.state.current, () => {
+                      console.log('tag', this.props.tag);
+                      this.props.clickFunc(this.props.tag);
+                    });
+                  }}
+                >
                   삭제
                 </Button>
                 <Button color="primary" onClick={this.toggleNested}>

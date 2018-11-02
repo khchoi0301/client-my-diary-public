@@ -28,7 +28,7 @@ class UserController extends Component {
             </NavLink>
           </NavItem>
         </Nav>
-        <img src="https://picsum.photos/600/400?image=123" />
+        <img alt="ourService" src="https://picsum.photos/600/400?image=123" />
       </div>
     );
   }
