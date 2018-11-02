@@ -26,10 +26,11 @@ class Diary extends Component {
   };
 
   _onClick(tag) {
+    console.log(tag);
     api.getData(tag, 'data', (res, state) => {
       this.setState({
         [state]: res.data,
-        selectedTag: tag,
+        selectedTag: tag
       });
     });
   }
@@ -63,6 +64,7 @@ class Diary extends Component {
           <p> loading... </p>
         ) : (
           <span>
+
             <Button className="newbtn" onClick={this._toggle}>
               새글쓰기
             </Button>
@@ -76,7 +78,6 @@ class Diary extends Component {
               tags={this.state.hashtag}
               clickFunc={this._onClick.bind(this)}
             />
-            {console.log('render', this.state.data)}
             {this.state.data ? (
               <SpecificDiaryList
                 articles={this.state.data}
