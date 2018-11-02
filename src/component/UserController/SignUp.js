@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 class SignUp extends Component {
   state = {
-    email: null,
+    email: '',
     password: null,
     nick: null,
   };
