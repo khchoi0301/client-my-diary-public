@@ -1,5 +1,5 @@
 .specific {
-  margin: 100px;
+  margin: 30px;
 }
 
 .newArticle {
@@ -19,4 +19,35 @@
 .bubble {
   position: relative;
   left: 45%
+}
+
+
+.newbtn {
+  float: center;
+}
+
+.svg{
+}
+.tagList{
+  margin-left: 100px;
+  float: left;
+  /* border: 1px red solid; */
+}
+.diaryList {
+  float: left;
+  /* display: inline; */
+  width: 30%;
+  /* border: 1px red solid; */
+  height: 100%;
+}
+
+.diarybtn {
+  width: 90%;
+  height: 100%;
+}
+
+.diary {
+  width: 100%;
+  float: left;
+  /* border: 1px red solid; */
 }

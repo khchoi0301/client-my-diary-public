@@ -5,6 +5,7 @@ import SignUp from './component/UserController/SignUp';
 import Login from './component/UserController/Login';
 import NewArticle from './component/Diary/newarticle';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+// import Bubbletest from './component/test/bubble';
 
 class App extends Component {
   render() {
