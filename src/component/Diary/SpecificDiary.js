@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SpecificDiary = props => (
-  <div>
+  <div className='diary'>
     <div>{props.article.title}</div>
     <div>{props.article.email}</div>
     <div>{props.article.content}</div>

@@ -53,17 +53,17 @@ class SpecificDiaryList extends Component {
     return !this.state.modify ? (
       this.state.current[arg]
     ) : (
-      <input
-        type="text"
-        value={this.state.current[arg]}
-        onChange={(e) => {
-          this.setState({
-            current: { ...this.state.current, [arg]: e.target.value },
-          });
-        }}
-        style={{ width: width }}
-      />
-    );
+        <input
+          type="text"
+          value={this.state.current[arg]}
+          onChange={(e) => {
+            this.setState({
+              current: { ...this.state.current, [arg]: e.target.value },
+            });
+          }}
+          style={{ width: width }}
+        />
+      );
   }
 
   _selectIndex(e) {
@@ -74,18 +74,19 @@ class SpecificDiaryList extends Component {
 
   render() {
     return (
-      <div>
+      <div className='diaryList'>
         {this.props.articles.map((article, idx) => {
           return (
             <Button
+              className='diarybtn'
               color="danger"
               onClick={e => {
                 this.toggle();
                 this._selectIndex({ idx });
               }}
-              style={{ margin: '10px', width: '90%' }}
+              style={{ margin: '10px' }}
             >
-              <SpecificDiary article={article} key={idx} />;
+              <SpecificDiary article={article} key={idx} />
             </Button>
           );
         })}
@@ -159,10 +160,10 @@ export default SpecificDiaryList;
 // const SpecificDiarylist = props => (
 //   <div className="specific">
 //     {props.articles.map((article, idx) => {
-//       return <SpecificDiary article={article} key={idx} />;
+//       return <SpecificDiary article={article} key={idx} />
 //     })}
 
 //   </div>
-// );
+// )
 
-// export default SpecificDiarylist;
+// export default SpecificDiarylist

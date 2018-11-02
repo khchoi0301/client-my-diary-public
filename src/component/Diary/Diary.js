@@ -17,16 +17,17 @@ class Diary extends Component {
   };
 
   _onClick(tag) {
+    console.log(tag);
     api.getData(tag, 'data', (res, state) => {
       this.setState({
         [state]: res.data,
         selectedTag: tag
-
       });
     });
   }
 
   componentDidMount() {
+    console.log('mount');
     api.getData('tag', 'hashtag', (res, state) => {
       this.setState({
         [state]: res.data,
@@ -42,13 +43,12 @@ class Diary extends Component {
         ) : (
           <span>
             <Link to="/newarticle">
-              <button className="newbtn">새글쓰기</button>
+              <div className='newbtn'><button className="newbtn">새글쓰기</button></div>
             </Link>
             <BubbleList
               tags={this.state.hashtag}
               clickFunc={this._onClick.bind(this)}
             />
-            {console.log('render', this.state.data)}
             {this.state.data ? (
               < SpecificDiaryList articles={this.state.data} tag={this.state.selectedTag} clickFunc={this._onClick.bind(this)} />
             ) : null}
