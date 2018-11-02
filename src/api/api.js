@@ -1,3 +1,4 @@
+// window.location 문제 해결해야함!!
 import axios from 'axios';
 // import { BrowserRouter, Route, Link } from 'react-router-dom';
 //13.209.41.118:3001  server
@@ -40,6 +41,26 @@ const mockPost = (data, callback) => {
     .then(res => {
       if (res.status === 201) {
         callback(postingData);
+      }
+    })
+    .catch(err => {
+      throw err;
+    });
+};
+
+const signupPost = (email, nick, password) => {
+  axios
+    .post(
+      'http://ec2-13-209-41-118.ap-northeast-2.compute.amazonaws.com:3001/auth/join',
+      {
+        email: email,
+        nick: nick,
+        password: password,
+      },
+    )
+    .then(res => {
+      if (res.status === 200) {
+        window.location = '/';
       }
     })
     .catch(err => {
@@ -92,4 +113,11 @@ const getData = (url, state, callback) => {
     });
 };
 
-export default { loginPost, modifyDiary, getData, deleteDiary, mockPost };
+export default {
+  loginPost,
+  modifyDiary,
+  getData,
+  deleteDiary,
+  mockPost,
+  signupPost,
+};
