@@ -12,6 +12,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
+  Alert,
 } from 'reactstrap';
 import api from '../../api/api';
 
@@ -22,20 +23,26 @@ export default class NewArticle extends Component {
     weather: '',
     tag: '',
     modal: true,
+    nestedModal: false,
+    closeAll: false,
   };
 
   _handleSubmit = e => {
     const { tag, title, content, weather } = this.state;
-    const splitedTagToArr = tag.split('#').slice(1);
+    const { postUpdate } = this.props; // Diary data state update
+    const splitedTagToArr = tag.split('#');
+    const postTag = !splitedTagToArr[0]
+      ? splitedTagToArr.slice(1)
+      : splitedTagToArr;
 
     let postDiaryData = {
       title,
       content,
       weather,
-      tag: splitedTagToArr,
+      tag: postTag,
     };
     e.preventDefault();
-    api.mockPost(postDiaryData);
+    api.mockPost(postDiaryData, postUpdate);
   };
 
   _onChangeAttr = (e, attr) => {
@@ -44,25 +51,46 @@ export default class NewArticle extends Component {
     });
   };
 
-  _toggle = () => {
-    console.log('modal toggled!');
-
+  _toggle = attr => {
     this.setState({
-      modal: !this.state.modal,
+      [attr]: !this.state[attr],
+    });
+  };
+
+  _toggleNested = () => {
+    this.setState({
+      nestedModal: !this.state.nestedModal,
+      closeAll: false,
+    });
+  };
+
+  _toggleAll = () => {
+    this.setState({
+      nestedModal: !this.state.nestedModal,
+      closeAll: true,
     });
   };
 
   render() {
     return (
-      <Modal
-        isOpen={this.state.modal}
-        toggle={() => {
-          this._toggle();
-          this.props.toToggle();
-        }}
-      >
-        <ModalHeader toggle={this.toggle}>일기 등록</ModalHeader>
+      <Modal isOpen={this.state.modal}>
+        <ModalHeader
+          toggle={() => {
+            this._toggle('modal');
+            this.props.toToggle();
+          }}
+        >
+          일기 등록
+        </ModalHeader>
         <ModalBody>
+          {/* <Modal isOpen={this.state.nestedModal} onClosed={this.state.closeAll}>
+            <ModalBody />
+            <ModalFooter>
+              <Button color="secondary" onClick={this._toggleAll}>
+                All Done
+              </Button>
+            </ModalFooter>
+          </Modal> */}
           <Form className="form" onSubmit={this._handleSubmit}>
             <FormGroup row>
               <Label for="exampleTitle" sm={2}>
