@@ -30,8 +30,13 @@ export default class BubbleList extends Component {
         {/* <h1 className="intro">My Diary By Tag</h1> */}
         <br />
         <BubbleChart
-          width={800}
-          height={700}
+          width={1000}
+          height={550}
+          graph={{
+            zoom: 0.65,
+            offsetX: +0.30, // -0.05 means that the offset is -5% of the graph width.
+            offsetY: -0.00,
+          }}
           fontFamily="Arial"
           data={this.props.tags}
           showLegend={true} // optional value, pass false to disable the legend.
