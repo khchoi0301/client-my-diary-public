@@ -12,13 +12,13 @@ const SpecificDiary = props => (
   // </div>
 
   <div className='diary'>
-    {console.log(props.article.image)}
+    {console.log(props.article.img)}
     <Card>
-      <CardImg top src={props.article.image} width="70px" height="70px" alt="Card image cap" />
+      <CardImg top src={props.article.img} width="70px" height="70px" alt="Card image cap" />
       <CardBody>
-        <CardTitle>{props.article.title}</CardTitle>
-        <CardSubtitle>{props.article.email}</CardSubtitle>
-        <CardText>{props.article.content}</CardText>
+        <CardTitle>{props.article.title.substring(0, 9)}{props.article.content[9] ? '...' : null}</CardTitle>
+        <CardSubtitle>{}</CardSubtitle>
+        <CardText>{props.article.content.substring(0, 20)}{props.article.content[20] ? '...' : null}</CardText>
       </CardBody>
     </Card>
   </div>

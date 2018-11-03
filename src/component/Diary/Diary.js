@@ -65,13 +65,14 @@ class Diary extends Component {
         ) : (
           <span>
             <Button className="newbtn" onClick={this._toggle}>
-              새글쓰기
+                새글쓰기
             </Button>
             {this.state.isClicked ? (
               <NewArticle
                 toToggle={this._toggle}
                 postUpdate={this._postDataUpdate}
                 hashTableUpdate={this._hashTableUpdate}
+                getWeather={api.getWeather}
               />
             ) : null}
             <BubbleList tags={this.state.hashtag} clickFunc={this._onClick} />
