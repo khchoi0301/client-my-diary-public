@@ -16,8 +16,6 @@ class Diary extends Component {
   };
 
   _hashTableUpdate = () => {
-    console.log('테이블 업데이트 확인!!');
-
     api.getData('tag', 'hashtag', (res, state) => {
       this.setState({
         [state]: res.data,

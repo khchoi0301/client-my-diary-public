@@ -1,5 +1,5 @@
-// 정상 통신 이후 작업은 아직 하지 않음
 // 이미지, 날씨는 우선 제외하고 테스팅중
+// 현재 통신에 성공하면 alert, 실패하면 console.error을 띄움. 추후에 어떤 이벤트를 발생할지 생각해야 함.
 import axios from 'axios';
 
 // const url =

@@ -1,7 +1,12 @@
 import React from 'react';
 import {
-  Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Button
+  Card,
+  CardImg,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  Button,
 } from 'reactstrap';
 
 const SpecificDiary = props => (
@@ -11,10 +16,17 @@ const SpecificDiary = props => (
   //   <div>{props.article.content}</div>
   // </div>
 
-  <div className='diary'>
-    {console.log(props.article.img)}
+
+  <div className="diary">
     <Card>
-      <CardImg top src={props.article.img} width="70px" height="70px" alt="Card image cap" />
+      <CardImg
+        top
+        src={props.article.img}
+        width="70px"
+        height="70px"
+        alt="Card image cap"
+      />
+
       <CardBody>
         <CardTitle>{props.article.title.substring(0, 9)}{props.article.content[9] ? '...' : null}</CardTitle>
         <CardSubtitle>{}</CardSubtitle>

@@ -13,7 +13,11 @@
     "react-infinite-scroller": "^1.2.2",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.5",
+
     "react-with-direction": "^1.3.0",
+
+    "react-scroll-horizontal": "^1.5.1",
+
     "reactstrap": "^6.5.0"
   },
   "scripts": {
