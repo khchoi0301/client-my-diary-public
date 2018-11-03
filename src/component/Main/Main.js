@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import api from 'api/api';
 
-class UserController extends Component {
+export default class UserController extends Component {
   render() {
     return (
       <div>
         <Nav>
           <NavItem>
             <NavLink>
-              <Link to="/login">Login</Link>
+              {!localStorage.token ? ( // 토큰이 존재하는지만 확인하므로 수정 필요
+                <Link to="/login">Login</Link>
+              ) : (
+                <div onClick={api.userLogout}>Logout</div>
+              )}
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink>
-              <Link to="/signup">Sign Up</Link>
+              {!localStorage.token ? <Link to="/signup">Sign Up</Link> : null}
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink>
               <Link to="/diary">Diary Link</Link>
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink disabled href="#">
-              Disabled Link
             </NavLink>
           </NavItem>
         </Nav>
@@ -33,5 +33,3 @@ class UserController extends Component {
     );
   }
 }
-
-export default UserController;

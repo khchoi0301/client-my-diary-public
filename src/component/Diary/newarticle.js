@@ -12,37 +12,34 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Alert,
 } from 'reactstrap';
-import api from '../../api/api';
+import api from 'api/api';
+import convertToArrayTag from 'utils/util';
 
 export default class NewArticle extends Component {
   state = {
     title: '',
     content: '',
     weather: '',
-    tag: '',
+    hashtag: '',
     modal: true,
     nestedModal: false,
     closeAll: false,
   };
 
   _handleSubmit = e => {
-    const { tag, title, content, weather } = this.state;
-    const { postUpdate } = this.props; // Diary data state update
-    const splitedTagToArr = tag.split('#');
-    const postTag = !splitedTagToArr[0]
-      ? splitedTagToArr.slice(1)
-      : splitedTagToArr;
+    const { postUpdate, hashTableUpdate } = this.props; // Diary data state update
+    const arrayifyHashTag = convertToArrayTag(this.state.hashtag);
 
-    let postDiaryData = {
-      title,
-      content,
-      weather,
-      tag: postTag,
+    const postDiaryData = {
+      ...this.state,
+      hashtag: arrayifyHashTag,
     };
+
+    console.log(postDiaryData);
+
     e.preventDefault();
-    api.mockPost(postDiaryData, postUpdate);
+    api.userDiaryPost(postDiaryData, hashTableUpdate);
   };
 
   _onChangeAttr = (e, attr) => {
@@ -83,14 +80,6 @@ export default class NewArticle extends Component {
           일기 등록
         </ModalHeader>
         <ModalBody>
-          {/* <Modal isOpen={this.state.nestedModal} onClosed={this.state.closeAll}>
-            <ModalBody />
-            <ModalFooter>
-              <Button color="secondary" onClick={this._toggleAll}>
-                All Done
-              </Button>
-            </ModalFooter>
-          </Modal> */}
           <Form className="form" onSubmit={this._handleSubmit}>
             <FormGroup row>
               <Label for="exampleTitle" sm={2}>
@@ -132,10 +121,10 @@ export default class NewArticle extends Component {
                 <FormGroup>
                   <Input
                     type="text"
-                    name="tag"
+                    name="hashtag"
                     id="exampleTag"
                     onChange={e => {
-                      this._onChangeAttr(e, 'tag');
+                      this._onChangeAttr(e, 'hashtag');
                     }}
                   />
                 </FormGroup>

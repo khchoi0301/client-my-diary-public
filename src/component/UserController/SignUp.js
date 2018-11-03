@@ -3,7 +3,7 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import api from '../../api/api';
 import { Link } from 'react-router-dom';
 
-class SignUp extends Component {
+export default class SignUp extends Component {
   state = {
     email: '',
     password: null,
@@ -34,11 +34,7 @@ class SignUp extends Component {
         <Form
           onSubmit={e => {
             e.preventDefault();
-            api.signupPost(
-              this.state.email,
-              this.state.nick,
-              this.state.password,
-            );
+            api.signupPost(this.state);
           }}
         >
           <FormGroup>
@@ -81,5 +77,3 @@ class SignUp extends Component {
     );
   }
 }
-
-export default SignUp;
