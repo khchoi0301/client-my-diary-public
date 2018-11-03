@@ -17,7 +17,11 @@ import api from 'api/api';
 import convertToArrayTag from 'utils/util';
 
 import 'react-dates/initialize';
-import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
+import {
+  DateRangePicker,
+  SingleDatePicker,
+  DayPickerRangeController,
+} from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 
 export default class NewArticle extends Component {
@@ -44,7 +48,20 @@ export default class NewArticle extends Component {
     console.log(postDiaryData);
 
     e.preventDefault();
-    api.userDiaryPost(postDiaryData, hashTableUpdate);
+    api
+      .userDiaryPost(postDiaryData)
+      .then(res => {
+        if (res.status === 200) {
+          hashTableUpdate();
+          console.log(postDiaryData);
+
+          postUpdate(postDiaryData);
+          alert('성공!');
+        } else {
+          alert('실패!');
+        }
+      })
+      .catch(err => console.error(err));
   };
 
   _onChangeAttr = (e, attr) => {
@@ -73,17 +90,21 @@ export default class NewArticle extends Component {
     });
   };
 
+  async componentDidMount() {
+    const getWeatherData = await api.getWeather('Seoul');
 
-  componentDidMount() {
-    api.getWeather('Seoul', (weather) => {
+    try {
+      const userLocationArea = getWeatherData.data.weather[0].main;
       this.setState({
-        weather: weather
+        weather: userLocationArea,
       });
-    });
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   render() {
-    console.log('date', this.state.date._d);
+    // console.log('date', this.state.date._d);
     return (
       <Modal isOpen={this.state.modal}>
         <ModalHeader

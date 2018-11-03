@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import api from '../../api/api';
 import { Link } from 'react-router-dom';
+import api from 'api/api';
 
 export default class SignUp extends Component {
   state = {
@@ -10,33 +10,28 @@ export default class SignUp extends Component {
     nick: null,
   };
 
-  _handleEmail = e => {
+  _handleUserInfo = (e, attr) => {
     this.setState({
-      email: e.target.value,
+      [attr]: e.target.value,
     });
   };
 
-  _handleNick = e => {
-    this.setState({
-      nick: e.target.value,
-    });
-  };
-
-  _handlePassword = e => {
-    this.setState({
-      password: e.target.value,
+  _onSignUp = e => {
+    e.preventDefault();
+    api.signupPost(this.state).then(res => {
+      if (res.status === 200) {
+        alert('성공');
+      } else {
+        console.dir(res);
+        alert('실패');
+      }
     });
   };
 
   render() {
     return (
       <div>
-        <Form
-          onSubmit={e => {
-            e.preventDefault();
-            api.signupPost(this.state);
-          }}
-        >
+        <Form onSubmit={this._onSignUp}>
           <FormGroup>
             <Label for="exampleEmail">Email</Label>
             <Input
@@ -44,7 +39,7 @@ export default class SignUp extends Component {
               name="email"
               id="exampleEmail"
               placeholder="example@gmail.com"
-              onChange={this._handleEmail}
+              onChange={e => this._handleUserInfo(e, 'email')}
             />
           </FormGroup>
           <FormGroup>
@@ -54,7 +49,7 @@ export default class SignUp extends Component {
               name="password"
               id="examplePassword"
               placeholder="password"
-              onChange={this._handlePassword}
+              onChange={e => this._handleUserInfo(e, 'password')}
             />
           </FormGroup>
           <FormGroup>
@@ -64,7 +59,7 @@ export default class SignUp extends Component {
               name="nick"
               id="exampleNickname"
               placeholder="Nickname"
-              onChange={this._handleNick}
+              onChange={e => this._handleUserInfo(e, 'nick')}
             />
           </FormGroup>
           <Button>Submit</Button>

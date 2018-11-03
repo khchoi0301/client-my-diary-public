@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
-import SpecificDiaryList from './SpecificDiaryList';
 import { Button } from 'reactstrap';
+import SpecificDiaryList from './SpecificDiaryList';
 import BubbleList from './BubbleList';
-// import { resolveComponents } from 'uri-js';
 import NewArticle from './newarticle';
-import api from '../../api/api';
+import api from 'api/api';
 
-class Diary extends Component {
+export default class Diary extends Component {
   state = {
     data: [],
     hashtag: [],
@@ -16,21 +14,29 @@ class Diary extends Component {
   };
 
   _hashTableUpdate = () => {
-    api.getData('tag', 'hashtag', (res, state) => {
-      this.setState({
-        [state]: res.data,
+    api
+      .getData('tag')
+      .then(res => {
+        this.setState({
+          hashtag: res.data,
+        });
+      })
+      .catch(err => {
+        console.error(err);
       });
-    });
   };
 
-  _onClick = tag => {
-    console.log(tag);
-    api.getData(tag, 'data', (res, state) => {
+  _onClick = async tag => {
+    const tagData = await api.getData(tag);
+
+    try {
       this.setState({
-        [state]: res.data,
+        data: tagData.data,
         selectedTag: tag,
       });
-    });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   _toggle = () => {
@@ -39,16 +45,24 @@ class Diary extends Component {
     });
   };
 
+  // 유저가 클릭한 태그의 데이터 리스트가 아래 깔려있는 상태에서
+  // 복잡하긴 하지만 일단 기능 구현...
   _postDataUpdate = postingData => {
-    const { data } = this.state;
+    const { data, selectedTag } = this.state;
 
-    // 우선 태그와 상관없이 띄우는건 만들었지만, 현재 클릭한 tag를 판단하여 data를 업데이트 해야하는지
-    // 고민해봐야 할듯..
-    this.setState({
-      data: data.concat(postingData),
-    });
+    if (postingData.hashtag && selectedTag) {
+      const isUserPostingTagIn = postingData.hashtag.findIndex(
+        tag => tag === selectedTag,
+      );
 
-    this._hashTableUpdate();
+      if (isUserPostingTagIn !== -1) {
+        console.log('돌아라!');
+
+        this.setState({
+          data: data.concat(postingData),
+        });
+      }
+    }
   };
 
   componentDidMount() {
@@ -63,7 +77,7 @@ class Diary extends Component {
         ) : (
           <span>
             <Button className="newbtn" onClick={this._toggle}>
-                새글쓰기
+              새글쓰기
             </Button>
             {this.state.isClicked ? (
               <NewArticle
@@ -88,7 +102,3 @@ class Diary extends Component {
     );
   }
 }
-
-Diary.propTypes = {};
-
-export default Diary;

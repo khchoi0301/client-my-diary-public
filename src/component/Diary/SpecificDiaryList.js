@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import HorizontalScroll from 'react-scroll-horizontal';
 import SpecificDiary from './SpecificDiary';
 import './diary.css';
 import api from 'api/api';
 import convertToArrayTag from 'utils/util';
-import InfiniteScroll from 'react-infinite-scroller';
-import HorizontalScroll from 'react-scroll-horizontal';
 
-class SpecificDiaryList extends Component {
+export default class SpecificDiaryList extends Component {
   state = {
     modal: false,
     modify: false,
@@ -65,7 +64,9 @@ class SpecificDiaryList extends Component {
     });
   };
 
-  _onModifyButtonClick = () => {
+  _onModifyButtonClick = async () => {
+    // 태그를 수정할때는 string으로 받아오기 때문에 배열화 작업이 필요함.
+    // 태그를 수정하지 않는 경우가 있기 때문에 현재 tag가 배열인지 확인작업이 필요함.
     const changedTag = this.state.current.tag;
     const arrayifyHashTag = Array.isArray(changedTag)
       ? changedTag
@@ -75,22 +76,36 @@ class SpecificDiaryList extends Component {
       tag: arrayifyHashTag,
     };
 
-    api.modifyDiary(modifiedDiaryData, () => {
-      this.props.clickFunc(this.props.tag);
-      this.props.hashTableUpdate();
-    });
+    const modifyResult = await api.modifyDiary(modifiedDiaryData);
 
-    this.toggle();
-    this.toggleModify();
+    try {
+      if (modifyResult.status === 200) {
+        this.props.clickFunc(this.props.tag);
+        this.props.hashTableUpdate();
+        this.toggle();
+        this.toggleModify();
+      } else {
+        alert(`에러 !! : ${modifyResult.status}`);
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  _onDeleteButtonClick = () => {
+  _onDeleteButtonClick = async () => {
     this.toggleAll();
-    api.deleteDiary(this.state.current, () => {
-      console.log('tag', this.props.tag);
-      this.props.clickFunc(this.props.tag);
-      this.props.hashTableUpdate();
-    });
+    const deleteResult = await api.deleteDiary(this.state.current);
+
+    try {
+      if (deleteResult.status === 200) {
+        this.props.clickFunc(this.props.tag);
+        this.props.hashTableUpdate();
+      } else {
+        alert(`에러!! : ${deleteResult.status}`);
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   render() {
@@ -134,7 +149,6 @@ class SpecificDiaryList extends Component {
         >
           <ModalHeader toggle={this.toggle}>
             {this.modify('title', '300px')}
-
           </ModalHeader>
           <ModalBody>
             {this.state.current.weather}
@@ -163,7 +177,7 @@ class SpecificDiaryList extends Component {
               </Button>
             ) : (
               <Button color="success" onClick={this._onModifyButtonClick}>
-                  완료
+                완료
               </Button>
             )}
             <Button color="danger" onClick={this.toggleNested}>
@@ -191,5 +205,3 @@ class SpecificDiaryList extends Component {
     );
   }
 }
-
-export default SpecificDiaryList;
