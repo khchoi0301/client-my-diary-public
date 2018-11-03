@@ -1,11 +1,42 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import api from '../../api/api';
+import { Link } from 'react-router-dom';
 
-class SignUp extends Component {
+export default class SignUp extends Component {
+  state = {
+    email: '',
+    password: null,
+    nick: null,
+  };
+
+  _handleEmail = e => {
+    this.setState({
+      email: e.target.value,
+    });
+  };
+
+  _handleNick = e => {
+    this.setState({
+      nick: e.target.value,
+    });
+  };
+
+  _handlePassword = e => {
+    this.setState({
+      password: e.target.value,
+    });
+  };
+
   render() {
     return (
       <div>
-        <Form action="http://10.130.151.17:3001/auth/join" method="post">
+        <Form
+          onSubmit={e => {
+            e.preventDefault();
+            api.signupPost(this.state);
+          }}
+        >
           <FormGroup>
             <Label for="exampleEmail">Email</Label>
             <Input
@@ -13,6 +44,7 @@ class SignUp extends Component {
               name="email"
               id="exampleEmail"
               placeholder="example@gmail.com"
+              onChange={this._handleEmail}
             />
           </FormGroup>
           <FormGroup>
@@ -22,23 +54,26 @@ class SignUp extends Component {
               name="password"
               id="examplePassword"
               placeholder="password"
+              onChange={this._handlePassword}
             />
           </FormGroup>
           <FormGroup>
-            <Label for="exampleNicknmae">Nickname</Label>
+            <Label for="exampleNickname">Nickname</Label>
             <Input
               type="text"
               name="nick"
               id="exampleNickname"
               placeholder="Nickname"
+              onChange={this._handleNick}
             />
           </FormGroup>
           <Button>Submit</Button>
         </Form>
-        <a href="/">main</a>
+        <Link to="/">메인</Link>
+        <div>
+          <Link to="/login">로그인</Link>
+        </div>
       </div>
     );
   }
 }
-
-export default SignUp;

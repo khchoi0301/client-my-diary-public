@@ -1,89 +1,138 @@
+// 정상 통신 이후 작업은 아직 하지 않음
+// 이미지, 날씨는 우선 제외하고 테스팅중
 import axios from 'axios';
-// import { BrowserRouter, Route, Link } from 'react-router-dom';
-//13.209.41.118:3001  server
-//13.209.41.118:3306  mysql
-//http://10.130.151.17:3001 bong
-//'http://13.125.244.228:3001'
-// http://ec2-13-209-41-118.ap-northeast-2.compute.amazonaws.com:3001/post  get
-// http://ec2-13-209-41-118.ap-northeast-2.compute.amazonaws.com:3001/post/id  put jooyeon
-const url = 'http://54.191.92.219';
-const email = 'test@naver.com';
 
-const loginPost = (email, password) => {
+// const url =
+//   'http://ec2-13-209-41-118.ap-northeast-2.compute.amazonaws.com:3001'; // 주연님 AWS 서버
+const url = 'http://10.130.151.17:3001';
+const email = 'test@naver.com';
+const TokenHeader = {
+  headers: {
+    authorization: localStorage.token,
+  },
+};
+
+// 토큰 발급 성공!
+const loginPost = loginUserInfo => {
   axios
-    .post('http://10.130.151.17:3001/auth/login', {
-      email: email,
-      password: password,
-    })
+    .post(`${url}/auth/login`, loginUserInfo)
     .then(res => {
       if (res.status === 200) {
         const token = res.data.token;
         localStorage.setItem('token', token);
+        alert('환영합니다!');
         window.location = '/';
+      } else {
+        console.dir(res);
+        alert('에러가 있어요');
       }
     })
     .catch(err => {
-      throw err;
+      console.error(err);
     });
 };
 
-const mockPost = (data, callback) => {
+// 성공
+const signupPost = signUpUserInfo => {
+  axios
+    .post(`${url}/auth/join`, signUpUserInfo)
+    .then(res => {
+      if (res.status === 200) {
+        alert('성공');
+      } else {
+        console.dir(res);
+        alert('실패');
+      }
+    })
+    .catch(err => {
+      console.error(err);
+    });
+};
+
+// 성공
+const userLogout = () => {
+  axios
+    .get(`${url}/auth/logout`, TokenHeader)
+    .then(res => {
+      if (res.status === 200) {
+        localStorage.removeItem('token');
+        window.location = '/';
+      } else {
+        console.dir(res);
+      }
+    })
+    .catch(err => {
+      console.dir(err);
+    });
+};
+
+// 성공
+const userDiaryPost = (data, callback) => {
   const postingData = {
     ...data,
-    image: 'https://picsum.photos/200/300/?random',
-    email: email,
-    userId: '8',
-    id_post: 2,
+    img: 'https://picsum.photos/200/300/?random',
   };
+
+  console.log(postingData);
+
   axios
-    .post(`${url}/post`, postingData)
+    .post(`${url}/post/write`, postingData, TokenHeader)
     .then(res => {
-      if (res.status === 201) {
+      if (res.status === 200) {
         callback(postingData);
+        alert('성공!');
       }
     })
     .catch(err => {
-      throw err;
+      console.error(err);
     });
 };
 
-const modifyDiary = function(obj, callback) {
-  console.log('modifyDiary', obj);
+// 성공
+const modifyDiary = function(modifiedDiary, callback) {
+  console.log(modifiedDiary);
+
   axios
-    .put(`${url}/post/${obj.id}`, {
-      id_post: obj.id_post,
-      title: obj.title,
-      email: obj.email,
-      content: obj.content,
-      weather: obj.weather,
-      image: obj.image,
-      tag: obj.tag,
-      userId: '7',
-    })
+    .patch(
+      `${url}/post/write`,
+      {
+        ...modifiedDiary,
+        img: null,
+        key: null,
+        weather: 'weatherTest',
+      },
+      TokenHeader,
+    )
     .then(res => {
       callback();
+      alert('업데이트 성공!');
+      // console.log('Update 성공!');
     })
     .catch(err => {
-      throw err;
+      console.error(err);
     });
 };
 
+// 성공
 const deleteDiary = (obj, callback) => {
   axios
-    .delete(`${url}/post/${obj.id}`, {
-      userId: '7',
+    .delete(`${url}/post/write`, {
+      data: obj,
+      ...TokenHeader,
     })
-    .then(res => {
-      callback('tag', 'hashtag');
+    .then(() => {
+      callback();
+      alert('성공!');
     })
     .catch(err => {
-      throw err;
+      console.error(err);
     });
 };
 
-const getData = (url, state, callback) => {
+// 성공
+const getData = (type, state, callback) => {
   axios
-    .get(`http://54.191.92.219/${url}`)
+    .get(`${url}/post/${type}`, TokenHeader)
     .then(res => {
       callback(res, state);
     })
@@ -92,4 +141,12 @@ const getData = (url, state, callback) => {
     });
 };
 
-export default { loginPost, modifyDiary, getData, deleteDiary, mockPost };
+export default {
+  loginPost,
+  modifyDiary,
+  getData,
+  deleteDiary,
+  userDiaryPost,
+  signupPost,
+  userLogout,
+};
