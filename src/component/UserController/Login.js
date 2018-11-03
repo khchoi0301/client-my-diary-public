@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import api from 'api/api';
 import { Link } from 'react-router-dom';
+import api from 'api/api';
 
 export default class Login extends Component {
   state = {
@@ -21,15 +21,30 @@ export default class Login extends Component {
     });
   };
 
+  _onLogin = e => {
+    e.preventDefault();
+    api
+      .loginPost(this.state)
+      .then(res => {
+        if (res.status === 200) {
+          const { token } = res.data;
+          localStorage.setItem('token', token);
+          alert('환영합니다!');
+          window.location = '/';
+        } else {
+          console.dir(res);
+          alert('에러가 있어요');
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
   render() {
     return (
       <div>
-        <Form
-          onSubmit={e => {
-            e.preventDefault();
-            api.loginPost(this.state);
-          }}
-        >
+        <Form onSubmit={this._onLogin}>
           <FormGroup>
             <Label for="exampleEmail">Email</Label>
             <Input
