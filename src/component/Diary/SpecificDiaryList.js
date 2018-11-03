@@ -3,6 +3,8 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import SpecificDiary from './SpecificDiary';
 import './diary.css';
 import api from '../../api/api';
+import InfiniteScroll from 'react-infinite-scroller';
+import HorizontalScroll from 'react-scroll-horizontal';
 
 class SpecificDiaryList extends Component {
   constructor(props) {
@@ -74,24 +76,39 @@ class SpecificDiaryList extends Component {
   }
 
   render() {
+    const parent = { width: '60em', height: '100%' };
     return (
       <div className='diaryList'>
-        {this.props.articles.map((article, idx) => {
-          return (
-            <Button
-              className='diarybtn'
-              color="danger"
-              onClick={e => {
-                this.toggle();
-                this._selectIndex({ idx });
-              }}
-              style={{ margin: '10px' }}
-            >
-              <SpecificDiary article={article} key={idx} />
-            </Button>
-          );
-        })}
-
+        {/* <InfiniteScroll
+          pageStart={0}
+          // loadMore={loadFunc}
+          hasMore={true}
+          loader={<div className="loader" key={0}>Loading ...</div>}
+          useWindow={false}
+        >
+        </InfiniteScroll> */}
+        <HorizontalScroll
+          pageLock={true}
+          // style={object}
+          config={{ stiffness: 4, damping: 3 }}
+        // className={string}
+        >
+          {this.props.articles.map((article, idx) => {
+            return (
+              <Button
+                className='diarybtn'
+                color="grey"
+                onClick={e => {
+                  this.toggle();
+                  this._selectIndex({ idx });
+                }}
+                style={{ margin: '4px', padding: '2px' }}
+              >
+                <SpecificDiary article={article} key={idx} />
+              </Button>
+            );
+          })}
+        </HorizontalScroll>
         <Modal
           isOpen={this.state.modal}
           toggle={this.toggle}
@@ -132,7 +149,7 @@ class SpecificDiaryList extends Component {
                     this.toggle();
                   }}
                 >
-                  완료
+                    완료
                 </span>
               ) /**/}
             </Button>{' '}
