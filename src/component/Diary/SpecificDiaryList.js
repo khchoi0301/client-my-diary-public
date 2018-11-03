@@ -50,7 +50,6 @@ class SpecificDiaryList extends Component {
         type="text"
         value={this.state.current[arg]}
         onChange={e => {
-          console.log(this.state.current.tag);
           this.setState({
             current: { ...this.state.current, [arg]: e.target.value },
           });
@@ -68,11 +67,9 @@ class SpecificDiaryList extends Component {
 
   _onModifyButtonClick = () => {
     const changedTag = this.state.current.tag;
-    console.log(changedTag);
-
     const arrayifyHashTag = Array.isArray(changedTag)
       ? changedTag
-      : convertToArrayTag(this.state.current.tag);
+      : convertToArrayTag(changedTag);
     const modifiedDiaryData = {
       ...this.state.current,
       tag: arrayifyHashTag,
