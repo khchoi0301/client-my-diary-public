@@ -41,9 +41,24 @@ export default class Login extends Component {
       });
   };
 
+  _kakaoLogin = async () => {
+    console.log(123);
+
+    const kakaoLoginResult = await api.routeKakaoLogin();
+
+    console.log(456);
+
+    try {
+      console.log(kakaoLoginResult);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   render() {
     return (
       <div>
+        <Button onClick={this._kakaoLogin}>카카오 로그인</Button>
         <Form onSubmit={this._onLogin}>
           <FormGroup>
             <Label for="exampleEmail">Email</Label>
