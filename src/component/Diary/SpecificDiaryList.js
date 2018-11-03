@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import SpecificDiary from './SpecificDiary';
 import './diary.css';
-
 import api from 'api/api';
 import convertToArrayTag from 'utils/util';
 import InfiniteScroll from 'react-infinite-scroller';
@@ -67,7 +66,10 @@ class SpecificDiaryList extends Component {
   };
 
   _onModifyButtonClick = () => {
-    const arrayifyHashTag = convertToArrayTag(this.state.current.tag);
+    const changedTag = this.state.current.tag;
+    const arrayifyHashTag = Array.isArray(changedTag)
+      ? changedTag
+      : convertToArrayTag(changedTag);
     const modifiedDiaryData = {
       ...this.state.current,
       tag: arrayifyHashTag,
@@ -94,7 +96,7 @@ class SpecificDiaryList extends Component {
   render() {
     const parent = { width: '60em', height: '100%' };
     return (
-      <div className='diaryList'>
+      <div className="diaryList">
         {/* <InfiniteScroll
           pageStart={0}
           // loadMore={loadFunc}
@@ -107,12 +109,12 @@ class SpecificDiaryList extends Component {
           pageLock={true}
           // style={object}
           config={{ stiffness: 4, damping: 3 }}
-        // className={string}
+          // className={string}
         >
           {this.props.articles.map((article, idx) => {
             return (
               <Button
-                className='diarybtn'
+                className="diarybtn"
                 color="grey"
                 onClick={e => {
                   this.toggle();
