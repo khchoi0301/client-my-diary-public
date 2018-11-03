@@ -89,7 +89,7 @@ const userDiaryPost = (data, callback) => {
 };
 
 // 성공
-const modifyDiary = function(modifiedDiary, callback) {
+const modifyDiary = function (modifiedDiary, callback) {
   console.log(modifiedDiary);
 
   axios
@@ -141,6 +141,22 @@ const getData = (type, state, callback) => {
     });
 };
 
+const getWeather = (city = 'Seoul', callback) => {
+  axios
+    .get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=cb4a47e322fcb2a924c922f9cacb7bca`)
+    .then(res => {
+      console.log('weather', res.data.weather[0].main);
+      callback(res.data.weather[0].main);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+};
+
+
+
+
+
 export default {
   loginPost,
   modifyDiary,
@@ -149,4 +165,5 @@ export default {
   userDiaryPost,
   signupPost,
   userLogout,
+  getWeather
 };

@@ -41,7 +41,7 @@ body {
 }
 .diaryList {
   border-top: 1px gray solid;
-  padding: 20px;
+  padding: 15px;
   float: left;
   overflow-x: auto;
   width: 75em;
@@ -52,7 +52,7 @@ body {
 .diarybtn {
   float: left;
   width: 10em;
-  height: 12em;
+  height: 13em;
   margin: 1;
   padding: 1;
   border: 3px 
@@ -63,4 +63,13 @@ body {
   height: 100%;
   float: left;
   /* border: 1px red solid; */
+}
+
+.card-body {
+padding: 10px;
+height: 8em;
+}
+.card-text {
+  width: 100%;
+  white-space: normal;
 }

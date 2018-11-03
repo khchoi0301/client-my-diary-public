@@ -134,7 +134,12 @@ class SpecificDiaryList extends Component {
         >
           <ModalHeader toggle={this.toggle}>
             {this.modify('title', '300px')}
+
           </ModalHeader>
+          <ModalBody>
+            {this.state.current.weather}
+            <br />
+          </ModalBody>
           <ModalBody>
             <img
               alt="User Upload Page"
@@ -150,7 +155,6 @@ class SpecificDiaryList extends Component {
           <ModalBody>
             #{this.modify('tag', '450px')}
             <br />
-            {this.state.current.weather}
           </ModalBody>
           <ModalFooter>
             {!this.state.modify ? (
@@ -159,7 +163,7 @@ class SpecificDiaryList extends Component {
               </Button>
             ) : (
               <Button color="success" onClick={this._onModifyButtonClick}>
-                완료
+                  완료
               </Button>
             )}
             <Button color="danger" onClick={this.toggleNested}>

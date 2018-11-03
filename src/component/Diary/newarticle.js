@@ -16,10 +16,15 @@ import {
 import api from 'api/api';
 import convertToArrayTag from 'utils/util';
 
+import 'react-dates/initialize';
+import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
+import 'react-dates/lib/css/_datepicker.css';
+
 export default class NewArticle extends Component {
   state = {
     title: '',
     content: '',
+    date: '',
     weather: '',
     hashtag: '',
     modal: true,
@@ -68,7 +73,17 @@ export default class NewArticle extends Component {
     });
   };
 
+
+  componentDidMount() {
+    api.getWeather('Seoul', (weather) => {
+      this.setState({
+        weather: weather
+      });
+    });
+  }
+
   render() {
+    console.log('date', this.state.date._d);
     return (
       <Modal isOpen={this.state.modal}>
         <ModalHeader
@@ -98,6 +113,28 @@ export default class NewArticle extends Component {
               </Col>
             </FormGroup>
             <FormGroup row>
+              <Label sm={2} for="exampleTag">
+                날짜
+              </Label>
+              <Col sm={9}>
+                <FormGroup>
+                  <SingleDatePicker
+                    date={this.state.date} // momentPropTypes.momentObj or null
+                    onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
+                    focused={this.state.focused} // PropTypes.bool
+                    onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+                    id="your_unique_id" // PropTypes.string.isRequired,
+                  />
+                </FormGroup>
+              </Col>
+              <Label sm={2} for="exampleTag">
+                날씨
+              </Label>
+              <Col sm={9}>
+                <FormGroup>
+                  <div>{this.state.weather}</div>
+                </FormGroup>
+              </Col>
               <Label for="exampleText" sm={2}>
                 내용
               </Label>
@@ -129,7 +166,7 @@ export default class NewArticle extends Component {
                   />
                 </FormGroup>
               </Col>
-              <Label sm={2} for="exampleTag">
+              {/* <Label sm={2} for="exampleTag">
                 날씨
               </Label>
               <Col sm={9}>
@@ -138,12 +175,13 @@ export default class NewArticle extends Component {
                     type="text"
                     name="weather"
                     id="exampleWeather"
+                    value={this.state.weather}
                     onChange={e => {
                       this._onChangeAttr(e, 'weather');
                     }}
                   />
                 </FormGroup>
-              </Col>
+              </Col> */}
             </Row>
 
             <FormGroup row>

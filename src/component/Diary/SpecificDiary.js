@@ -16,6 +16,7 @@ const SpecificDiary = props => (
   //   <div>{props.article.content}</div>
   // </div>
 
+
   <div className="diary">
     <Card>
       <CardImg
@@ -25,10 +26,11 @@ const SpecificDiary = props => (
         height="70px"
         alt="Card image cap"
       />
+
       <CardBody>
-        <CardTitle>{props.article.title}</CardTitle>
-        <CardSubtitle>{props.article.email}</CardSubtitle>
-        <CardText>{props.article.content}</CardText>
+        <CardTitle>{props.article.title.substring(0, 9)}{props.article.content[9] ? '...' : null}</CardTitle>
+        <CardSubtitle>{}</CardSubtitle>
+        <CardText>{props.article.content.substring(0, 20)}{props.article.content[20] ? '...' : null}</CardText>
       </CardBody>
     </Card>
   </div>
