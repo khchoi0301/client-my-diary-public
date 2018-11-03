@@ -16,7 +16,7 @@ class Diary extends Component {
   };
 
   _hashTableUpdate = () => {
-    console.log('table업데이트!! ');
+    console.log('테이블 업데이트 확인!!');
 
     api.getData('tag', 'hashtag', (res, state) => {
       this.setState({
@@ -25,15 +25,15 @@ class Diary extends Component {
     });
   };
 
-  _onClick(tag) {
+  _onClick = tag => {
     console.log(tag);
     api.getData(tag, 'data', (res, state) => {
       this.setState({
         [state]: res.data,
-        selectedTag: tag
+        selectedTag: tag,
       });
     });
-  }
+  };
 
   _toggle = () => {
     this.setState({
@@ -64,7 +64,6 @@ class Diary extends Component {
           <p> loading... </p>
         ) : (
           <span>
-
             <Button className="newbtn" onClick={this._toggle}>
               새글쓰기
             </Button>
@@ -72,17 +71,16 @@ class Diary extends Component {
               <NewArticle
                 toToggle={this._toggle}
                 postUpdate={this._postDataUpdate}
+                hashTableUpdate={this._hashTableUpdate}
               />
             ) : null}
-            <BubbleList
-              tags={this.state.hashtag}
-              clickFunc={this._onClick.bind(this)}
-            />
+            <BubbleList tags={this.state.hashtag} clickFunc={this._onClick} />
             {this.state.data ? (
               <SpecificDiaryList
                 articles={this.state.data}
                 tag={this.state.selectedTag}
-                clickFunc={this._onClick.bind(this)}
+                clickFunc={this._onClick}
+                hashTableUpdate={this._hashTableUpdate}
               />
             ) : null}
           </span>

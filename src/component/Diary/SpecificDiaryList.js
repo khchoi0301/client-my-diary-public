@@ -2,26 +2,17 @@ import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import SpecificDiary from './SpecificDiary';
 import './diary.css';
-import api from '../../api/api';
+import api from 'api/api';
+import convertToArrayTag from 'utils/util';
 
 class SpecificDiaryList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modal: false,
-      modify: false,
-      nestedModal: false,
-      closeAll: false,
-      current: {}, //
-    };
-
-    this.toggle = this.toggle.bind(this);
-    this.modify = this.modify.bind(this);
-    this.toggleModify = this.toggleModify.bind(this);
-    this.toggleNested = this.toggleNested.bind(this);
-    this.toggleAll = this.toggleAll.bind(this);
-    this._selectIndex = this._selectIndex.bind(this);
-  }
+  state = {
+    modal: false,
+    modify: false,
+    nestedModal: false,
+    closeAll: false,
+    current: {}, //
+  };
 
   toggle = () => {
     this.setState({
@@ -49,11 +40,10 @@ class SpecificDiaryList extends Component {
     });
   };
 
-  modify(arg, width) {
+  modify = (arg, width) => {
     return !this.state.modify ? (
       this.state.current[arg]
     ) : (
-
       <input
         type="text"
         value={this.state.current[arg]}
@@ -65,21 +55,46 @@ class SpecificDiaryList extends Component {
         style={{ width: width }}
       />
     );
-  }
+  };
 
-  _selectIndex(e) {
+  _selectIndex = e => {
     this.setState({
       current: this.props.articles[e.idx],
     });
-  }
+  };
+
+  _onModifyButtonClick = () => {
+    const arrayifyHashTag = convertToArrayTag(this.state.current.tag);
+    const modifiedDiaryData = {
+      ...this.state.current,
+      tag: arrayifyHashTag,
+    };
+
+    api.modifyDiary(modifiedDiaryData, () => {
+      this.props.clickFunc(this.props.tag);
+      this.props.hashTableUpdate();
+    });
+
+    this.toggle();
+    this.toggleModify();
+  };
+
+  _onDeleteButtonClick = () => {
+    this.toggleAll();
+    api.deleteDiary(this.state.current, () => {
+      console.log('tag', this.props.tag);
+      this.props.clickFunc(this.props.tag);
+      this.props.hashTableUpdate();
+    });
+  };
 
   render() {
     return (
-      <div className='diaryList'>
+      <div className="diaryList">
         {this.props.articles.map((article, idx) => {
           return (
             <Button
-              className='diarybtn'
+              className="diarybtn"
               color="danger"
               onClick={e => {
                 this.toggle();
@@ -103,7 +118,7 @@ class SpecificDiaryList extends Component {
           <ModalBody>
             <img
               alt="User Upload Page"
-              src={this.state.current.image}
+              src={this.state.current.img}
               width="400px"
             />
             <br />
@@ -118,24 +133,15 @@ class SpecificDiaryList extends Component {
             {this.state.current.weather}
           </ModalBody>
           <ModalFooter>
-            <Button color="success" onClick={this.toggleModify}>
-              {!this.state.modify ? (
-                '수정'
-              ) : (
-                <span
-                  onClick={() => {
-                    console.log('modifySubmit');
-                    api.modifyDiary(this.state.current, () => {
-                      console.log('tag', this.props.tag);
-                      this.props.clickFunc(this.props.tag);
-                    });
-                    this.toggle();
-                  }}
-                >
-                  완료
-                </span>
-              ) /**/}
-            </Button>{' '}
+            {!this.state.modify ? (
+              <Button color="success" onClick={this.toggleModify}>
+                수정
+              </Button>
+            ) : (
+              <Button color="success" onClick={this._onModifyButtonClick}>
+                완료
+              </Button>
+            )}
             <Button color="danger" onClick={this.toggleNested}>
               삭제
             </Button>
@@ -147,16 +153,7 @@ class SpecificDiaryList extends Component {
               <ModalHeader>삭제</ModalHeader>
               <ModalBody>정말 삭제 하시겠습니까??</ModalBody>
               <ModalFooter>
-                <Button
-                  color="danger"
-                  onClick={() => {
-                    this.toggleAll();
-                    api.deleteDiary(this.state.current, () => {
-                      console.log('tag', this.props.tag);
-                      this.props.clickFunc(this.props.tag);
-                    });
-                  }}
-                >
+                <Button color="danger" onClick={this._onDeleteButtonClick}>
                   삭제
                 </Button>
                 <Button color="primary" onClick={this.toggleNested}>
@@ -172,4 +169,3 @@ class SpecificDiaryList extends Component {
 }
 
 export default SpecificDiaryList;
-
