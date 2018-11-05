@@ -58,7 +58,9 @@ export default class Login extends Component {
   render() {
     return (
       <div>
-        <Button onClick={this._kakaoLogin}>카카오 로그인</Button>
+        {/* <Button onClick={this._kakaoLogin}>카카오 로그인</Button>
+       */}
+        <a href="http://10.130.151.17:3001/auth/kakao">카카오 로그인</a>
         <Form onSubmit={this._onLogin}>
           <FormGroup>
             <Label for="exampleEmail">Email</Label>
