@@ -15,6 +15,7 @@ import {
 } from 'reactstrap';
 import api from 'api/api';
 import convertToArrayTag from 'utils/util';
+var FormData = require('form-data');
 
 export default class NewArticle extends Component {
   state = {
@@ -25,7 +26,24 @@ export default class NewArticle extends Component {
     modal: true,
     nestedModal: false,
     closeAll: false,
+    img: '',
   };
+
+  // _handleSubmit = e => {
+  //   const { postUpdate, hashTableUpdate } = this.props; // Diary data state update
+  //   const arrayifyHashTag = convertToArrayTag(this.state.hashtag);
+
+  //   const postDiaryData = new FormData();
+  //   postDiaryData.append('hashtag', arrayifyHashTag);
+  //   for (var prop in this.state) {
+  //     postDiaryData.append(prop, this.state[prop]);
+  //   }
+
+  //   e.preventDefault();
+  //   console.log('it is', postDiaryData);
+  //   // console.log('hhh', postDiaryData.getHeaders());
+  //   api.userDiaryPost(postDiaryData, hashTableUpdate);
+  // };
 
   _handleSubmit = e => {
     const { postUpdate, hashTableUpdate } = this.props; // Diary data state update
@@ -36,11 +54,38 @@ export default class NewArticle extends Component {
       hashtag: arrayifyHashTag,
     };
 
-    console.log(postDiaryData);
+    console.log('postDiaryData', postDiaryData);
 
     e.preventDefault();
     api.userDiaryPost(postDiaryData, hashTableUpdate);
   };
+
+  _sendImage = () => {
+    // 폼데이터로 만들기
+    // console.log('_sendImage');
+    var imageForm = new FormData();
+    // console.log(document.getElementById('imagefile').files[0]);
+    imageForm.append('img', document.getElementById('imagefile').files[0]);
+    api.uploadImage(imageForm, a => {
+      console.log('aa', a);
+      this.setState({
+        img: 'aaaaaa',
+      });
+      console.log(this.state.img);
+    });
+    // console.log(e);
+    // callback(e);
+  };
+
+  // _changeImgState = e => {
+  //   if (this.state.img !== '') {
+  //     console.log('EEEE', e);
+  //     this.setState({
+  //       img: e,
+  //       // key: e.key,
+  //     });
+  //   }
+  // };
 
   _onChangeAttr = (e, attr) => {
     this.setState({
@@ -151,9 +196,19 @@ export default class NewArticle extends Component {
                 사진
               </Label>
               <Col sm={10}>
-                <Input type="file" name="file" id="exampleFile" />
+                <Input
+                  type="file"
+                  name="file"
+                  id="imagefile"
+                  // enctype="multipart/form-data"
+                  onChange={() => {
+                    console.log('Imagechanging');
+                    this._sendImage();
+                    // api.uploadImage();
+                  }}
+                />
                 <FormText color="muted">
-                  파일은 하나만 넣을 수 있습니다!
+                  파일은 하나만 넣을 수 있습니다!!
                 </FormText>
               </Col>
             </FormGroup>
