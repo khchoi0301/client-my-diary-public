@@ -4,6 +4,8 @@ import SpecificDiaryList from './SpecificDiaryList';
 import BubbleList from './BubbleList';
 import NewArticle from './newarticle';
 import api from 'api/api';
+import { ReactSelectize, SimpleSelect, MultiSelect } from 'react-selectize';
+
 
 export default class Diary extends Component {
   state = {
@@ -12,6 +14,7 @@ export default class Diary extends Component {
     selectedTag: null,
     isClicked: false,
   };
+
 
   _hashTableUpdate = () => {
     api
@@ -77,7 +80,7 @@ export default class Diary extends Component {
         ) : (
           <span>
             <Button className="newbtn" onClick={this._toggle}>
-              새글쓰기
+                새글쓰기
             </Button>
             {this.state.isClicked ? (
               <NewArticle
@@ -91,7 +94,7 @@ export default class Diary extends Component {
             {this.state.data ? (
               <SpecificDiaryList
                 articles={this.state.data}
-                tag={this.state.selectedTag}
+                selectedtag={this.state.selectedTag}
                 clickFunc={this._onClick}
                 hashTableUpdate={this._hashTableUpdate}
               />

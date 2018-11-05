@@ -5,8 +5,11 @@ import SpecificDiary from './SpecificDiary';
 import './diary.css';
 import api from 'api/api';
 import convertToArrayTag from 'utils/util';
+import MakeTag from './MakeTag';
+
 
 export default class SpecificDiaryList extends Component {
+
   state = {
     modal: false,
     modify: false,
@@ -41,21 +44,37 @@ export default class SpecificDiaryList extends Component {
     });
   };
 
+
   modify = (arg, width) => {
-    return !this.state.modify ? (
-      this.state.current[arg]
-    ) : (
-      <input
-        type="text"
-        value={this.state.current[arg]}
-        onChange={e => {
-          this.setState({
-            current: { ...this.state.current, [arg]: e.target.value },
-          });
-        }}
-        style={{ width: width }}
-      />
-    );
+    var obj = this.state.current.tag;
+    if (obj && !obj[0].label) {
+      obj = this.state.current.tag.map((text) => {
+        return { label: text, value: text };
+      });
+    }
+
+    return !this.state.modify ? ( //modi상태인지
+      arg === 'tag' && Array.isArray(this.state.current[arg]) ? (
+        this.state.current[arg].map((item) => {
+          return `#${item} `;
+        })
+      ) : this.state.current[arg]
+    ) :
+      Array.isArray(this.state.current[arg]) ?
+        <MakeTag tag={obj} func={this._onvalueChange} />
+        : (
+          <input
+            type="text"
+            value={this.state.current[arg]}
+            onChange={e => {
+              this.setState({
+                current: { ...this.state.current, [arg]: e.target.value },
+              });
+            }}
+            style={{ width: width }}
+          />
+        );
+
   };
 
   _selectIndex = e => {
@@ -65,12 +84,14 @@ export default class SpecificDiaryList extends Component {
   };
 
   _onModifyButtonClick = async () => {
-    // 태그를 수정할때는 string으로 받아오기 때문에 배열화 작업이 필요함.
-    // 태그를 수정하지 않는 경우가 있기 때문에 현재 tag가 배열인지 확인작업이 필요함.
-    const changedTag = this.state.current.tag;
-    const arrayifyHashTag = Array.isArray(changedTag)
-      ? changedTag
-      : convertToArrayTag(changedTag);
+    var arrayifyHashTag = this.state.current.tag;
+
+    if (arrayifyHashTag[0].label) {
+      arrayifyHashTag = this.state.current.tag.map((item) => {
+        return item.label;
+      });
+    }
+
     const modifiedDiaryData = {
       ...this.state.current,
       tag: arrayifyHashTag,
@@ -80,7 +101,7 @@ export default class SpecificDiaryList extends Component {
 
     try {
       if (modifyResult.status === 200) {
-        this.props.clickFunc(this.props.tag);
+        this.props.clickFunc(this.props.selectedtag);
         this.props.hashTableUpdate();
         this.toggle();
         this.toggleModify();
@@ -98,7 +119,7 @@ export default class SpecificDiaryList extends Component {
 
     try {
       if (deleteResult.status === 200) {
-        this.props.clickFunc(this.props.tag);
+        this.props.clickFunc(this.props.selectedtag);
         this.props.hashTableUpdate();
       } else {
         alert(`에러!! : ${deleteResult.status}`);
@@ -108,8 +129,15 @@ export default class SpecificDiaryList extends Component {
     }
   };
 
+  _onvalueChange = (tags) => {
+    this.setState({
+      current: { ...this.state.current, tag: tags }
+    });
+  }
+
   render() {
     const parent = { width: '60em', height: '100%' };
+
     return (
       <div className="diaryList">
         {/* <InfiniteScroll
@@ -124,7 +152,7 @@ export default class SpecificDiaryList extends Component {
           pageLock={true}
           // style={object}
           config={{ stiffness: 4, damping: 3 }}
-          // className={string}
+        // className={string}
         >
           {this.props.articles.map((article, idx) => {
             return (
@@ -167,7 +195,9 @@ export default class SpecificDiaryList extends Component {
             <br />
           </ModalBody>
           <ModalBody>
-            #{this.modify('tag', '450px')}
+            {this.modify('tag', '450px')}
+
+
             <br />
           </ModalBody>
           <ModalFooter>
@@ -177,7 +207,7 @@ export default class SpecificDiaryList extends Component {
               </Button>
             ) : (
               <Button color="success" onClick={this._onModifyButtonClick}>
-                완료
+                  완료
               </Button>
             )}
             <Button color="danger" onClick={this.toggleNested}>

@@ -10,13 +10,6 @@ import {
 } from 'reactstrap';
 
 const SpecificDiary = props => (
-  // <div className='diary'>
-  //   <div>{props.article.title}</div>
-  //   <div>{props.article.email}</div>
-  //   <div>{props.article.content}</div>
-  // </div>
-
-
   <div className="diary">
     <Card>
       <CardImg
