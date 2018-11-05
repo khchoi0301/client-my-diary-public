@@ -26,6 +26,7 @@ export default class NewArticle extends Component {
     modal: true,
     nestedModal: false,
     closeAll: false,
+    key: '',
     img: '',
   };
 
@@ -67,9 +68,11 @@ export default class NewArticle extends Component {
     // console.log(document.getElementById('imagefile').files[0]);
     imageForm.append('img', document.getElementById('imagefile').files[0]);
     api.uploadImage(imageForm, a => {
-      console.log('aa', a);
+      var b = JSON.parse(a);
+      console.log('aaa', b.img);
       this.setState({
-        img: 'aaaaaa',
+        img: b.img,
+        key: b.key,
       });
       console.log(this.state.img);
     });
@@ -114,6 +117,7 @@ export default class NewArticle extends Component {
   };
 
   render() {
+    console.log('render', this.state);
     return (
       <Modal isOpen={this.state.modal}>
         <ModalHeader
