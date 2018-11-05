@@ -2,8 +2,9 @@
 // 현재 통신에 성공하면 alert, 실패하면 console.error을 띄움. 추후에 어떤 이벤트를 발생할지 생각해야 함.
 import axios from 'axios';
 
-const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com'; // 주연님 AWS 서버
+const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com'; // 테스트용 AWS 서버
 // const url = 'http://10.130.151.17:3001';
+
 const TokenHeader = {
   headers: {
     authorization: localStorage.token,
@@ -47,7 +48,9 @@ const userLogout = () => {
 const userDiaryPost = data => {
   const postingData = {
     ...data,
-    img: 'https://picsum.photos/200/300/?random',
+    // img: 'https://picsum.photos/200/300/?random',
+    img: 'https://mydiarystorage.s3.ap-northeast-2.amazonaws.com/original/154141890822220180423121537154613.jpg',
+    key: 'original/154141890822220180423121537154613.jpg',
   };
 
   console.log(postingData);
@@ -65,8 +68,9 @@ const modifyDiary = modifiedDiary => {
       `${url}/post/write`,
       {
         ...modifiedDiary,
-        img: null,
-        key: null,
+        // img: 'https://picsum.photos/200/300/?random',
+        img: 'https://mydiarystorage.s3.ap-northeast-2.amazonaws.com/original/154141890822220180423121537154613.jpg',
+        key: 'original/154141890822220180423121537154613.jpg',
       },
       TokenHeader,
     )
