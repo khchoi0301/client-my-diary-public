@@ -1,33 +1,32 @@
 import React, { Component } from 'react';
-import { Nav, NavItem, NavLink } from 'reactstrap';
-import { Link } from 'react-router-dom';
-import api from 'api/api';
+import auth from 'utils/auth';
+import MainHeader from 'component/Main/MainHeader';
 
-export default class UserController extends Component {
+export default class Main extends Component {
+  state = {
+    isLogined: {},
+  };
+
+  async componentDidMount() {
+    const checking = await auth.userCheck();
+
+    if (checking.code !== 200) {
+      localStorage.removeItem('token');
+      alert('로그인 만료! 재로그인 해주세요');
+    }
+    this.setState({
+      isLogined: checking,
+    });
+  }
+
   render() {
+    const { isLogined } = this.state;
+
+    if (!isLogined.code) return null;
+
     return (
       <div>
-        <Nav>
-          <NavItem>
-            <NavLink>
-              {!localStorage.token ? ( // 토큰이 존재하는지만 확인하므로 수정 필요
-                <Link to="/login">Login</Link>
-              ) : (
-                <div onClick={api.userLogout}>Logout</div>
-              )}
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink>
-              {!localStorage.token ? <Link to="/signup">Sign Up</Link> : null}
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink>
-              <Link to="/diary">Diary Link</Link>
-            </NavLink>
-          </NavItem>
-        </Nav>
+        <MainHeader isLogined={isLogined.code === 200} />
         <img alt="ourService" src="https://picsum.photos/600/400?image=123" />
       </div>
     );
