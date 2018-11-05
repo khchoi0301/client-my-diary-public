@@ -2,8 +2,7 @@
 // 현재 통신에 성공하면 alert, 실패하면 console.error을 띄움. 추후에 어떤 이벤트를 발생할지 생각해야 함.
 import axios from 'axios';
 
-const url =
-  'http://ec2-13-209-41-118.ap-northeast-2.compute.amazonaws.com:3001'; // 주연님 AWS 서버
+const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com'; // 주연님 AWS 서버
 // const url = 'http://10.130.151.17:3001';
 const TokenHeader = {
   headers: {
