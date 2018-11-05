@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import api from 'api/api';
+import auth from 'utils/auth';
 
 export default class UserController extends Component {
   render() {
@@ -10,7 +11,7 @@ export default class UserController extends Component {
         <Nav>
           <NavItem>
             <NavLink>
-              {!localStorage.token ? ( // 토큰이 존재하는지만 확인하므로 수정 필요
+              {auth.getToken() === null ? ( // 토큰이 존재하는지만 확인하므로 수정 필요
                 <Link to="/login">Login</Link>
               ) : (
                 <div onClick={api.userLogout}>Logout</div>
