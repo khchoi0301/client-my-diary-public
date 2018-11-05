@@ -11,7 +11,7 @@ export default class UserController extends Component {
         <Nav>
           <NavItem>
             <NavLink>
-              {auth.getToken() === null ? ( // 토큰이 존재하는지만 확인하므로 수정 필요
+              {auth.userCheck().code !== 200 ? ( // 토큰이 존재하는지만 확인하므로 수정 필요
                 <Link to="/login">Login</Link>
               ) : (
                 <div onClick={api.userLogout}>Logout</div>
@@ -20,7 +20,9 @@ export default class UserController extends Component {
           </NavItem>
           <NavItem>
             <NavLink>
-              {!localStorage.token ? <Link to="/signup">Sign Up</Link> : null}
+              {auth.userCheck().code !== 200 ? (
+                <Link to="/signup">Sign Up</Link>
+              ) : null}
             </NavLink>
           </NavItem>
           <NavItem>

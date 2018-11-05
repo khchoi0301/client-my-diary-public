@@ -4,6 +4,7 @@ import Main from 'component/Main/Main';
 import SignUp from 'component/UserController/SignUp';
 import Login from 'component/UserController/Login';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import PrivateRouter from 'utils/privateRoute';
 
 export default class App extends Component {
   render() {
@@ -13,9 +14,9 @@ export default class App extends Component {
           {/* header 넣기 */}
           <Switch>
             <Route path="/" exact component={Main} />
-            <Route path="/diary" component={Diary} />
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={Login} />
+            <PrivateRouter path="/diary" component={Diary} />
           </Switch>
         </div>
       </Router>
