@@ -61,20 +61,35 @@ export default class NewArticle extends Component {
     api.userDiaryPost(postDiaryData, hashTableUpdate);
   };
 
+  _setHashtagState = hashtags => {
+    if (Array.isArray(this.state.hashtag)) {
+      for (var i = 0; i < hashtags.length; i++) {
+        this.state.hashtag.push(hashtags[i]);
+        console.log('11', this.state);
+      }
+    } else {
+      this.setState({
+        hashtag: hashtags,
+      });
+      console.log('22', this.state);
+    }
+  };
+
   _sendImage = () => {
     // 폼데이터로 만들기
     // console.log('_sendImage');
     var imageForm = new FormData();
     // console.log(document.getElementById('imagefile').files[0]);
     imageForm.append('img', document.getElementById('imagefile').files[0]);
-    api.uploadImage(imageForm, a => {
-      var b = JSON.parse(a);
-      console.log('aaa', b.img);
+    api.uploadImage(imageForm, data => {
+      var imgData = JSON.parse(data);
+
       this.setState({
-        img: b.img,
-        key: b.key,
+        img: imgData.img,
+        key: imgData.key,
       });
-      console.log(this.state.img);
+
+      this._setHashtagState(imgData.tag);
     });
     // console.log(e);
     // callback(e);
