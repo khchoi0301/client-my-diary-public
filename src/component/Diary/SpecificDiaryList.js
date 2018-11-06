@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {
+  Button, Modal, ModalHeader, ModalBody, ModalFooter, Col,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+} from 'reactstrap';
 import HorizontalScroll from 'react-scroll-horizontal';
 import SpecificDiary from './SpecificDiary';
 import './diary.css';
@@ -42,12 +49,10 @@ export default class SpecificDiaryList extends Component {
   };
 
   modify = (arg, width) => {
-    let obj = this.state.current.tag;
-    if (obj && !obj[0].label) {
-      obj = this.state.current.tag.map(text => {
-        return { label: text, value: text };
-      });
-    }
+
+    var obj = this.state.current.tag;
+
+
 
     return !this.state.modify ? ( //modi상태인지
       arg === 'tag' && Array.isArray(this.state.current[arg]) ? (
@@ -55,22 +60,22 @@ export default class SpecificDiaryList extends Component {
           return `#${item} `;
         })
       ) : (
-        this.state.current[arg]
-      )
+          this.state.current[arg]
+        )
     ) : Array.isArray(this.state.current[arg]) ? (
       <MakeTag tag={obj} func={this._onvalueChange} />
     ) : (
-      <input
-        type="text"
-        value={this.state.current[arg]}
-        onChange={e => {
-          this.setState({
-            current: { ...this.state.current, [arg]: e.target.value },
-          });
-        }}
-        style={{ width: width }}
-      />
-    );
+          <input
+            type="text"
+            value={this.state.current[arg]}
+            onChange={e => {
+              this.setState({
+                current: { ...this.state.current, [arg]: e.target.value },
+              });
+            }}
+            style={{ width: width }}
+          />
+        );
   };
 
   _selectIndex = e => {
@@ -147,7 +152,7 @@ export default class SpecificDiaryList extends Component {
           pageLock={true}
           // style={object}
           config={{ stiffness: 4, damping: 3 }}
-          // className={string}
+        // className={string}
         >
           {this.props.articles.map((article, idx) => {
             return (
@@ -174,7 +179,8 @@ export default class SpecificDiaryList extends Component {
             {this.modify('title', '300px')}
           </ModalHeader>
           <ModalBody>
-            {this.state.current.weather}
+            <span>{this.state.current.date}</span>
+            <span className='weather'>{this.state.current.weather}</span>
             <br />
           </ModalBody>
           <ModalBody>
@@ -194,16 +200,40 @@ export default class SpecificDiaryList extends Component {
 
             <br />
           </ModalBody>
+          {/* <Form>
+            <FormGroup row>
+              <Label for="exampleFile" sm={2}>
+                사진
+              </Label>
+              <Col sm={10}>
+                <Input
+                  type="file"
+                  name="file"
+                  id="imagefile"
+                  // enctype="multipart/form-data"
+                  onChange={() => {
+                    console.log('Imagechanging');
+                    this._sendImage();
+                    // api.uploadImage();
+                  }}
+                />
+                <FormText color="muted">
+                  파일은 하나만 넣을 수 있습니다!!
+                  <img src={this.state.img} />
+                </FormText>
+              </Col>
+            </FormGroup>
+          </Form> */}
           <ModalFooter>
             {!this.state.modify ? (
               <Button color="success" onClick={this.toggleModify}>
                 수정
               </Button>
             ) : (
-              <Button color="success" onClick={this._onModifyButtonClick}>
-                완료
+                <Button color="success" onClick={this._onModifyButtonClick}>
+                  완료
               </Button>
-            )}
+              )}
             <Button color="danger" onClick={this.toggleNested}>
               삭제
             </Button>

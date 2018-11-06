@@ -3,9 +3,20 @@ import { MultiSelect } from 'react-selectize';
 
 export default class MakeTag extends Component {
   render() {
+
+    var obj = this.props.tag;
+    if (obj.length && !obj[0].label) {
+      obj = this.props.tag.map(text => {
+        return { label: text, value: text };
+      });
+    }
+
     return (
-      <MultiSelect
-        values={this.props.tag}
+
+      < MultiSelect
+        values={obj}
+
+
         // delimtiers :: [KeyCode]
         delimiters={[188, 32]}
         // valuesFromPaste :: [Item] -> [Item] -> String -> [Item]

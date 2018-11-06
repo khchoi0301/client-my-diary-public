@@ -15,15 +15,22 @@ import {
 } from 'reactstrap';
 import api from 'api/api';
 import 'react-dates/initialize';
-import { SingleDatePicker } from 'react-dates';
+import {
+
+  SingleDatePicker,
+
+} from 'react-dates';
+import moment from 'moment';
+
 import 'react-dates/lib/css/_datepicker.css';
 import MakeTag from './MakeTag';
+var FormData = require('form-data');
 
 export default class NewArticle extends Component {
   state = {
     title: '',
     content: '',
-    date: '',
+    date: moment().subtract(2, 'year'),
     weather: '',
     hashtag: [],
     modal: true,
@@ -66,27 +73,29 @@ export default class NewArticle extends Component {
   };
 
   _setHashtagState = hashtags => {
-    if (Array.isArray(this.state.hashtag)) {
-      for (let i = 0; i < hashtags.length; i++) {
-        this.state.hashtag.push(hashtags[i]);
-        console.log('11', this.state);
-      }
-    } else {
-      this.setState({
-        hashtag: hashtags,
-      });
-      console.log('22', this.state);
-    }
+
+    var changed = hashtags.map(text => {
+      return { label: text, value: text };
+    });
+    var newtag = this.state.hashtag.concat(changed);
+    this.setState({
+      hashtag: newtag
+    });
   };
 
   _sendImage = () => {
-    // 폼데이터로 만들기
-    const imageForm = new FormData();
+    var imageForm = new FormData();
+    // console.log(document.getElementById('imagefile').files[0]);
+
     imageForm.append('img', document.getElementById('imagefile').files[0]);
     api
       .uploadImage(imageForm)
       .then(data => {
         const imgData = data.data;
+
+
+      this._setHashtagState(imgData.tag);
+
 
         this.setState({
           img: imgData.img,
@@ -186,11 +195,13 @@ export default class NewArticle extends Component {
               <Col sm={9}>
                 <FormGroup>
                   <SingleDatePicker
+
                     date={this.state.date} // momentPropTypes.momentObj or null
                     onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
                     focused={this.state.focused} // PropTypes.bool
                     onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
                     id="your_unique_id" // PropTypes.string.isRequired,
+                    isOutsideRange={() => false}
                   />
                 </FormGroup>
               </Col>
@@ -251,6 +262,7 @@ export default class NewArticle extends Component {
                 />
                 <FormText color="muted">
                   파일은 하나만 넣을 수 있습니다!!
+                  <img src={this.state.img} />
                 </FormText>
               </Col>
             </FormGroup>
