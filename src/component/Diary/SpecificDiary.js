@@ -6,7 +6,6 @@ import {
   CardBody,
   CardTitle,
   CardSubtitle,
-  Button,
 } from 'reactstrap';
 
 const SpecificDiary = props => (
@@ -21,9 +20,15 @@ const SpecificDiary = props => (
       />
 
       <CardBody>
-        <CardTitle>{props.article.title.substring(0, 9)}{props.article.content[9] ? '...' : null}</CardTitle>
+        <CardTitle>
+          {props.article.title.substring(0, 9)}
+          {props.article.content[9] ? '...' : null}
+        </CardTitle>
         <CardSubtitle>{}</CardSubtitle>
-        <CardText>{props.article.content.substring(0, 20)}{props.article.content[20] ? '...' : null}</CardText>
+        <CardText>
+          {props.article.content.substring(0, 20)}
+          {props.article.content[20] ? '...' : null}
+        </CardText>
       </CardBody>
     </Card>
   </div>

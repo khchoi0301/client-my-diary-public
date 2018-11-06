@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import api from 'api/api';
 
 export default class SignUp extends Component {
@@ -8,6 +8,7 @@ export default class SignUp extends Component {
     email: '',
     password: null,
     nick: null,
+    isSignUp: false,
   };
 
   _handleUserInfo = (e, attr) => {
@@ -20,17 +21,22 @@ export default class SignUp extends Component {
     e.preventDefault();
     api.signupPost(this.state).then(res => {
       if (res.status === 200) {
-        alert('성공');
+        alert('회원가입 되었습니다!');
+        this.setState({
+          isSignUp: !this.state.isSignUp,
+        });
       } else {
         console.dir(res);
-        alert('실패');
+        alert('회원가입에 실패했습니다!');
       }
     });
   };
 
   render() {
+    const { isSignUp } = this.state;
     return (
       <div>
+        {/* {isSignUp ? <Redirect to='/login'/> :  */}
         <Form onSubmit={this._onSignUp}>
           <FormGroup>
             <Label for="exampleEmail">Email</Label>

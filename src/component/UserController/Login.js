@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import api from 'api/api';
-import util from 'utils/util';
 
 export default class Login extends Component {
   state = {
