@@ -3,8 +3,8 @@ import Diary from 'component/Diary/Diary';
 import Main from 'component/Main/Main';
 import SignUp from 'component/UserController/SignUp';
 import Login from 'component/UserController/Login';
-
-import { HashRouter as Router, Route } from 'react-router-dom';
+import PrivateRouter from 'component/UserController/privateRoute';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
 export default class App extends Component {
   render() {
@@ -12,10 +12,12 @@ export default class App extends Component {
       <Router>
         <div className="App">
           {/* header 넣기 */}
-          <Route path="/" exact component={Main} />
-          <Route path="/diary" component={Diary} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/login" component={Login} />
+          <Switch>
+            <Route path="/" exact component={Main} />
+            <Route path="/signup" component={SignUp} />
+            <Route path="/login" component={Login} />
+            <PrivateRouter path="/diary" component={Diary} />
+          </Switch>
         </div>
       </Router>
     );
