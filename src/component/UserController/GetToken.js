@@ -1,14 +1,28 @@
 import React, { Component } from 'react';
-import {} from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 export default class GetToken extends Component {
   state = {
     isGetToken: false,
   };
 
-  _getKakaoToken = () => {};
+  _getKakaoToken = () => {
+    const token = this.props.match.params.token;
+    console.log(token);
+    if (token) {
+      localStorage.setItem('token', token);
+    } else alert('에러!!');
+  };
+
+  componentDidMount() {
+    const { isGetToken } = this.state;
+    this._getKakaoToken();
+    this.setState({
+      isGetToken: !isGetToken,
+    });
+  }
 
   render() {
-    return <div />;
+    return <div>{this.state.isGetToken ? <div /> : <Redirect to="/" />}</div>;
   }
 }
