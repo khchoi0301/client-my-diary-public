@@ -11,7 +11,6 @@ import HorizontalScroll from 'react-scroll-horizontal';
 import SpecificDiary from './SpecificDiary';
 import './diary.css';
 import api from 'api/api';
-import util from 'utils/util';
 import MakeTag from './MakeTag';
 
 export default class SpecificDiaryList extends Component {
@@ -20,7 +19,7 @@ export default class SpecificDiaryList extends Component {
     modify: false,
     nestedModal: false,
     closeAll: false,
-    current: {}, //
+    current: {},
   };
 
   toggle = () => {
@@ -50,12 +49,10 @@ export default class SpecificDiaryList extends Component {
   };
 
   modify = (arg, width) => {
+
     var obj = this.state.current.tag;
-    // if (obj && !obj[0].label) {
-    //   obj = this.state.current.tag.map(text => {
-    //     return { label: text, value: text };
-    //   });
-    // }
+
+
 
     return !this.state.modify ? ( //modi상태인지
       arg === 'tag' && Array.isArray(this.state.current[arg]) ? (
@@ -88,7 +85,7 @@ export default class SpecificDiaryList extends Component {
   };
 
   _onModifyButtonClick = async () => {
-    var arrayifyHashTag = this.state.current.tag;
+    let arrayifyHashTag = this.state.current.tag;
 
     if (arrayifyHashTag[0].label) {
       arrayifyHashTag = this.state.current.tag.map(item => {
@@ -110,7 +107,7 @@ export default class SpecificDiaryList extends Component {
         this.toggle();
         this.toggleModify();
       } else {
-        alert(`에러 !! : ${modifyResult.status}`);
+        alert(`수정에러 !! : ${modifyResult.status}`);
       }
     } catch (err) {
       console.error(err);
@@ -126,7 +123,7 @@ export default class SpecificDiaryList extends Component {
         this.props.clickFunc(this.props.selectedtag);
         this.props.hashTableUpdate();
       } else {
-        alert(`에러!! : ${deleteResult.status}`);
+        alert(`삭제에러!! : ${deleteResult.status}`);
       }
     } catch (err) {
       console.error(err);
@@ -140,8 +137,7 @@ export default class SpecificDiaryList extends Component {
   };
 
   render() {
-    const parent = { width: '60em', height: '100%' };
-
+    // const parent = { width: '60em', height: '100%' };
     return (
       <div className="diaryList">
         {/* <InfiniteScroll

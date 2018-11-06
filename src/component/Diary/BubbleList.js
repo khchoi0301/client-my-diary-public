@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Bubble from './Bubble';
 import BubbleChart from '@weknow/react-bubble-chart-d3';
 
 // export default props => (
@@ -11,17 +10,15 @@ import BubbleChart from '@weknow/react-bubble-chart-d3';
 //   </div>
 // );
 
-
 export default class BubbleList extends Component {
-
-  bubbleClick = (label) => {
+  bubbleClick = label => {
     this.props.clickFunc(label);
     console.log('Custom bubble click func', label);
-  }
-  legendClick = (label) => {
+  };
+  legendClick = label => {
     this.props.clickFunc(label);
     console.log('Customer legend click func', label);
-  }
+  };
 
   render() {
     return (
@@ -34,8 +31,8 @@ export default class BubbleList extends Component {
           height={550}
           graph={{
             zoom: 0.65,
-            offsetX: +0.30, // -0.05 means that the offset is -5% of the graph width.
-            offsetY: -0.00,
+            offsetX: +0.3, // -0.05 means that the offset is -5% of the graph width.
+            offsetY: -0.0,
           }}
           fontFamily="Arial"
           data={this.props.tags}
@@ -59,18 +56,16 @@ export default class BubbleList extends Component {
             color: '#fff',
             weight: 'bold',
           }}
-
           bubbleClickFun={this.bubbleClick}
           legendClickFun={this.legendClick}
 
-        //       graph={
-        //         zoom: 1.1,
-        //       offsetX: -0.05,
-        //         offsetY: -0.01,
-        // }
+          //       graph={
+          //         zoom: 1.1,
+          //       offsetX: -0.05,
+          //         offsetY: -0.01,
+          // }
         />
       </span>
     );
   }
 }
-
