@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import HorizontalScroll from 'react-scroll-horizontal';
 import SpecificDiary from './SpecificDiary';
 import './diary.css';
-
 import api from 'api/api';
 import convertToArrayTag from 'utils/util';
-import InfiniteScroll from 'react-infinite-scroller';
-import HorizontalScroll from 'react-scroll-horizontal';
+import MakeTag from './MakeTag';
 
-class SpecificDiaryList extends Component {
+
+export default class SpecificDiaryList extends Component {
+
   state = {
     modal: false,
     modify: false,
@@ -43,21 +44,37 @@ class SpecificDiaryList extends Component {
     });
   };
 
+
   modify = (arg, width) => {
-    return !this.state.modify ? (
-      this.state.current[arg]
-    ) : (
-      <input
-        type="text"
-        value={this.state.current[arg]}
-        onChange={e => {
-          this.setState({
-            current: { ...this.state.current, [arg]: e.target.value },
-          });
-        }}
-        style={{ width: width }}
-      />
-    );
+    var obj = this.state.current.tag;
+    if (obj && !obj[0].label) {
+      obj = this.state.current.tag.map((text) => {
+        return { label: text, value: text };
+      });
+    }
+
+    return !this.state.modify ? ( //modi상태인지
+      arg === 'tag' && Array.isArray(this.state.current[arg]) ? (
+        this.state.current[arg].map((item) => {
+          return `#${item} `;
+        })
+      ) : this.state.current[arg]
+    ) :
+      Array.isArray(this.state.current[arg]) ?
+        <MakeTag tag={obj} func={this._onvalueChange} />
+        : (
+          <input
+            type="text"
+            value={this.state.current[arg]}
+            onChange={e => {
+              this.setState({
+                current: { ...this.state.current, [arg]: e.target.value },
+              });
+            }}
+            style={{ width: width }}
+          />
+        );
+
   };
 
   _selectIndex = e => {
@@ -66,35 +83,63 @@ class SpecificDiaryList extends Component {
     });
   };
 
-  _onModifyButtonClick = () => {
-    const arrayifyHashTag = convertToArrayTag(this.state.current.tag);
+  _onModifyButtonClick = async () => {
+    var arrayifyHashTag = this.state.current.tag;
+
+    if (arrayifyHashTag[0].label) {
+      arrayifyHashTag = this.state.current.tag.map((item) => {
+        return item.label;
+      });
+    }
+
     const modifiedDiaryData = {
       ...this.state.current,
       tag: arrayifyHashTag,
     };
 
-    api.modifyDiary(modifiedDiaryData, () => {
-      this.props.clickFunc(this.props.tag);
-      this.props.hashTableUpdate();
-    });
+    const modifyResult = await api.modifyDiary(modifiedDiaryData);
 
-    this.toggle();
-    this.toggleModify();
+    try {
+      if (modifyResult.status === 200) {
+        this.props.clickFunc(this.props.selectedtag);
+        this.props.hashTableUpdate();
+        this.toggle();
+        this.toggleModify();
+      } else {
+        alert(`에러 !! : ${modifyResult.status}`);
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  _onDeleteButtonClick = () => {
+  _onDeleteButtonClick = async () => {
     this.toggleAll();
-    api.deleteDiary(this.state.current, () => {
-      console.log('tag', this.props.tag);
-      this.props.clickFunc(this.props.tag);
-      this.props.hashTableUpdate();
-    });
+    const deleteResult = await api.deleteDiary(this.state.current);
+
+    try {
+      if (deleteResult.status === 200) {
+        this.props.clickFunc(this.props.selectedtag);
+        this.props.hashTableUpdate();
+      } else {
+        alert(`에러!! : ${deleteResult.status}`);
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
+
+  _onvalueChange = (tags) => {
+    this.setState({
+      current: { ...this.state.current, tag: tags }
+    });
+  }
 
   render() {
     const parent = { width: '60em', height: '100%' };
+
     return (
-      <div className='diaryList'>
+      <div className="diaryList">
         {/* <InfiniteScroll
           pageStart={0}
           // loadMore={loadFunc}
@@ -112,7 +157,7 @@ class SpecificDiaryList extends Component {
           {this.props.articles.map((article, idx) => {
             return (
               <Button
-                className='diarybtn'
+                className="diarybtn"
                 color="grey"
                 onClick={e => {
                   this.toggle();
@@ -134,6 +179,10 @@ class SpecificDiaryList extends Component {
             {this.modify('title', '300px')}
           </ModalHeader>
           <ModalBody>
+            {this.state.current.weather}
+            <br />
+          </ModalBody>
+          <ModalBody>
             <img
               alt="User Upload Page"
               src={this.state.current.img}
@@ -146,9 +195,10 @@ class SpecificDiaryList extends Component {
             <br />
           </ModalBody>
           <ModalBody>
-            #{this.modify('tag', '450px')}
+            {this.modify('tag', '450px')}
+
+
             <br />
-            {this.state.current.weather}
           </ModalBody>
           <ModalFooter>
             {!this.state.modify ? (
@@ -157,7 +207,7 @@ class SpecificDiaryList extends Component {
               </Button>
             ) : (
               <Button color="success" onClick={this._onModifyButtonClick}>
-                완료
+                  완료
               </Button>
             )}
             <Button color="danger" onClick={this.toggleNested}>
@@ -185,5 +235,3 @@ class SpecificDiaryList extends Component {
     );
   }
 }
-
-export default SpecificDiaryList;

@@ -17,15 +17,26 @@ import api from 'api/api';
 import convertToArrayTag from 'utils/util';
 var FormData = require('form-data');
 
+import 'react-dates/initialize';
+import {
+  DateRangePicker,
+  SingleDatePicker,
+  DayPickerRangeController,
+} from 'react-dates';
+import 'react-dates/lib/css/_datepicker.css';
+import MakeTag from './MakeTag';
+
 export default class NewArticle extends Component {
   state = {
     title: '',
     content: '',
+    date: '',
     weather: '',
-    hashtag: '',
+    hashtag: [],
     modal: true,
     nestedModal: false,
     closeAll: false,
+
     key: '',
     img: '',
   };
@@ -48,18 +59,34 @@ export default class NewArticle extends Component {
 
   _handleSubmit = e => {
     const { postUpdate, hashTableUpdate } = this.props; // Diary data state update
-    const arrayifyHashTag = convertToArrayTag(this.state.hashtag);
+    const arrayifyHashTag = this.state.hashtag.map((item) => {
+      return item.label;
+    });
 
     const postDiaryData = {
       ...this.state,
       hashtag: arrayifyHashTag,
     };
+    this.setState({ modal: false });
 
     console.log('postDiaryData', postDiaryData);
 
     e.preventDefault();
-    api.userDiaryPost(postDiaryData, hashTableUpdate);
-  };
+    api
+      .userDiaryPost(postDiaryData)
+      .then(res => {
+        if (res.status === 200) {
+          hashTableUpdate();
+          console.log(postDiaryData);
+
+          postUpdate(postDiaryData);
+          alert('성공!');
+        } else {
+          alert('실패!');
+        }
+      })
+      .catch(err => console.error(err));
+  }
 
   _setHashtagState = hashtags => {
     if (Array.isArray(this.state.hashtag)) {
@@ -109,30 +136,59 @@ export default class NewArticle extends Component {
     this.setState({
       [attr]: e.target.value,
     });
-  };
+  }
+
+  _onChangeTag = (e, attr) => {
+    console.log('thisonchangetag', e);
+    this.setState({
+      [attr]: e.target.value,
+    });
+  }
 
   _toggle = attr => {
     this.setState({
       [attr]: !this.state[attr],
     });
-  };
+  }
 
   _toggleNested = () => {
     this.setState({
       nestedModal: !this.state.nestedModal,
       closeAll: false,
     });
-  };
+  }
 
   _toggleAll = () => {
     this.setState({
       nestedModal: !this.state.nestedModal,
       closeAll: true,
     });
-  };
+  }
+
+  _onvalueChange = (tags) => {
+    this.setState({ hashtag: tags });
+    console.log('tag', this.state.hashtag);
+  }
+
+  async componentDidMount() {
+    const getWeatherData = await api.getWeather('Seoul');
+
+    try {
+      const userLocationArea = getWeatherData.data.weather[0].main;
+      this.setState({
+        weather: userLocationArea,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   render() {
+
     console.log('render', this.state);
+
+    // console.log('date', this.state.date._d)
+
     return (
       <Modal isOpen={this.state.modal}>
         <ModalHeader
@@ -162,6 +218,28 @@ export default class NewArticle extends Component {
               </Col>
             </FormGroup>
             <FormGroup row>
+              <Label sm={2} for="exampleTag">
+                날짜
+              </Label>
+              <Col sm={9}>
+                <FormGroup>
+                  <SingleDatePicker
+                    date={this.state.date} // momentPropTypes.momentObj or null
+                    onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
+                    focused={this.state.focused} // PropTypes.bool
+                    onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+                    id="your_unique_id" // PropTypes.string.isRequired,
+                  />
+                </FormGroup>
+              </Col>
+              <Label sm={2} for="exampleTag">
+                날씨
+              </Label>
+              <Col sm={9}>
+                <FormGroup>
+                  <div>{this.state.weather}</div>
+                </FormGroup>
+              </Col>
               <Label for="exampleText" sm={2}>
                 내용
               </Label>
@@ -183,29 +261,7 @@ export default class NewArticle extends Component {
               </Label>
               <Col sm={9}>
                 <FormGroup>
-                  <Input
-                    type="text"
-                    name="hashtag"
-                    id="exampleTag"
-                    onChange={e => {
-                      this._onChangeAttr(e, 'hashtag');
-                    }}
-                  />
-                </FormGroup>
-              </Col>
-              <Label sm={2} for="exampleTag">
-                날씨
-              </Label>
-              <Col sm={9}>
-                <FormGroup>
-                  <Input
-                    type="text"
-                    name="weather"
-                    id="exampleWeather"
-                    onChange={e => {
-                      this._onChangeAttr(e, 'weather');
-                    }}
-                  />
+                  <MakeTag tag={this.state.hashtag} func={this._onvalueChange} />
                 </FormGroup>
               </Col>
             </Row>
