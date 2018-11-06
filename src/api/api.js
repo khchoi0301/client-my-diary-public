@@ -4,15 +4,10 @@ import axios from 'axios';
 
 // const url = 'http://ec2-13-209-41-118.ap-northeast-2.compute.amazonaws.com:3001'; // AWS 서버
 const url = 'http://10.130.151.17:3001'; // 봉균
-// const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com';
 
 //  /post  method get
-
-// const url =
-//   'http://ec2-13-209-41-118.ap-northeast-2.compute.amazonaws.com:3001'; // 주연님 AWS 서버
-const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com'; // 로컬 서버
-// const url = 'http://13.209.41.118:3001'; // EC2 서버
-const email = 'test@naver.com';
+// const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com'; // 로컬 서버
+// const email = 'test@naver.com';
 
 
 const TokenHeader = {
@@ -85,12 +80,6 @@ const userDiaryPost = data => {
   const postingData = {
     ...data,
     // img: 'https://picsum.photos/200/300/?random',
-
-    img: 'https://mydiarystorage.s3.ap-northeast-2.amazonaws.com/original/154147819859720180423121537154613.jpg',
-    key: 'original/154147819859720180423121537154613.jpg',
-
-
-
   };
 
   console.log('it is', postingData);
@@ -174,9 +163,6 @@ export default {
   userDiaryPost,
   signupPost,
   userLogout,
-
   uploadImage,
-
   getWeather,
-
 };

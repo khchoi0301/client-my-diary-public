@@ -15,7 +15,6 @@ import {
 } from 'reactstrap';
 import api from 'api/api';
 import util from 'utils/util';
-var FormData = require('form-data');
 
 import 'react-dates/initialize';
 import {
@@ -25,6 +24,7 @@ import {
 } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import MakeTag from './MakeTag';
+var FormData = require('form-data');
 
 export default class NewArticle extends Component {
   state = {
