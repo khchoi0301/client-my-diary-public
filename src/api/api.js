@@ -4,7 +4,7 @@ import axios from 'axios';
 
 // const url =
 //   'http://ec2-13-209-41-118.ap-northeast-2.compute.amazonaws.com:3001'; // 주연님 AWS 서버
-const url = 'http://127.0.0.1:3001'; // 로컬 서버
+const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com'; // 로컬 서버
 // const url = 'http://13.209.41.118:3001'; // EC2 서버
 const email = 'test@naver.com';
 const TokenHeader = {
