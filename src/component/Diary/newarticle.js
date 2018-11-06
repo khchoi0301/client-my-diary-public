@@ -89,7 +89,7 @@ export default class NewArticle extends Component {
         key: imgData.key,
       });
 
-      this._setHashtagState(imgData.tag);
+      // this._setHashtagState(imgData.tag);
     });
     // console.log(e);
     // callback(e);
