@@ -117,9 +117,6 @@ const modifyDiary = modifiedDiary => {
       `${url}/post/write`,
       {
         ...modifiedDiary,
-        // img: 'https://picsum.photos/200/300/?random',
-        img: 'https://mydiarystorage.s3.ap-northeast-2.amazonaws.com/original/154147819859720180423121537154613.jpg',
-        key: 'original/154147819859720180423121537154613.jpg',
       },
       TokenHeader,
     )
