@@ -14,15 +14,8 @@ import {
   ModalFooter,
 } from 'reactstrap';
 import api from 'api/api';
-import util from 'utils/util';
-var FormData = require('form-data');
-
 import 'react-dates/initialize';
-import {
-  DateRangePicker,
-  SingleDatePicker,
-  DayPickerRangeController,
-} from 'react-dates';
+import { SingleDatePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import MakeTag from './MakeTag';
 
@@ -38,6 +31,7 @@ export default class NewArticle extends Component {
     closeAll: false,
     key: '',
     img: '',
+    isUploadImg: false,
   };
 
   _handleSubmit = e => {
@@ -63,7 +57,7 @@ export default class NewArticle extends Component {
           console.log(postDiaryData);
 
           postUpdate(postDiaryData);
-          alert('성공!');
+          alert('등록되었습니다!');
         } else {
           alert('실패!');
         }
@@ -73,7 +67,7 @@ export default class NewArticle extends Component {
 
   _setHashtagState = hashtags => {
     if (Array.isArray(this.state.hashtag)) {
-      for (var i = 0; i < hashtags.length; i++) {
+      for (let i = 0; i < hashtags.length; i++) {
         this.state.hashtag.push(hashtags[i]);
         console.log('11', this.state);
       }
@@ -87,33 +81,21 @@ export default class NewArticle extends Component {
 
   _sendImage = () => {
     // 폼데이터로 만들기
-    // console.log('_sendImage');
-    var imageForm = new FormData();
-    // console.log(document.getElementById('imagefile').files[0]);
+    const imageForm = new FormData();
     imageForm.append('img', document.getElementById('imagefile').files[0]);
-    api.uploadImage(imageForm, data => {
-      var imgData = JSON.parse(data);
+    api
+      .uploadImage(imageForm)
+      .then(data => {
+        const imgData = data.data;
 
-      this.setState({
-        img: imgData.img,
-        key: imgData.key,
-      });
-
-      // this._setHashtagState(imgData.tag);
-    });
-    // console.log(e);
-    // callback(e);
+        this.setState({
+          img: imgData.img,
+          key: imgData.key,
+          isUploadImg: false,
+        });
+      })
+      .catch(err => console.error(err));
   };
-
-  // _changeImgState = e => {
-  //   if (this.state.img !== '') {
-  //     console.log('EEEE', e);
-  //     this.setState({
-  //       img: e,
-  //       // key: e.key,
-  //     });
-  //   }
-  // };
 
   _onChangeAttr = (e, attr) => {
     this.setState({
@@ -167,10 +149,7 @@ export default class NewArticle extends Component {
   }
 
   render() {
-
     console.log('render', this.state);
-
-    // console.log('date', this.state.date._d)
 
     return (
       <Modal isOpen={this.state.modal}>
@@ -263,9 +242,11 @@ export default class NewArticle extends Component {
                   id="imagefile"
                   // enctype="multipart/form-data"
                   onChange={() => {
+                    this.setState({
+                      isUploadImg: !this.state.isUploadImg,
+                    });
                     console.log('Imagechanging');
                     this._sendImage();
-                    // api.uploadImage();
                   }}
                 />
                 <FormText color="muted">
@@ -277,7 +258,9 @@ export default class NewArticle extends Component {
             <ModalFooter>
               <FormGroup check row>
                 <Col sm={{ size: 10, offset: 2 }}>
-                  <Button>Submit</Button>
+                  <Button disabled={this.state.isUploadImg ? true : false}>
+                    Submit
+                  </Button>
                 </Col>
               </FormGroup>
             </ModalFooter>

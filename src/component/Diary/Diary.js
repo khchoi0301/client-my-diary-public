@@ -4,8 +4,6 @@ import SpecificDiaryList from './SpecificDiaryList';
 import BubbleList from './BubbleList';
 import NewArticle from './newarticle';
 import api from 'api/api';
-import { ReactSelectize, SimpleSelect, MultiSelect } from 'react-selectize';
-
 
 export default class Diary extends Component {
   state = {
@@ -14,7 +12,6 @@ export default class Diary extends Component {
     selectedTag: null,
     isClicked: false,
   };
-
 
   _hashTableUpdate = () => {
     api
@@ -48,8 +45,6 @@ export default class Diary extends Component {
     });
   };
 
-  // 유저가 클릭한 태그의 데이터 리스트가 아래 깔려있는 상태에서
-  // 복잡하긴 하지만 일단 기능 구현...
   _postDataUpdate = postingData => {
     const { data, selectedTag } = this.state;
 
@@ -80,7 +75,7 @@ export default class Diary extends Component {
         ) : (
           <span>
             <Button className="newbtn" onClick={this._toggle}>
-                새글쓰기
+              새글쓰기
             </Button>
             {this.state.isClicked ? (
               <NewArticle
