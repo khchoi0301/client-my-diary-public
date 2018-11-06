@@ -49,7 +49,7 @@ export default class Login extends Component {
     console.log(456);
 
     try {
-      console.log(kakaoLoginResult);
+      console.error(kakaoLoginResult);
     } catch (err) {
       console.error(err);
     }
@@ -58,9 +58,9 @@ export default class Login extends Component {
   render() {
     return (
       <div>
-        {/* <Button onClick={this._kakaoLogin}>카카오 로그인</Button>
-       */}
-        <a href="http://13.209.41.118:3001/auth/kakao">카카오 로그인</a>
+        <Button onClick={this._kakaoLogin}>카카오 로그인</Button>
+
+        {/* <a href="http://13.209.41.118:3001/auth/kakao">카카오 로그인</a> */}
         <Form onSubmit={this._onLogin}>
           <FormGroup>
             <Label for="exampleEmail">Email</Label>
