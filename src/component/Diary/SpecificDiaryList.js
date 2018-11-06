@@ -4,12 +4,10 @@ import HorizontalScroll from 'react-scroll-horizontal';
 import SpecificDiary from './SpecificDiary';
 import './diary.css';
 import api from 'api/api';
-import convertToArrayTag from 'utils/util';
+import util from 'utils/util';
 import MakeTag from './MakeTag';
 
-
 export default class SpecificDiaryList extends Component {
-
   state = {
     modal: false,
     modify: false,
@@ -44,37 +42,36 @@ export default class SpecificDiaryList extends Component {
     });
   };
 
-
   modify = (arg, width) => {
     var obj = this.state.current.tag;
     if (obj && !obj[0].label) {
-      obj = this.state.current.tag.map((text) => {
+      obj = this.state.current.tag.map(text => {
         return { label: text, value: text };
       });
     }
 
     return !this.state.modify ? ( //modi상태인지
       arg === 'tag' && Array.isArray(this.state.current[arg]) ? (
-        this.state.current[arg].map((item) => {
+        this.state.current[arg].map(item => {
           return `#${item} `;
         })
-      ) : this.state.current[arg]
-    ) :
-      Array.isArray(this.state.current[arg]) ?
-        <MakeTag tag={obj} func={this._onvalueChange} />
-        : (
-          <input
-            type="text"
-            value={this.state.current[arg]}
-            onChange={e => {
-              this.setState({
-                current: { ...this.state.current, [arg]: e.target.value },
-              });
-            }}
-            style={{ width: width }}
-          />
-        );
-
+      ) : (
+        this.state.current[arg]
+      )
+    ) : Array.isArray(this.state.current[arg]) ? (
+      <MakeTag tag={obj} func={this._onvalueChange} />
+    ) : (
+      <input
+        type="text"
+        value={this.state.current[arg]}
+        onChange={e => {
+          this.setState({
+            current: { ...this.state.current, [arg]: e.target.value },
+          });
+        }}
+        style={{ width: width }}
+      />
+    );
   };
 
   _selectIndex = e => {
@@ -87,7 +84,7 @@ export default class SpecificDiaryList extends Component {
     var arrayifyHashTag = this.state.current.tag;
 
     if (arrayifyHashTag[0].label) {
-      arrayifyHashTag = this.state.current.tag.map((item) => {
+      arrayifyHashTag = this.state.current.tag.map(item => {
         return item.label;
       });
     }
@@ -129,11 +126,11 @@ export default class SpecificDiaryList extends Component {
     }
   };
 
-  _onvalueChange = (tags) => {
+  _onvalueChange = tags => {
     this.setState({
-      current: { ...this.state.current, tag: tags }
+      current: { ...this.state.current, tag: tags },
     });
-  }
+  };
 
   render() {
     const parent = { width: '60em', height: '100%' };
@@ -152,7 +149,7 @@ export default class SpecificDiaryList extends Component {
           pageLock={true}
           // style={object}
           config={{ stiffness: 4, damping: 3 }}
-        // className={string}
+          // className={string}
         >
           {this.props.articles.map((article, idx) => {
             return (
@@ -197,7 +194,6 @@ export default class SpecificDiaryList extends Component {
           <ModalBody>
             {this.modify('tag', '450px')}
 
-
             <br />
           </ModalBody>
           <ModalFooter>
@@ -207,7 +203,7 @@ export default class SpecificDiaryList extends Component {
               </Button>
             ) : (
               <Button color="success" onClick={this._onModifyButtonClick}>
-                  완료
+                완료
               </Button>
             )}
             <Button color="danger" onClick={this.toggleNested}>

@@ -8,15 +8,27 @@ export default class Main extends Component {
   };
 
   async componentDidMount() {
-    const checking = await auth.userCheck();
+    if (!localStorage.getItem('token')) {
+      const { isLogined } = this.state;
+      this.setState({
+        isLogined: {
+          code: 407,
+          message: '잘못된 회원입니다.',
+          ...isLogined,
+        },
+      });
+    } else {
+      const checking = await auth.userCheck();
+      console.log(123);
 
-    if (checking.code !== 200) {
-      localStorage.removeItem('token');
-      alert('로그인 만료! 재로그인 해주세요');
+      if (checking.code !== 200) {
+        localStorage.removeItem('token');
+        alert('로그인 만료! 재로그인 해주세요');
+      }
+      this.setState({
+        isLogined: checking,
+      });
     }
-    this.setState({
-      isLogined: checking,
-    });
   }
 
   render() {
