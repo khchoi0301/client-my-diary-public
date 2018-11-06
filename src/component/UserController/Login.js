@@ -41,26 +41,26 @@ export default class Login extends Component {
       });
   };
 
-  _kakaoLogin = async () => {
-    console.log(123);
+  // _kakaoLogin = async () => {
+  //   console.log(123);
 
-    const kakaoLoginResult = await api.routeKakaoLogin();
+  //   const kakaoLoginResult = await api.routeKakaoLogin();
 
-    console.log(456);
+  //   console.log(456);
 
-    try {
-      console.log(kakaoLoginResult);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  //   try {
+  //     console.log(kakaoLoginResult);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   render() {
     return (
       <div>
-        <Button onClick={this._kakaoLogin}>카카오 로그인</Button>
+        {/* <Button onClick={this._kakaoLogin}>카카오 로그인</Button> */}
 
-        {/* <a href="http://13.209.41.118:3001/auth/kakao">카카오 로그인</a> */}
+        <a href="http://13.209.41.118:3001/auth/kakao">카카오 로그인</a>
         <Form onSubmit={this._onLogin}>
           <FormGroup>
             <Label for="exampleEmail">Email</Label>
