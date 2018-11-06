@@ -49,7 +49,7 @@ export default class Login extends Component {
     console.log(456);
 
     try {
-      console.error(kakaoLoginResult);
+      console.log(kakaoLoginResult);
     } catch (err) {
       console.error(err);
     }
