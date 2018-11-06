@@ -14,7 +14,7 @@ import {
   ModalFooter,
 } from 'reactstrap';
 import api from 'api/api';
-import convertToArrayTag from 'utils/util';
+import util from 'utils/util';
 
 import 'react-dates/initialize';
 import {
@@ -35,11 +35,11 @@ export default class NewArticle extends Component {
     modal: true,
     nestedModal: false,
     closeAll: false,
-  }
+  };
 
   _handleSubmit = e => {
     const { postUpdate, hashTableUpdate } = this.props; // Diary data state update
-    const arrayifyHashTag = this.state.hashtag.map((item) => {
+    const arrayifyHashTag = this.state.hashtag.map(item => {
       return item.label;
     });
 
@@ -66,45 +66,45 @@ export default class NewArticle extends Component {
         }
       })
       .catch(err => console.error(err));
-  }
+  };
 
   _onChangeAttr = (e, attr) => {
     this.setState({
       [attr]: e.target.value,
     });
-  }
+  };
 
   _onChangeTag = (e, attr) => {
     console.log('thisonchangetag', e);
     this.setState({
       [attr]: e.target.value,
     });
-  }
+  };
 
   _toggle = attr => {
     this.setState({
       [attr]: !this.state[attr],
     });
-  }
+  };
 
   _toggleNested = () => {
     this.setState({
       nestedModal: !this.state.nestedModal,
       closeAll: false,
     });
-  }
+  };
 
   _toggleAll = () => {
     this.setState({
       nestedModal: !this.state.nestedModal,
       closeAll: true,
     });
-  }
+  };
 
-  _onvalueChange = (tags) => {
+  _onvalueChange = tags => {
     this.setState({ hashtag: tags });
     console.log('tag', this.state.hashtag);
-  }
+  };
 
   async componentDidMount() {
     const getWeatherData = await api.getWeather('Seoul');
@@ -193,7 +193,10 @@ export default class NewArticle extends Component {
               </Label>
               <Col sm={9}>
                 <FormGroup>
-                  <MakeTag tag={this.state.hashtag} func={this._onvalueChange} />
+                  <MakeTag
+                    tag={this.state.hashtag}
+                    func={this._onvalueChange}
+                  />
                 </FormGroup>
               </Col>
             </Row>

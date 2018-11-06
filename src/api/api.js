@@ -29,19 +29,20 @@ const signupPost = signUpUserInfo => {
 
 // 성공 (보통 로그아웃시 별다른 이벤트가 없기 때문에 리팩토링 X)
 const userLogout = () => {
-  axios
-    .get(`${url}/auth/logout`, TokenHeader)
-    .then(res => {
-      if (res.status === 200) {
-        localStorage.removeItem('token');
-        window.location = '/';
-      } else {
-        console.dir(res);
-      }
-    })
-    .catch(err => {
-      console.error(err);
-    });
+  // axios
+  // .get(`${url}/auth/logout`, TokenHeader)
+  // .then(res => {
+  //   if (res.status === 200) {
+  localStorage.removeItem('token');
+  window.location = '/';
+  alert('로그아웃 되었습니다!');
+  //   } else {
+  //     console.dir(res);
+  //   }
+  // })
+  // .catch(err => {
+  //   console.error(err);
+  // });
 };
 
 // 성공 + 프로미스화
@@ -49,7 +50,8 @@ const userDiaryPost = data => {
   const postingData = {
     ...data,
     // img: 'https://picsum.photos/200/300/?random',
-    img: 'https://mydiarystorage.s3.ap-northeast-2.amazonaws.com/original/154141890822220180423121537154613.jpg',
+    img:
+      'https://mydiarystorage.s3.ap-northeast-2.amazonaws.com/original/154141890822220180423121537154613.jpg',
     key: 'original/154141890822220180423121537154613.jpg',
   };
 
@@ -69,7 +71,8 @@ const modifyDiary = modifiedDiary => {
       {
         ...modifiedDiary,
         // img: 'https://picsum.photos/200/300/?random',
-        img: 'https://mydiarystorage.s3.ap-northeast-2.amazonaws.com/original/154141890822220180423121537154613.jpg',
+        img:
+          'https://mydiarystorage.s3.ap-northeast-2.amazonaws.com/original/154141890822220180423121537154613.jpg',
         key: 'original/154141890822220180423121537154613.jpg',
       },
       TokenHeader,

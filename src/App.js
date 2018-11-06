@@ -3,8 +3,8 @@ import Diary from 'component/Diary/Diary';
 import Main from 'component/Main/Main';
 import SignUp from 'component/UserController/SignUp';
 import Login from 'component/UserController/Login';
+import PrivateRouter from 'component/UserController/privateRoute';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
-import PrivateRouter from 'utils/privateRoute';
 
 export default class App extends Component {
   render() {
