@@ -68,6 +68,8 @@ export default class Diary extends Component {
   }
 
   render() {
+    console.log('불러온 데이터 : ', this.state.data);
+
     return (
       <div>
         {!this.state.hashtag ? (

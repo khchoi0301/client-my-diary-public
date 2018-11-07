@@ -15,16 +15,12 @@ import {
 } from 'reactstrap';
 import api from 'api/api';
 import 'react-dates/initialize';
-import {
-
-  SingleDatePicker,
-
-} from 'react-dates';
+import { SingleDatePicker } from 'react-dates';
 import moment from 'moment';
 
 import 'react-dates/lib/css/_datepicker.css';
 import MakeTag from './MakeTag';
-var FormData = require('form-data');
+// var FormData = require('form-data');
 
 export default class NewArticle extends Component {
   state = {
@@ -73,13 +69,12 @@ export default class NewArticle extends Component {
   };
 
   _setHashtagState = hashtags => {
-
     var changed = hashtags.map(text => {
       return { label: text, value: text };
     });
     var newtag = this.state.hashtag.concat(changed);
     this.setState({
-      hashtag: newtag
+      hashtag: newtag,
     });
   };
 
@@ -93,9 +88,7 @@ export default class NewArticle extends Component {
       .then(data => {
         const imgData = data.data;
 
-
-      this._setHashtagState(imgData.tag);
-
+        this._setHashtagState(imgData.tag);
 
         this.setState({
           img: imgData.img,
@@ -195,7 +188,6 @@ export default class NewArticle extends Component {
               <Col sm={9}>
                 <FormGroup>
                   <SingleDatePicker
-
                     date={this.state.date} // momentPropTypes.momentObj or null
                     onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
                     focused={this.state.focused} // PropTypes.bool

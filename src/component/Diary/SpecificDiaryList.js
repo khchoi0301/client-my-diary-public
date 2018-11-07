@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import {
-  Button, Modal, ModalHeader, ModalBody, ModalFooter, Col,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Col,
   Form,
   FormGroup,
   Label,
@@ -49,10 +54,7 @@ export default class SpecificDiaryList extends Component {
   };
 
   modify = (arg, width) => {
-
     var obj = this.state.current.tag;
-
-
 
     return !this.state.modify ? ( //modi상태인지
       arg === 'tag' && Array.isArray(this.state.current[arg]) ? (
@@ -60,22 +62,22 @@ export default class SpecificDiaryList extends Component {
           return `#${item} `;
         })
       ) : (
-          this.state.current[arg]
-        )
+        this.state.current[arg]
+      )
     ) : Array.isArray(this.state.current[arg]) ? (
       <MakeTag tag={obj} func={this._onvalueChange} />
     ) : (
-          <input
-            type="text"
-            value={this.state.current[arg]}
-            onChange={e => {
-              this.setState({
-                current: { ...this.state.current, [arg]: e.target.value },
-              });
-            }}
-            style={{ width: width }}
-          />
-        );
+      <input
+        type="text"
+        value={this.state.current[arg]}
+        onChange={e => {
+          this.setState({
+            current: { ...this.state.current, [arg]: e.target.value },
+          });
+        }}
+        style={{ width: width }}
+      />
+    );
   };
 
   _selectIndex = e => {
@@ -152,7 +154,7 @@ export default class SpecificDiaryList extends Component {
           pageLock={true}
           // style={object}
           config={{ stiffness: 4, damping: 3 }}
-        // className={string}
+          // className={string}
         >
           {this.props.articles.map((article, idx) => {
             return (
@@ -180,7 +182,7 @@ export default class SpecificDiaryList extends Component {
           </ModalHeader>
           <ModalBody>
             <span>{this.state.current.date}</span>
-            <span className='weather'>{this.state.current.weather}</span>
+            <span className="weather">{this.state.current.weather}</span>
             <br />
           </ModalBody>
           <ModalBody>
@@ -230,10 +232,10 @@ export default class SpecificDiaryList extends Component {
                 수정
               </Button>
             ) : (
-                <Button color="success" onClick={this._onModifyButtonClick}>
-                  완료
+              <Button color="success" onClick={this._onModifyButtonClick}>
+                완료
               </Button>
-              )}
+            )}
             <Button color="danger" onClick={this.toggleNested}>
               삭제
             </Button>
