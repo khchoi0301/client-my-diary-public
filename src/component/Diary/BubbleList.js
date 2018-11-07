@@ -22,9 +22,7 @@ export default class BubbleList extends Component {
 
   render() {
     return (
-      <span className="tagList">
-        {console.log(this.props)}
-        {/* <h1 className="intro">My Diary By Tag</h1> */}
+      <span id="TagList">
         <br />
         <BubbleChart
           width={1000}
@@ -58,12 +56,6 @@ export default class BubbleList extends Component {
           }}
           bubbleClickFun={this.bubbleClick}
           legendClickFun={this.legendClick}
-
-          //       graph={
-          //         zoom: 1.1,
-          //       offsetX: -0.05,
-          //         offsetY: -0.01,
-          // }
         />
       </span>
     );

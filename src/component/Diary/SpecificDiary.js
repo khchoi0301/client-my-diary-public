@@ -9,8 +9,8 @@ import {
 } from 'reactstrap';
 
 const SpecificDiary = props => (
-  <div className="diary">
-    <Card>
+  < div id="Specificdiary" >
+    < Card >
       <CardImg
         top
         src={props.article.img}
@@ -30,8 +30,8 @@ const SpecificDiary = props => (
           {props.article.content[20] ? '...' : null}
         </CardText>
       </CardBody>
-    </Card>
-  </div>
+    </Card >
+  </div >
 );
 
 export default SpecificDiary;

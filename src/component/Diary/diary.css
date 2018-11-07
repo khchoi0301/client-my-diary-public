@@ -1,82 +1,77 @@
 @import  '../../../node_modules/react-selectize/themes/index.css';
 
-.specific {
-  margin: 30px;
-}
-
-.newArticle {
-  border: 1px solid gray;
-  background-color: bisque;
-  z-index: 5;
-}
-
-/* .newbtn {
-  position: absolute;
-} */
-
-.form {
-  margin: 20px;
-}
-
-.bubble {
-  position: relative;
-  left: 45%
-}
-
-
-.newbtn {
-  float: center;
-}
-
-.svg{
-}
-.tagList{
-  margin-left: 100px;
-  float: left;
-  /* border: 1px red solid; */
-}
-
 body {
   width: 100%;
   height:100%;
   margin:0;
 }
-.diaryList {
+
+/* .specific {
+  margin: 30px;
+} */
+
+/* 
+.bubble {
+  position: relative;
+  left: 45%
+} */
+
+#Newarticlemodal .form {
+  margin: 20px;
+}
+
+#TagList{
+  margin-left: 100px;
+  float: left;
+}
+
+#Diary .show {
+  margin: 5px;
+}
+
+/* #Diary .newbtn {
+  float: center;
+} */
+
+#Diary .btns {
+  margin-left: 400px
+}
+
+#Specificdiary {
+  width: 100%;
+  height: 100%;
+  float: left;
+}
+
+#Specificdiary .card-body {
+  padding: 10px;
+  height: 8em;
+}
+
+#Specificdiary .card-text {
+  width: 100%;
+  white-space: normal;
+}
+
+#DiaryList {
   border-top: 1px gray solid;
   padding: 15px;
   float: left;
   overflow-x: auto;
   width: 75em;
   height: 17em
-
 }
 
-.diarybtn {
+#DiaryList .diarybtn {
   float: left;
   width: 10em;
   height: 13em;
-  margin: 1;
-  padding: 1;
-  border: 3px 
+  border: 3px; 
+  margin: 4px;
+  padding: 2px,
 }
 
-.diary {
-  width: 100%;
-  height: 100%;
-  float: left;
-  /* border: 1px red solid; */
-}
-
-.card-body {
-padding: 10px;
-height: 8em;
-}
-.card-text {
-  width: 100%;
-  white-space: normal;
-}
-
-.weather {
+#DiaryList .weather {
   float: right;
   margin-right: 50px
 }
