@@ -14,38 +14,46 @@ import {
   ModalFooter,
 } from 'reactstrap';
 import api from 'api/api';
-import convertToArrayTag from 'utils/util';
-
 import 'react-dates/initialize';
 import {
-  DateRangePicker,
+
   SingleDatePicker,
-  DayPickerRangeController,
+
 } from 'react-dates';
+import moment from 'moment';
+
 import 'react-dates/lib/css/_datepicker.css';
+import MakeTag from './MakeTag';
+var FormData = require('form-data');
 
 export default class NewArticle extends Component {
   state = {
     title: '',
     content: '',
-    date: '',
+    date: moment().subtract(2, 'year'),
     weather: '',
-    hashtag: '',
+    hashtag: [],
     modal: true,
     nestedModal: false,
     closeAll: false,
+    key: '',
+    img: '',
+    isUploadImg: false,
   };
 
   _handleSubmit = e => {
     const { postUpdate, hashTableUpdate } = this.props; // Diary data state update
-    const arrayifyHashTag = convertToArrayTag(this.state.hashtag);
+    const arrayifyHashTag = this.state.hashtag.map(item => {
+      return item.label;
+    });
 
     const postDiaryData = {
       ...this.state,
       hashtag: arrayifyHashTag,
     };
+    this.setState({ modal: false });
 
-    console.log(postDiaryData);
+    console.log('postDiaryData', postDiaryData);
 
     e.preventDefault();
     api
@@ -56,7 +64,7 @@ export default class NewArticle extends Component {
           console.log(postDiaryData);
 
           postUpdate(postDiaryData);
-          alert('성공!');
+          alert('등록되었습니다!');
         } else {
           alert('실패!');
         }
@@ -64,7 +72,48 @@ export default class NewArticle extends Component {
       .catch(err => console.error(err));
   };
 
+  _setHashtagState = hashtags => {
+
+    var changed = hashtags.map(text => {
+      return { label: text, value: text };
+    });
+    var newtag = this.state.hashtag.concat(changed);
+    this.setState({
+      hashtag: newtag
+    });
+  };
+
+  _sendImage = () => {
+    var imageForm = new FormData();
+    // console.log(document.getElementById('imagefile').files[0]);
+
+    imageForm.append('img', document.getElementById('imagefile').files[0]);
+    api
+      .uploadImage(imageForm)
+      .then(data => {
+        const imgData = data.data;
+
+
+      this._setHashtagState(imgData.tag);
+
+
+        this.setState({
+          img: imgData.img,
+          key: imgData.key,
+          isUploadImg: false,
+        });
+      })
+      .catch(err => console.error(err));
+  };
+
   _onChangeAttr = (e, attr) => {
+    this.setState({
+      [attr]: e.target.value,
+    });
+  };
+
+  _onChangeTag = (e, attr) => {
+    console.log('thisonchangetag', e);
     this.setState({
       [attr]: e.target.value,
     });
@@ -90,6 +139,11 @@ export default class NewArticle extends Component {
     });
   };
 
+  _onvalueChange = tags => {
+    this.setState({ hashtag: tags });
+    console.log('tag', this.state.hashtag);
+  };
+
   async componentDidMount() {
     const getWeatherData = await api.getWeather('Seoul');
 
@@ -104,7 +158,8 @@ export default class NewArticle extends Component {
   }
 
   render() {
-    // console.log('date', this.state.date._d);
+    console.log('render', this.state);
+
     return (
       <Modal isOpen={this.state.modal}>
         <ModalHeader
@@ -140,11 +195,13 @@ export default class NewArticle extends Component {
               <Col sm={9}>
                 <FormGroup>
                   <SingleDatePicker
+
                     date={this.state.date} // momentPropTypes.momentObj or null
                     onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
                     focused={this.state.focused} // PropTypes.bool
                     onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
                     id="your_unique_id" // PropTypes.string.isRequired,
+                    isOutsideRange={() => false}
                   />
                 </FormGroup>
               </Col>
@@ -177,32 +234,12 @@ export default class NewArticle extends Component {
               </Label>
               <Col sm={9}>
                 <FormGroup>
-                  <Input
-                    type="text"
-                    name="hashtag"
-                    id="exampleTag"
-                    onChange={e => {
-                      this._onChangeAttr(e, 'hashtag');
-                    }}
+                  <MakeTag
+                    tag={this.state.hashtag}
+                    func={this._onvalueChange}
                   />
                 </FormGroup>
               </Col>
-              {/* <Label sm={2} for="exampleTag">
-                날씨
-              </Label>
-              <Col sm={9}>
-                <FormGroup>
-                  <Input
-                    type="text"
-                    name="weather"
-                    id="exampleWeather"
-                    value={this.state.weather}
-                    onChange={e => {
-                      this._onChangeAttr(e, 'weather');
-                    }}
-                  />
-                </FormGroup>
-              </Col> */}
             </Row>
 
             <FormGroup row>
@@ -210,9 +247,22 @@ export default class NewArticle extends Component {
                 사진
               </Label>
               <Col sm={10}>
-                <Input type="file" name="file" id="exampleFile" />
+                <Input
+                  type="file"
+                  name="file"
+                  id="imagefile"
+                  // enctype="multipart/form-data"
+                  onChange={() => {
+                    this.setState({
+                      isUploadImg: !this.state.isUploadImg,
+                    });
+                    console.log('Imagechanging');
+                    this._sendImage();
+                  }}
+                />
                 <FormText color="muted">
-                  파일은 하나만 넣을 수 있습니다!
+                  파일은 하나만 넣을 수 있습니다!!
+                  <img src={this.state.img} />
                 </FormText>
               </Col>
             </FormGroup>
@@ -220,7 +270,9 @@ export default class NewArticle extends Component {
             <ModalFooter>
               <FormGroup check row>
                 <Col sm={{ size: 10, offset: 2 }}>
-                  <Button>Submit</Button>
+                  <Button disabled={this.state.isUploadImg ? true : false}>
+                    Submit
+                  </Button>
                 </Col>
               </FormGroup>
             </ModalFooter>

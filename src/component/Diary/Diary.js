@@ -45,8 +45,6 @@ export default class Diary extends Component {
     });
   };
 
-  // 유저가 클릭한 태그의 데이터 리스트가 아래 깔려있는 상태에서
-  // 복잡하긴 하지만 일단 기능 구현...
   _postDataUpdate = postingData => {
     const { data, selectedTag } = this.state;
 
@@ -91,7 +89,7 @@ export default class Diary extends Component {
             {this.state.data ? (
               <SpecificDiaryList
                 articles={this.state.data}
-                tag={this.state.selectedTag}
+                selectedtag={this.state.selectedTag}
                 clickFunc={this._onClick}
                 hashTableUpdate={this._hashTableUpdate}
               />

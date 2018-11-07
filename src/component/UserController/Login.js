@@ -7,6 +7,8 @@ export default class Login extends Component {
   state = {
     email: null,
     password: null,
+    isLoginCorrect: false,
+    isEmailCorrect: false,
   };
 
   _handleEmail = e => {
