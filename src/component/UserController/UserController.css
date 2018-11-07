@@ -4,10 +4,12 @@
   margin-top: 20px;
 }
 
-.signupBottom,.signinBottom {
+#SignUp .signupBottom, #SignIn .signinBottom {
   margin: 40px;
   margin-top: 20px;
   margin-bottom: 0px;
+  color:gray
+
 
 }
 
@@ -21,3 +23,14 @@
 }
 
 
+#SignUp .kakaoimg,#SignIn .kakaoimg  {
+  margin: 5px;
+}
+
+#SignUp .correct {
+  color: green
+}
+
+#SignUp .wrong {
+  color: red
+}

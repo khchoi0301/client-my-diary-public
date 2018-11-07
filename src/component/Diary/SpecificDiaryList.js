@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import {
-  Button, Modal, ModalHeader, ModalBody, ModalFooter, Col,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Col,
   Form,
   FormGroup,
   Label,
@@ -12,6 +17,9 @@ import SpecificDiary from './SpecificDiary';
 import './diary.css';
 import api from 'api/api';
 import MakeTag from './MakeTag';
+import JavascriptTimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
+import Time from './Time';
 
 export default class SpecificDiaryList extends Component {
   state = {
@@ -50,6 +58,7 @@ export default class SpecificDiaryList extends Component {
 
   modify = (arg, width) => {
     var obj = this.state.current.tag;
+
     return !this.state.modify ? ( //modi상태인지
       arg === 'tag' && Array.isArray(this.state.current[arg]) ? (
         this.state.current[arg].map(item => {
@@ -83,7 +92,7 @@ export default class SpecificDiaryList extends Component {
   _onModifyButtonClick = async () => {
     let arrayifyHashTag = this.state.current.tag;
 
-    if (arrayifyHashTag[0].label) {
+    if (arrayifyHashTag.length && arrayifyHashTag[0].label) {
       arrayifyHashTag = this.state.current.tag.map(item => {
         return item.label;
       });
@@ -133,6 +142,12 @@ export default class SpecificDiaryList extends Component {
   };
 
   render() {
+
+    if (this.state.current.date) {
+      var localTime = new Date(this.state.current.date);
+      JavascriptTimeAgo.locale(en);
+    }
+
     return (
       <div id="DiaryList">
         {/* <InfiniteScroll
@@ -143,7 +158,6 @@ export default class SpecificDiaryList extends Component {
           useWindow={false}
         >
         </InfiniteScroll> */}
-
 
         <HorizontalScroll
           pageLock={true}
@@ -179,12 +193,19 @@ export default class SpecificDiaryList extends Component {
           toggle={this.toggle}
           className={this.props.className}
         >
-          <ModalHeader toggle={this.toggle}>
+          <ModalHeader toggl e={this.toggle}>
             {this.modify('title', '300px')}
           </ModalHeader>
           <ModalBody>
-            <span>{this.state.current.date}</span>
+
+            {this.state.current.date ?
+              <span>
+                <div>{localTime.toDateString()}</div>
+                (<Time className='time' date={localTime} />)
+              </span>
+              : null}
             <span className='weather'>{this.state.current.weather}</span>
+
             <br />
           </ModalBody>
           <ModalBody>
@@ -211,7 +232,7 @@ export default class SpecificDiaryList extends Component {
               </Button>
             ) : (
               <Button color="success" onClick={this._onModifyButtonClick}>
-                  완료
+                완료
               </Button>
             )}
             <Button color="danger" onClick={this.toggleNested}>

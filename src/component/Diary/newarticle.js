@@ -20,13 +20,13 @@ import moment from 'moment';
 
 import 'react-dates/lib/css/_datepicker.css';
 import MakeTag from './MakeTag';
-var FormData = require('form-data');
+// var FormData = require('form-data');
 
 export default class NewArticle extends Component {
   state = {
     title: '',
     content: '',
-    date: moment().subtract(2, 'year'),
+    date: moment(),
     weather: '',
     hashtag: [],
     modal: true,
@@ -87,6 +87,7 @@ export default class NewArticle extends Component {
       .uploadImage(imageForm)
       .then(data => {
         const imgData = data.data;
+
         this._setHashtagState(imgData.tag);
         this.setState({
           img: imgData.img,

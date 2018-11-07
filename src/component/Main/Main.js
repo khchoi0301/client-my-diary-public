@@ -8,9 +8,6 @@ const liStyle = {
 };
 
 export default class Main extends Component {
-  componentDidMount() {
-    document.title = 'My Log';
-  }
 
   render() {
     return (

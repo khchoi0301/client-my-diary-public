@@ -3,10 +3,13 @@
 import axios from 'axios';
 
 
-const url = 'http://13.209.41.118:3001';
+const url = 'http://10.130.151.17:3001';//bbk
+// window.url = 'http://13.209.41.118:3001'; //aws
 // 'http://ec2-13-209-41-118.ap-northeast-2.compute.amazonaws.com:3001'; // 주연님 AWS 서버
 // 'http://ec2-54-191-92-219.us-west-2.compute.amazonaws.com:3001';
-// const url = 'http://10.130.151.17:3001';
+
+// window.url = url;
+
 
 const TokenHeader = {
   headers: {
@@ -30,6 +33,13 @@ const signupPost = signUpUserInfo => {
     .catch(err => err);
 };
 
+const emailCheck = email => {
+  return axios
+    .post(`${url}/auth/email`, { email })
+    .then(res => res)
+    .catch(err => err);
+};
+
 // 성공 (보통 로그아웃시 별다른 이벤트가 없기 때문에 리팩토링 X)
 const userLogout = () => {
   localStorage.removeItem('token');
@@ -39,7 +49,6 @@ const userLogout = () => {
 
 // 성공 + 프로미스화
 const userDiaryPost = data => {
-
   console.log('it is', data);
 
   return axios
@@ -49,12 +58,10 @@ const userDiaryPost = data => {
 };
 
 const uploadImage = (data, callback) => {
-
   return axios
     .post(`${url}/post/img`, data, TokenHeader)
     .then(res => res)
     .catch(err => err);
-
 };
 
 // 성공 + 프로미스화
@@ -119,4 +126,5 @@ export default {
   uploadImage,
   getWeather,
   routeKakaoLogin,
+  emailCheck
 };
