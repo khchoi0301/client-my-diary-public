@@ -6,13 +6,14 @@ import Login from 'component/UserController/Login';
 import GetToken from 'component/UserController/GetToken';
 import PrivateRouter from 'component/UserController/privateRoute';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import Mainheader from 'component/Main/Mainheader';
 
 export default class App extends Component {
   render() {
     return (
       <Router>
         <div className="App">
-          {/* header 넣기 */}
+          <Mainheader />
           <Switch>
             <Route path="/" exact component={Main} />
             <Route path="/signup" component={SignUp} />
