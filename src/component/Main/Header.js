@@ -9,6 +9,11 @@ export default props => {
       <Nav>
         <NavItem>
           <NavLink>
+            <Link to="/">My Log</Link>
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink>
             {!props.isLogined ? (
               <Link to="/login">Login</Link>
             ) : (
