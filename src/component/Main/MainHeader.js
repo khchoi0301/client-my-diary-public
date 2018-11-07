@@ -5,14 +5,6 @@ import React, { Component } from 'react';
 import auth from 'utils/auth';
 import Header from 'component/Main/Header';
 
-class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Home',
-  };
-
-  /* render function, etc */
-}
-
 export default class Mainheader extends Component {
   state = {
     isLogined: {},
