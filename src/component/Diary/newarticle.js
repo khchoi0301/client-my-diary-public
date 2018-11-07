@@ -15,11 +15,7 @@ import {
 } from 'reactstrap';
 import api from 'api/api';
 import 'react-dates/initialize';
-import {
-
-  SingleDatePicker,
-
-} from 'react-dates';
+import { SingleDatePicker } from 'react-dates';
 import moment from 'moment';
 
 import 'react-dates/lib/css/_datepicker.css';
@@ -30,7 +26,7 @@ export default class NewArticle extends Component {
   state = {
     title: '',
     content: '',
-    date: moment().subtract(2, 'year'),
+    date: moment(),
     weather: '',
     hashtag: [],
     modal: true,
