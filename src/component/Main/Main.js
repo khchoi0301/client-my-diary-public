@@ -28,11 +28,11 @@ export default class Main extends Component {
         isLogined: checking,
       });
     }
-
-  componentDidMount() {
     document.title = 'My Log';
 
   }
+
+
   render() {
     return (
       <div id="main">
