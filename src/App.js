@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Diary from 'component/Diary/Diary';
 import Main from 'component/Main/Main';
 import SignUp from 'component/UserController/SignUp';
@@ -6,15 +7,14 @@ import Login from 'component/UserController/Login';
 import GetToken from 'component/UserController/GetToken';
 import PrivateRouter from 'component/UserController/privateRoute';
 import NewDiary from 'component/Detail/NewDiary';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
-import Mainheader from 'component/Main/MainHeader';
+import MainHeader from 'component/Main/MainHeader';
 
 export default class App extends Component {
   render() {
     return (
       <Router>
         <div className="App">
-          <Mainheader />
+          <MainHeader />
           <Switch>
             <Route path="/" exact component={Main} />
             <Route path="/signup" component={SignUp} />
