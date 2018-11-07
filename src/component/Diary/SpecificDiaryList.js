@@ -49,33 +49,29 @@ export default class SpecificDiaryList extends Component {
   };
 
   modify = (arg, width) => {
-
     var obj = this.state.current.tag;
-
-
-
     return !this.state.modify ? ( //modi상태인지
       arg === 'tag' && Array.isArray(this.state.current[arg]) ? (
         this.state.current[arg].map(item => {
           return `#${item} `;
         })
       ) : (
-          this.state.current[arg]
-        )
+        this.state.current[arg]
+      )
     ) : Array.isArray(this.state.current[arg]) ? (
       <MakeTag tag={obj} func={this._onvalueChange} />
     ) : (
-          <input
-            type="text"
-            value={this.state.current[arg]}
-            onChange={e => {
-              this.setState({
-                current: { ...this.state.current, [arg]: e.target.value },
-              });
-            }}
-            style={{ width: width }}
-          />
-        );
+      <input
+        type="text"
+        value={this.state.current[arg]}
+        onChange={e => {
+          this.setState({
+            current: { ...this.state.current, [arg]: e.target.value },
+          });
+        }}
+        style={{ width: width }}
+      />
+    );
   };
 
   _selectIndex = e => {
@@ -137,9 +133,8 @@ export default class SpecificDiaryList extends Component {
   };
 
   render() {
-    // const parent = { width: '60em', height: '100%' };
     return (
-      <div className="diaryList">
+      <div id="DiaryList">
         {/* <InfiniteScroll
           pageStart={0}
           // loadMore={loadFunc}
@@ -148,28 +143,37 @@ export default class SpecificDiaryList extends Component {
           useWindow={false}
         >
         </InfiniteScroll> */}
+
+
         <HorizontalScroll
           pageLock={true}
-          // style={object}
+          // style={{ width: '500px' }}
           config={{ stiffness: 4, damping: 3 }}
-        // className={string}
         >
           {this.props.articles.map((article, idx) => {
-            return (
-              <Button
-                className="diarybtn"
-                color="grey"
-                onClick={e => {
-                  this.toggle();
-                  this._selectIndex({ idx });
-                }}
-                style={{ margin: '4px', padding: '2px' }}
-              >
-                <SpecificDiary article={article} key={idx} />
-              </Button>
-            );
+            if (!article.img) {
+              article.img = 'https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180';
+            }
+            if (article.content) {
+              return (
+                <Button
+                  className="diarybtn"
+                  color="grey"
+                  onClick={e => {
+                    this.toggle();
+                    this._selectIndex({ idx });
+                  }}
+                  style={{
+                    margin: '4px', padding: '2px',
+                  }}
+                >
+                  <SpecificDiary article={article} key={idx} />
+                </Button>
+              );
+            }
           })}
         </HorizontalScroll>
+
         <Modal
           isOpen={this.state.modal}
           toggle={this.toggle}
@@ -200,40 +204,16 @@ export default class SpecificDiaryList extends Component {
 
             <br />
           </ModalBody>
-          {/* <Form>
-            <FormGroup row>
-              <Label for="exampleFile" sm={2}>
-                사진
-              </Label>
-              <Col sm={10}>
-                <Input
-                  type="file"
-                  name="file"
-                  id="imagefile"
-                  // enctype="multipart/form-data"
-                  onChange={() => {
-                    console.log('Imagechanging');
-                    this._sendImage();
-                    // api.uploadImage();
-                  }}
-                />
-                <FormText color="muted">
-                  파일은 하나만 넣을 수 있습니다!!
-                  <img src={this.state.img} />
-                </FormText>
-              </Col>
-            </FormGroup>
-          </Form> */}
           <ModalFooter>
             {!this.state.modify ? (
               <Button color="success" onClick={this.toggleModify}>
                 수정
               </Button>
             ) : (
-                <Button color="success" onClick={this._onModifyButtonClick}>
+              <Button color="success" onClick={this._onModifyButtonClick}>
                   완료
               </Button>
-              )}
+            )}
             <Button color="danger" onClick={this.toggleNested}>
               삭제
             </Button>
