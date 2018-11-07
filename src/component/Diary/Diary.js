@@ -13,6 +13,10 @@ export default class Diary extends Component {
     isClicked: false,
   };
 
+  _changeTitle = () => {
+    document.title = 'My Diary';
+  };
+
   _hashTableUpdate = () => {
     api
       .getData('tag')
@@ -73,6 +77,7 @@ export default class Diary extends Component {
   }
 
   render() {
+    this._changeTitle();
     return (
       <div id='Diary'>
         {!this.state.hashtag ? (
