@@ -77,6 +77,8 @@ export default class Diary extends Component {
   }
 
   render() {
+    console.log('불러온 데이터 : ', this.state.data);
+
     this._changeTitle();
     return (
       <div id='Diary'>
