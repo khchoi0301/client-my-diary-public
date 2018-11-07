@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import {
-  Button, Modal, ModalHeader, ModalBody, ModalFooter, Col,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Col,
   Form,
   FormGroup,
   Label,
@@ -53,6 +58,7 @@ export default class SpecificDiaryList extends Component {
 
   modify = (arg, width) => {
     var obj = this.state.current.tag;
+
     return !this.state.modify ? ( //modi상태인지
       arg === 'tag' && Array.isArray(this.state.current[arg]) ? (
         this.state.current[arg].map(item => {
@@ -191,6 +197,7 @@ export default class SpecificDiaryList extends Component {
             {this.modify('title', '300px')}
           </ModalHeader>
           <ModalBody>
+
             {this.state.current.date ?
               <span>
                 <div>{localTime.toDateString()}</div>
@@ -198,6 +205,7 @@ export default class SpecificDiaryList extends Component {
               </span>
               : null}
             <span className='weather'>{this.state.current.weather}</span>
+
             <br />
           </ModalBody>
           <ModalBody>
@@ -224,7 +232,7 @@ export default class SpecificDiaryList extends Component {
               </Button>
             ) : (
               <Button color="success" onClick={this._onModifyButtonClick}>
-                  완료
+                완료
               </Button>
             )}
             <Button color="danger" onClick={this.toggleNested}>

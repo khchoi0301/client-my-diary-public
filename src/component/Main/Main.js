@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import auth from 'utils/auth';
-import MainHeader from 'component/Main/MainHeader';
 
 export default class Main extends Component {
+
   state = {
     isLogined: {},
   };
@@ -28,16 +28,14 @@ export default class Main extends Component {
         isLogined: checking,
       });
     }
+
+  componentDidMount() {
+    document.title = 'My Log';
+
   }
-
   render() {
-    const { isLogined } = this.state;
-
-    if (!isLogined.code) return null;
-
     return (
-      <div>
-        <MainHeader isLogined={isLogined.code === 200} />
+      <div id="main">
         <img alt="ourService" src="https://picsum.photos/600/400?image=123" />
       </div>
     );

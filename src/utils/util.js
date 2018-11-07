@@ -15,4 +15,26 @@ const passwordCheck = password => {
   return checker.test(password);
 };
 
-export default { convertToArrayTag, emailCheck, passwordCheck };
+const getToday = () => {
+  let today = new Date();
+  let dd = today.getDate();
+  let mm = today.getMonth() + 1; //January is 0!
+  let yyyy = today.getFullYear();
+
+  if (dd < 10) {
+    dd = '0' + dd;
+  }
+
+  if (mm < 10) {
+    mm = '0' + mm;
+  }
+
+  return `${yyyy}년 ${mm}월 ${dd}일`;
+};
+
+export default {
+  convertToArrayTag,
+  emailCheck,
+  passwordCheck,
+  getToday,
+};
