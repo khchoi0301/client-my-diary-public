@@ -55,6 +55,17 @@ export default class NewArticle extends Component {
       })
       .catch(err => console.error(err));
   };
+  _setHashtagState = hashtags => {
+    var changed = hashtags.map(text => {
+      return { label: text, value: text };
+    });
+    var newtag = this.state.hashtag.concat(changed);
+    console.log(newtag);
+
+    this.setState({
+      hashtag: newtag,
+    });
+  };
 
   _sendImage = () => {
     let imageForm = new FormData();
@@ -65,8 +76,9 @@ export default class NewArticle extends Component {
       .then(data => {
         const imgData = data.data;
 
-        console.log('working!');
+        console.log(imgData);
 
+        this._setHashtagState(imgData.tag);
         this.setState({
           img: imgData.img,
           key: imgData.key,
