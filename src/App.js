@@ -6,7 +6,7 @@ import Login from 'component/UserController/Login';
 import GetToken from 'component/UserController/GetToken';
 import PrivateRouter from 'component/UserController/privateRoute';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
-import Mainheader from 'component/Main/Mainheader';
+import Mainheader from 'component/Main/MainHeader';
 
 export default class App extends Component {
   render() {

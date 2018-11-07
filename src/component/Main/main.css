@@ -1,0 +1,32 @@
+#header {
+  /* margin: 10px */
+  background-color: #e9e9e7;
+  padding: 10px;
+}
+
+#mainheader {
+  /* background-color: black; */
+}
+
+#header #login {
+  color: white;
+}
+
+#main {
+  margin: auto;
+  width: 50%;
+  margin-top: 5%;
+}
+
+#navbar {
+  color: black;
+}
+
+#id {
+  position: relative;
+  right: 10px;
+}
+
+#navitem-login #navitem-navlink {
+  color: black !important;
+}
