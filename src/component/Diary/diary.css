@@ -71,7 +71,12 @@ body {
   padding: 2px,
 }
 
-#DiaryList .weather {
+/* weather는 #DiaryList 하위이나 modal 사용으로 별도 처리 */
+.weather {   
   float: right;
   margin-right: 50px
+}
+/* time는 #DiaryList 하위이나 modal 사용으로 별도 처리 */
+.time{
+  display: inline;
 }

@@ -26,7 +26,7 @@ export default class NewArticle extends Component {
   state = {
     title: '',
     content: '',
-    date: moment().subtract(2, 'year'),
+    date: moment(),
     weather: '',
     hashtag: [],
     modal: true,
