@@ -1,0 +1,23 @@
+
+#SignUp .signUp, #SignIn .signIn {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.signupBottom,.signinBottom {
+  margin: 40px;
+  margin-top: 20px;
+  margin-bottom: 0px;
+
+}
+
+#SignUp, #SignIn {
+  margin: auto;
+  text-align: center;
+  margin-top: 10em;
+  padding: 30px;
+  border: 1px gainsboro solid;
+  width:700px;  
+}
+
+

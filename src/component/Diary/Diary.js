@@ -13,6 +13,10 @@ export default class Diary extends Component {
     isClicked: false,
   };
 
+  _changeTitle = () => {
+    document.title = 'My Diary';
+  };
+
   _hashTableUpdate = () => {
     api
       .getData('tag')
@@ -28,7 +32,6 @@ export default class Diary extends Component {
 
   _onClick = async tag => {
     const tagData = await api.getData(tag);
-
     try {
       this.setState({
         data: tagData.data,
@@ -63,22 +66,35 @@ export default class Diary extends Component {
     }
   };
 
+  _showAll = () => {
+    this.setState({
+      selectedTag: ''
+    });
+  }
   componentDidMount() {
+    this._onClick('');
     this._hashTableUpdate();
   }
 
   render() {
     console.log('불러온 데이터 : ', this.state.data);
 
+    this._changeTitle();
     return (
-      <div>
+      <div id='Diary'>
         {!this.state.hashtag ? (
           <p> loading... </p>
-        ) : (
+        ) :
           <span>
-            <Button className="newbtn" onClick={this._toggle}>
-              새글쓰기
-            </Button>
+            <div className='btns'>
+              <Button className="show newbtn" onClick={this._toggle}>
+                새글쓰기
+              </Button>
+              <Button className="show All" onClick={() => { console.log('hi'); this._onClick(''); }} >
+                Show All
+              </Button>
+
+            </div>
             {this.state.isClicked ? (
               <NewArticle
                 toToggle={this._toggle}
@@ -88,16 +104,14 @@ export default class Diary extends Component {
               />
             ) : null}
             <BubbleList tags={this.state.hashtag} clickFunc={this._onClick} />
-            {this.state.data ? (
-              <SpecificDiaryList
-                articles={this.state.data}
-                selectedtag={this.state.selectedTag}
-                clickFunc={this._onClick}
-                hashTableUpdate={this._hashTableUpdate}
-              />
-            ) : null}
+            <SpecificDiaryList
+              articles={this.state.data}
+              selectedtag={this.state.selectedTag}
+              clickFunc={this._onClick}
+              hashTableUpdate={this._hashTableUpdate}
+            />
           </span>
-        )}
+        }
       </div>
     );
   }

@@ -89,7 +89,6 @@ export default class NewArticle extends Component {
         const imgData = data.data;
 
         this._setHashtagState(imgData.tag);
-
         this.setState({
           img: imgData.img,
           key: imgData.key,
@@ -154,7 +153,7 @@ export default class NewArticle extends Component {
     console.log('render', this.state);
 
     return (
-      <Modal isOpen={this.state.modal}>
+      <Modal id='Newarticlemodal' isOpen={this.state.modal}>
         <ModalHeader
           toggle={() => {
             this._toggle('modal');
@@ -243,7 +242,6 @@ export default class NewArticle extends Component {
                   type="file"
                   name="file"
                   id="imagefile"
-                  // enctype="multipart/form-data"
                   onChange={() => {
                     this.setState({
                       isUploadImg: !this.state.isUploadImg,
@@ -254,7 +252,7 @@ export default class NewArticle extends Component {
                 />
                 <FormText color="muted">
                   파일은 하나만 넣을 수 있습니다!!
-                  <img src={this.state.img} />
+                  <img src={this.state.img} width='300px' />
                 </FormText>
               </Col>
             </FormGroup>

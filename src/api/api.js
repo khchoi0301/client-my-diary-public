@@ -98,6 +98,13 @@ const getWeather = (city = 'Seoul') => {
     .catch(err => err);
 };
 
+const routeKakaoLogin = () => {
+  return axios
+    .get(`${url}/api`)
+    .then(res => res)
+    .catch(err => err);
+};
+
 export default {
   loginPost,
   modifyDiary,
@@ -108,4 +115,5 @@ export default {
   userLogout,
   uploadImage,
   getWeather,
+  routeKakaoLogin,
 };
