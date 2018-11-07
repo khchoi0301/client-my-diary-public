@@ -3,11 +3,10 @@
 import axios from 'axios';
 
 
-// const url =
-//   'http://ec2-13-209-41-118.ap-northeast-2.compute.amazonaws.com:3001'; // 주연님 AWS 서버
-const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com'; // 로컬 서버
-// const url = 'http://13.209.41.118:3001'; // EC2 서버
-
+const url = 'http://13.209.41.118:3001';
+// 'http://ec2-13-209-41-118.ap-northeast-2.compute.amazonaws.com:3001'; // 주연님 AWS 서버
+// 'http://ec2-54-191-92-219.us-west-2.compute.amazonaws.com:3001';
+// const url = 'http://10.130.151.17:3001';
 
 const TokenHeader = {
   headers: {
@@ -102,6 +101,13 @@ const getWeather = (city = 'Seoul') => {
     .catch(err => err);
 };
 
+const routeKakaoLogin = () => {
+  return axios
+    .get(`${url}/api`)
+    .then(res => res)
+    .catch(err => err);
+};
+
 export default {
   loginPost,
   modifyDiary,
@@ -112,4 +118,5 @@ export default {
   userLogout,
   uploadImage,
   getWeather,
+  routeKakaoLogin,
 };
