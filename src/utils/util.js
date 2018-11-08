@@ -3,14 +3,15 @@ const convertToArrayTag = tagString => {
   return !splitedTagToArr[0] ? splitedTagToArr.slice(1) : splitedTagToArr;
 };
 
-const emailCheck = email => {
-  const checker = /^[a-zA-Z0-9_\-.]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+$/;
+// const emailCheck = email => {
+//   const checker = /^[a-zA-Z0-9_\-.]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+$/;
+//   return checker.test(email);
+// };
 
-  return checker.test(email);
-};
+const minPwNum = 8;
 
 const passwordCheck = password => {
-  const checker = /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/;
+  const checker = /^(?=(.*[A-Za-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/i;
 
   return checker.test(password);
 };
@@ -34,7 +35,8 @@ const getToday = () => {
 
 export default {
   convertToArrayTag,
-  emailCheck,
+  // emailCheck,
   passwordCheck,
   getToday,
+  minPwNum
 };

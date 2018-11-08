@@ -22,8 +22,6 @@ export default class Mainheader extends Component {
       });
     } else {
       const checking = await auth.userCheck();
-      console.log(123);
-
       if (checking.code !== 200) {
         localStorage.removeItem('token');
         alert('로그인 만료! 재로그인 해주세요');

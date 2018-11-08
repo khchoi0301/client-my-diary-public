@@ -81,6 +81,8 @@ export default class Login extends Component {
         <div className='signinBottom'>
           <Link className='signinBottom' to="/">메인</Link>
           <span className='signinBottom' >|</span>
+          <Link className='signinBottom' to="/changeinfo">비밀번호 찾기</Link>
+          <span className='signinBottom' >|</span>
           <Link className='signinBottom' to="/signup">회원가입</Link>
         </div>
       </div>

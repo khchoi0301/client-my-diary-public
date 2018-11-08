@@ -8,6 +8,7 @@ import GetToken from 'component/UserController/GetToken';
 import PrivateRouter from 'component/UserController/privateRoute';
 import NewDiary from 'component/Detail/NewDiary';
 import MainHeader from 'component/Main/MainHeader';
+import ChangeInfo from './component/UserController/ChangeInfo';
 
 export default class App extends Component {
   render() {
@@ -19,6 +20,7 @@ export default class App extends Component {
             <Route path="/" exact component={Main} />
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={Login} />
+            <Route path="/changeinfo" component={ChangeInfo} />
             <Route path="/post" component={NewDiary} />
             <PrivateRouter path="/diary" component={Diary} />
             <Route path="/user/:token" component={GetToken} />
