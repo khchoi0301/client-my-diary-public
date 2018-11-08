@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-// import { Nav, NavItem, NavLink } from 'reactstrap';
-// import { Link } from 'react-router-dom';
-// import api from 'api/api';
+import { Nav, NavItem, NavLink } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import api from 'api/api';
 import auth from 'utils/auth';
-import Header from 'component/Main/Header';
 
-export default class Mainheader extends Component {
+export default class Header extends Component {
   state = {
     isLogined: {},
   };
 
   async componentDidMount() {
     if (!localStorage.getItem('token')) {
+      // 토큰 없음
       const { isLogined } = this.state;
       this.setState({
         isLogined: {
@@ -22,7 +22,6 @@ export default class Mainheader extends Component {
       });
     } else {
       const checking = await auth.userCheck();
-      console.log(123);
 
       if (checking.code !== 200) {
         localStorage.removeItem('token');
@@ -36,12 +35,31 @@ export default class Mainheader extends Component {
 
   render() {
     const { isLogined } = this.state;
-
     if (!isLogined.code) return null;
 
     return (
-      <div id="mainheader">
-        <Header props={isLogined.code === 200} />
+      <div id="header">
+        <Nav id="navbar" color="black">
+          <NavItem>
+            <NavLink>
+              <Link to="/">My Log</Link>
+            </NavLink>
+          </NavItem>
+          <NavItem id="diarylink">
+            <NavLink>
+              <Link to="/diary">My Diary</Link>
+            </NavLink>
+          </NavItem>
+          <NavItem id="login">
+            <NavLink id="navlink">
+              {!(isLogined.code === 200) ? (
+                <Link to="/login">Login</Link>
+              ) : (
+                <div onClick={api.userLogout}>Logout</div>
+              )}
+            </NavLink>
+          </NavItem>
+        </Nav>
       </div>
     );
   }
