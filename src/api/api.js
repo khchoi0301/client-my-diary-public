@@ -3,15 +3,14 @@
 import axios from 'axios';
 
 
+
 const url = 'http://10.130.151.17:3001';//bbk
 // const url = 'http://10.130.151.10:3001';//JY
-
 // window.url = 'http://13.209.41.118:3001'; //aws
 // 'http://ec2-13-209-41-118.ap-northeast-2.compute.amazonaws.com:3001'; // 주연님 AWS 서버
 // 'http://ec2-54-191-92-219.us-west-2.compute.amazonaws.com:3001';
 
 // window.url = url;
-
 
 const TokenHeader = {
   headers: {
@@ -137,6 +136,7 @@ export default {
   getWeather,
   routeKakaoLogin,
   emailCheck,
+
   url,
   changeInfoPost
 };

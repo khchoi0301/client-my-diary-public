@@ -7,15 +7,19 @@ import Login from 'component/UserController/Login';
 import GetToken from 'component/UserController/GetToken';
 import PrivateRouter from 'component/UserController/privateRoute';
 import NewDiary from 'component/Detail/NewDiary';
-import MainHeader from 'component/Main/MainHeader';
+
+
 import ChangeInfo from './component/UserController/ChangeInfo';
+
+import Header from 'component/Main/MainHeader';
+
 
 export default class App extends Component {
   render() {
     return (
       <Router>
         <div className="App">
-          <MainHeader />
+          <Header />
           <Switch>
             <Route path="/" exact component={Main} />
             <Route path="/signup" component={SignUp} />
