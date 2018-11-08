@@ -2,7 +2,10 @@
 // 현재 통신에 성공하면 alert, 실패하면 console.error을 띄움. 추후에 어떤 이벤트를 발생할지 생각해야 함.
 import axios from 'axios';
 
-const url = 'http://10.130.151.17:3001'; //bbk
+
+
+const url = 'http://10.130.151.17:3001';//bbk
+// const url = 'http://10.130.151.10:3001';//JY
 // window.url = 'http://13.209.41.118:3001'; //aws
 // 'http://ec2-13-209-41-118.ap-northeast-2.compute.amazonaws.com:3001'; // 주연님 AWS 서버
 // 'http://ec2-54-191-92-219.us-west-2.compute.amazonaws.com:3001';
@@ -27,6 +30,14 @@ const loginPost = loginUserInfo => {
 const signupPost = signUpUserInfo => {
   return axios
     .post(`${url}/auth/join`, signUpUserInfo)
+    .then(res => res)
+    .catch(err => err);
+};
+
+const changeInfoPost = changeInfoPost => {
+  console.log('change', changeInfoPost);
+  return axios
+    .post(`${url}/auth/password`, changeInfoPost)
     .then(res => res)
     .catch(err => err);
 };
@@ -125,4 +136,7 @@ export default {
   getWeather,
   routeKakaoLogin,
   emailCheck,
+
+  url,
+  changeInfoPost
 };

@@ -1,9 +1,12 @@
 import axios from 'axios';
+import api from '../api/api';
 
 // const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com';
 // const url = 'http://ec2-54-218-47-139.us-west-2.compute.amazonaws.com';
 
-const url = 'http://10.130.151.17:3001';
+const url = api.url;
+console.log(url);
+// 'http://10.130.151.17:3001';
 
 
 const TokenHeader = {

@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, row, Col, Label, Input, FormText } from 'react
 import { Link, Redirect } from 'react-router-dom';
 import api from 'api/api';
 import './UserController.css';
+import utils from '../../utils/util';
 
 export default class SignUp extends Component {
   state = {
@@ -11,7 +12,7 @@ export default class SignUp extends Component {
     passwordcheck: null,
     nick: null,
     isPwSame: false,
-    isPwLong: false,
+    isPwValid: false,
     isIdExist: false,
   };
 
@@ -30,22 +31,22 @@ export default class SignUp extends Component {
           alert('동일한 이메일이 이미 등록되었습니다.!');
         } else {
           alert('회원가입 되었습니다!');
-          window.location = '/';
+          window.location = '/#/login';
         }
-
       } else {
-        console.dir(res);
+        alert(res.response.data.message);
         alert('회원가입에 실패했습니다!');
+        console.dir(res);
       }
     });
   };
 
   render() {
-    let pwlength = 5;
-    if (this.state.password.length >= pwlength && !this.state.isPwLong) {
-      console.log('short password');
+    let pwlength = utils.minPwNum;
+    if (!this.state.isPwValid && utils.passwordCheck(this.state.password)) {
+      console.log('wrong password');
       this.setState({
-        isPwLong: true
+        isPwValid: true
       });
     }
     if (this.state.password === this.state.passwordcheck && !this.state.isPwSame) {
@@ -135,8 +136,8 @@ export default class SignUp extends Component {
                 onChange={e => this._handleUserInfo(e, 'passwordcheck')}
               />
               <FormText color="muted">
-                {!this.state.isPwLong ?
-                  <span className='wrong'>비밀번호를 {pwlength}자 이상으로 설정해 주세요</span>
+                {!this.state.isPwValid ?
+                  <span className='wrong'>비밀번호를 {pwlength}자 이상, 숫자와 문자를 포함하여 설정해 주세요</span>
                   : this.state.isPwSame ?
                     <span className='correct'>비밀 번호가 확인 되었습니다</span>
                     : <span className='wrong'>x 비밀 번호가 동일 하지 않습니다</span>}
@@ -144,7 +145,7 @@ export default class SignUp extends Component {
               </FormText>
             </Col>
           </FormGroup>
-          <Button color="primary" size="lg" className='signUp btn' disabled={!this.state.isPwLong || !this.state.isPwSame || this.state.isIdExist}> 가입 하기</Button>
+          <Button color="primary" size="lg" className='signUp btn' disabled={!this.state.isPwValid || !this.state.isPwSame || this.state.isIdExist}> 가입 하기</Button>
         </Form>
         <Button color="warning" href="http://13.209.41.118:3001/auth/kakao" size="lg" className='signUp btnkakao white'  >
           <img className='kakaoimg' src='https://developers.kakao.com/assets/img/features/service/p_talk.png' width='20px' padding='100px' />
