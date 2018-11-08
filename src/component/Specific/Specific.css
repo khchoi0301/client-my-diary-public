@@ -1,0 +1,35 @@
+#Specific {
+  margin: 3em;
+}
+
+#Specific .title {
+  margin-left: 10px;
+  font-size: 2.1em;
+  font-weight: bold;
+}
+
+#Specific .detailBar {
+  height: 1.7px;
+  background-color: black;
+}
+
+#Specific .button {
+  float: right;
+  margin-right: 10px;
+}
+
+#Specific .userImage {
+  width: 500px;
+  height: 300px;
+}
+
+#Specific .imageContainer,
+#Specific .weather {
+  text-align: center;
+  font-weight: bold;
+}
+
+#Specific .createdAt {
+  float: right;
+  color: gray;
+}

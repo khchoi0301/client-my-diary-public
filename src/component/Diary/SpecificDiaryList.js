@@ -1,17 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Col,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  FormText,
-} from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import HorizontalScroll from 'react-scroll-horizontal';
 import SpecificDiary from './SpecificDiary';
 import './diary.css';
@@ -20,6 +8,8 @@ import MakeTag from './MakeTag';
 import JavascriptTimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import Time from './Time';
+import { Redirect } from 'react-router-dom';
+// import Specific from 'component/Specific/Specific';
 
 export default class SpecificDiaryList extends Component {
   state = {
@@ -28,6 +18,7 @@ export default class SpecificDiaryList extends Component {
     nestedModal: false,
     closeAll: false,
     current: {},
+    redirect: false,
   };
 
   toggle = () => {
@@ -120,7 +111,7 @@ export default class SpecificDiaryList extends Component {
   };
 
   _onDeleteButtonClick = async () => {
-    this.toggleAll();
+    // this.toggleAll();
     const deleteResult = await api.deleteDiary(this.state.current);
 
     try {
@@ -141,8 +132,19 @@ export default class SpecificDiaryList extends Component {
     });
   };
 
-  render() {
+  _renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to="/specific" />;
+    }
+  };
 
+  _setRedirect = () => {
+    this.setState({
+      redirect: true,
+    });
+  };
+
+  render() {
     if (this.state.current.date) {
       var localTime = new Date(this.state.current.date);
       JavascriptTimeAgo.locale(en);
@@ -150,23 +152,11 @@ export default class SpecificDiaryList extends Component {
 
     return (
       <div id="DiaryList">
-        {/* <InfiniteScroll
-          pageStart={0}
-          // loadMore={loadFunc}
-          hasMore={true}
-          loader={<div className="loader" key={0}>Loading ...</div>}
-          useWindow={false}
-        >
-        </InfiniteScroll> */}
-
-        <HorizontalScroll
-          pageLock={true}
-          // style={{ width: '500px' }}
-          config={{ stiffness: 4, damping: 3 }}
-        >
+        <HorizontalScroll pageLock={true} config={{ stiffness: 4, damping: 3 }}>
           {this.props.articles.map((article, idx) => {
             if (!article.img) {
-              article.img = 'https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180';
+              article.img =
+                'https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180';
             }
             if (article.content) {
               return (
@@ -178,7 +168,8 @@ export default class SpecificDiaryList extends Component {
                     this._selectIndex({ idx });
                   }}
                   style={{
-                    margin: '4px', padding: '2px',
+                    margin: '4px',
+                    padding: '2px',
                   }}
                 >
                   <SpecificDiary article={article} key={idx} />
@@ -187,24 +178,22 @@ export default class SpecificDiaryList extends Component {
             }
           })}
         </HorizontalScroll>
-
         <Modal
           isOpen={this.state.modal}
           toggle={this.toggle}
           className={this.props.className}
         >
-          <ModalHeader toggl e={this.toggle}>
+          <ModalHeader toggle={this.toggle}>
             {this.modify('title', '300px')}
           </ModalHeader>
           <ModalBody>
-
-            {this.state.current.date ?
+            {this.state.current.date ? (
               <span>
-                <div>{localTime.toDateString()}</div>
-                (<Time className='time' date={localTime} />)
+                <div>{localTime.toDateString()}</div>(
+                <Time className="time" date={localTime} />)
               </span>
-              : null}
-            <span className='weather'>{this.state.current.weather}</span>
+            ) : null}
+            <span className="weather">{this.state.current.weather}</span>
 
             <br />
           </ModalBody>
@@ -226,34 +215,16 @@ export default class SpecificDiaryList extends Component {
             <br />
           </ModalBody>
           <ModalFooter>
-            {!this.state.modify ? (
-              <Button color="success" onClick={this.toggleModify}>
-                수정
-              </Button>
-            ) : (
-              <Button color="success" onClick={this._onModifyButtonClick}>
-                완료
-              </Button>
-            )}
-            <Button color="danger" onClick={this.toggleNested}>
-              삭제
-            </Button>
-            <Modal
-              isOpen={this.state.nestedModal}
-              toggle={this.toggleNested}
-              onClosed={this.state.closeAll ? this.toggle : undefined}
+            <Button
+              color="info"
+              onClick={() => {
+                this.props.appStateChange(this.state.current);
+                this._setRedirect();
+              }}
             >
-              <ModalHeader>삭제</ModalHeader>
-              <ModalBody>정말 삭제 하시겠습니까??</ModalBody>
-              <ModalFooter>
-                <Button color="danger" onClick={this._onDeleteButtonClick}>
-                  삭제
-                </Button>
-                <Button color="primary" onClick={this.toggleNested}>
-                  취소
-                </Button>{' '}
-              </ModalFooter>
-            </Modal>
+              상세보기
+            </Button>
+            {this.state.redirect ? this._renderRedirect() : null}
           </ModalFooter>
         </Modal>
       </div>
