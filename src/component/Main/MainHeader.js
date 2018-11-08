@@ -3,22 +3,19 @@ import { Nav, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import api from 'api/api';
 import auth from 'utils/auth';
+import DropDown from './DropDown';
 
 export default class Header extends Component {
   state = {
     isLogined: {},
+    user: 'init',
+    isFirst: true
   };
 
   async componentDidMount() {
     if (!localStorage.getItem('token')) {
-      // 토큰 없음
-      const { isLogined } = this.state;
       this.setState({
-        isLogined: {
-          code: 407,
-          message: '잘못된 회원입니다.',
-          ...isLogined,
-        },
+        isLogined: { code: 407 }
       });
     } else {
       const checking = await auth.userCheck();
@@ -34,8 +31,15 @@ export default class Header extends Component {
   }
 
   render() {
+    if (this.props.user !== 'propsinit' && this.state.isFirst) {
+      this.setState({
+        user: this.props.user,
+        isFirst: false
+      });
+    }
+
+    console.log('nav', this.state.user, this.props.user);
     const { isLogined } = this.state;
-    if (!isLogined.code) return null;
 
     return (
       <div id="header">
@@ -52,11 +56,10 @@ export default class Header extends Component {
           </NavItem>
           <NavItem id="login">
             <NavLink id="navlink">
-              {!(isLogined.code === 200) ? (
-                <Link to="/login">Login</Link>
-              ) : (
-                <div onClick={api.userLogout}>Logout</div>
-              )}
+              {(!isLogined.code) ? null :
+                !(isLogined.code === 200) ? (
+                  <Link to="/login">Login</Link>
+                ) : (<Link to disabled><DropDown /></Link>)}
             </NavLink>
           </NavItem>
         </Nav>
