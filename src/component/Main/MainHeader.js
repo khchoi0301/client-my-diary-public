@@ -5,6 +5,7 @@ import api from 'api/api';
 import auth from 'utils/auth';
 import DropDown from './DropDown';
 import Menu from './Menu';
+import './mainheader.css';
 
 
 export default class Header extends Component {
