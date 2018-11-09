@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Old+Standard+TT|Stardos+Stencil:700|Vidaloka');
+
  #main {
   /* margin: auto; */
   /* width: 50%; */
@@ -21,7 +23,6 @@ body #title{
 	height: 100%;
 	position: relative;
 	top: 70%;
-	font: italic;
 }
 
 #header {
@@ -50,19 +51,30 @@ li {
 	width:26%;
 	margin: auto;
 	text-align: center;
-  /* background-color: red; */
+	font-family: 'Vidaloka', serif;
 	color: black
 }
 
+
 #header .diarylink, #header .login {
-font-size: 18px;
-	/* font:times; */
-  font:arial;
-	
+  font-size: 18px;
 }
+
 #header  .home{
-  font-size: 25px;
-  font-weight: bold;
+	font-size: 30px;
+	font-family: 'Stardos Stencil', cursive;
+	font-weight: bold;
+
+}
+
+#header  #nick {
+	font-family: 'Vidaloka', serif; 
+	margin-right: 10px;
+}
+
+#dropnick {
+	font-size: 21px;
+	color: black
 }
 
 #menuimg {
@@ -71,14 +83,11 @@ font-size: 18px;
 
 
 .nav-link {
-  margin: auto;
-  /* float: right; */
-  /* background-color: red; */
+	margin: auto;
 }
 
 #login  {
   position: relative;
-  /* float: right; */
 }
 
 
@@ -88,3 +97,8 @@ font-size: 18px;
   background-color: #dee2e6;
   border:#dee2e6
 }
+
+#Dropdown {
+	display: inline-block;
+}
+

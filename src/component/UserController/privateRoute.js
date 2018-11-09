@@ -9,6 +9,7 @@ export default class withPrivateRoute extends Component {
   };
 
   async componentDidMount() {
+    console.log('privateRoute');
     if (!localStorage.getItem('token')) {
       this.setState({
         loaded: !this.state.loaded,
@@ -27,6 +28,8 @@ export default class withPrivateRoute extends Component {
           alert(authenticateResult.message);
 
           localStorage.removeItem('token');
+          localStorage.removeItem('nick');
+
           this.setState({
             loaded: !this.state.loaded,
           });

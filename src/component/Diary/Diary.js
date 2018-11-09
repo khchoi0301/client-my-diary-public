@@ -90,7 +90,7 @@ export default class Diary extends Component {
           <span>
             <div className="btns">
               <Button className="show newbtn" onClick={this._toggle}>
-                새글쓰기
+                  새글쓰기
               </Button>
               <Button
                 className="show All"
@@ -99,7 +99,7 @@ export default class Diary extends Component {
                   this._onClick('');
                 }}
               >
-                Show All
+                  Show All
               </Button>
             </div>
             {this.state.isClicked ? <Redirect to="/post" /> : null}

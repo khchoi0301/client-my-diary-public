@@ -49,6 +49,8 @@ const emailCheck = email => {
 const userLogout = () => {
   console.log('logout');
   localStorage.removeItem('token');
+  localStorage.removeItem('nick');
+
   window.location = '/';
   alert('로그아웃 되었습니다!');
 };

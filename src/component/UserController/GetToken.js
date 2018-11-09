@@ -8,7 +8,8 @@ export default class GetToken extends Component {
 
   _getKakaoToken = () => {
     const token = this.props.match.params.token;
-    console.log(token);
+
+    console.log('kakao token', token);
     if (token) {
       localStorage.setItem('token', token);
     } else alert('에러!!');
