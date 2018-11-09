@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
 import SpecificDiaryList from './SpecificDiaryList';
 import BubbleList from './BubbleList';
-import NewArticle from './newarticle';
 import api from 'api/api';
 
 export default class Diary extends Component {
@@ -15,6 +15,7 @@ export default class Diary extends Component {
 
   _changeTitle = () => {
     document.title = 'My Diary';
+    console.log('diary : ', this.props);
   };
 
   _hashTableUpdate = () => {
@@ -68,9 +69,10 @@ export default class Diary extends Component {
 
   _showAll = () => {
     this.setState({
-      selectedTag: ''
+      selectedTag: '',
     });
-  }
+  };
+
   componentDidMount() {
     this._onClick('');
     this._hashTableUpdate();
@@ -81,37 +83,36 @@ export default class Diary extends Component {
 
     this._changeTitle();
     return (
-      <div id='Diary'>
+      <div id="Diary">
         {!this.state.hashtag ? (
           <p> loading... </p>
-        ) :
+        ) : (
           <span>
-            <div className='btns'>
+            <div className="btns">
               <Button className="show newbtn" onClick={this._toggle}>
                 새글쓰기
               </Button>
-              <Button className="show All" onClick={() => { console.log('hi'); this._onClick(''); }} >
+              <Button
+                className="show All"
+                onClick={() => {
+                  console.log('hi');
+                  this._onClick('');
+                }}
+              >
                 Show All
               </Button>
-
             </div>
-            {this.state.isClicked ? (
-              <NewArticle
-                toToggle={this._toggle}
-                postUpdate={this._postDataUpdate}
-                hashTableUpdate={this._hashTableUpdate}
-                getWeather={api.getWeather}
-              />
-            ) : null}
+            {this.state.isClicked ? <Redirect to="/post" /> : null}
             <BubbleList tags={this.state.hashtag} clickFunc={this._onClick} />
             <SpecificDiaryList
               articles={this.state.data}
               selectedtag={this.state.selectedTag}
               clickFunc={this._onClick}
               hashTableUpdate={this._hashTableUpdate}
+              appStateChange={this.props.appStateChange}
             />
           </span>
-        }
+        )}
       </div>
     );
   }

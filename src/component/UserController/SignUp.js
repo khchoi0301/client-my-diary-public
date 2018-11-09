@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, row, Col, Label, Input, FormText } from 'reactstrap';
-import { Link, Redirect } from 'react-router-dom';
+import {
+  Button,
+  Form,
+  FormGroup,
+  Col,
+  Label,
+  Input,
+  FormText,
+} from 'reactstrap';
+import { Link } from 'react-router-dom';
 import api from 'api/api';
 import './UserController.css';
 import utils from '../../utils/util';
@@ -46,46 +54,53 @@ export default class SignUp extends Component {
     if (!this.state.isPwValid && utils.passwordCheck(this.state.password)) {
       console.log('wrong password');
       this.setState({
+        isPwLong: true,
         isPwValid: true
       });
     }
-    if (this.state.password === this.state.passwordcheck && !this.state.isPwSame) {
+    if (
+      this.state.password === this.state.passwordcheck &&
+      !this.state.isPwSame
+    ) {
       console.log(this.state.is);
       this.setState({
-        isPwSame: true
+        isPwSame: true,
       });
-    } else if (this.state.password !== this.state.passwordcheck && this.state.isPwSame) {
+    } else if (
+      this.state.password !== this.state.passwordcheck &&
+      this.state.isPwSame
+    ) {
       this.setState({
-        isPwSame: false
+        isPwSame: false,
       });
     }
 
     if (!this.state.isIdExist && this.state.email.length) {
-      api.emailCheck(this.state.email)
-        .then(res => {
-          if (res.data.code === 405) {
-            console.log(this.state.email + '이 존재함');
-            this.setState({
-              isIdExist: true
-            });
-          }
-        });
+      api.emailCheck(this.state.email).then(res => {
+        if (res.data.code === 405) {
+          console.log(this.state.email + '이 존재함');
+          this.setState({
+            isIdExist: true,
+          });
+        }
+      });
     } else if (this.state.isIdExist) {
-      api.emailCheck(this.state.email)
-        .then(res => {
-          if (res.data.code !== 405) {
-            this.setState({
-              isIdExist: false
-            });
-          }
-        });
+      api.emailCheck(this.state.email).then(res => {
+        if (res.data.code !== 405) {
+          this.setState({
+            isIdExist: false,
+          });
+        }
+      });
     }
 
     return (
-      <div id='SignUp'>
+      <div id="SignUp">
         <Form onSubmit={this._onSignUp}>
           <FormGroup row>
-            <Label for="signUpEmail" sm={4}>이메일</Label>
+            <Label for="signUpEmail" sm={4}>
+              이메일
+            </Label>
             <Col sm={8}>
               <Input
                 type="email"
@@ -95,14 +110,18 @@ export default class SignUp extends Component {
                 onChange={e => this._handleUserInfo(e, 'email')}
               />
               <FormText color="muted">
-                {this.state.email.length && this.state.isIdExist ?
-                  <span className='wrong'>동일한 이메일 주소가 이미 존재합니다</span>
-                  : null}
+                {this.state.email.length && this.state.isIdExist ? (
+                  <span className="wrong">
+                    동일한 이메일 주소가 이미 존재합니다
+                  </span>
+                ) : null}
               </FormText>
             </Col>
           </FormGroup>
           <FormGroup row>
-            <Label for="signUpNickname" sm={4}>닉네임</Label>
+            <Label for="signUpNickname" sm={4}>
+              닉네임
+            </Label>
             <Col sm={8}>
               <Input
                 type="text"
@@ -114,7 +133,9 @@ export default class SignUp extends Component {
             </Col>
           </FormGroup>
           <FormGroup row>
-            <Label className='test' for="signUpPassword" sm={4} >비밀번호</Label>
+            <Label className="test" for="signUpPassword" sm={4}>
+              비밀번호
+            </Label>
             <Col sm={8}>
               <Input
                 type="password"
@@ -126,7 +147,9 @@ export default class SignUp extends Component {
             </Col>
           </FormGroup>
           <FormGroup row>
-            <Label for="signUpPasswordcheck" sm={4}>비밀번호 확인</Label>
+            <Label for="signUpPasswordcheck" sm={4}>
+              비밀번호 확인
+            </Label>
             <Col sm={8}>
               <Input
                 type="password"
@@ -136,6 +159,33 @@ export default class SignUp extends Component {
                 onChange={e => this._handleUserInfo(e, 'passwordcheck')}
               />
               <FormText color="muted">
+                {!this.state.isPwLong ? (
+                  <span className="wrong">
+                    비밀번호를 {pwlength}자 이상으로 설정해 주세요
+                  </span>
+                ) : this.state.isPwSame ? (
+                  <span className="correct">비밀 번호가 확인 되었습니다</span>
+                ) : (
+                  <span className="wrong">
+                    x 비밀 번호가 동일 하지 않습니다
+                  </span>
+                )}
+              </FormText>
+            </Col>
+          </FormGroup>
+          <Button
+            color="primary"
+            size="lg"
+            className="signUp btn"
+            disabled={
+              !this.state.isPwLong ||
+              !this.state.isPwSame ||
+              this.state.isIdExist
+            }
+          >
+            {' '}
+            가입 하기
+          </Button>
                 {!this.state.isPwValid ?
                   <span className='wrong'>비밀번호를 {pwlength}자 이상, 숫자와 문자를 포함하여 설정해 주세요</span>
                   : this.state.isPwSame ?
@@ -147,18 +197,35 @@ export default class SignUp extends Component {
           </FormGroup>
           <Button color="primary" size="lg" className='signUp btn' disabled={!this.state.isPwValid || !this.state.isPwSame || this.state.isIdExist}> 가입 하기</Button>
         </Form>
-        <Button color="warning" href="http://13.209.41.118:3001/auth/kakao" size="lg" className='signUp btnkakao white'  >
-          <img className='kakaoimg' src='https://developers.kakao.com/assets/img/features/service/p_talk.png' width='20px' padding='100px' />
+        <Button
+          color="warning"
+          href="http://13.209.41.118:3001/auth/kakao"
+          size="lg"
+          className="signUp btnkakao white"
+        >
+          <img
+            className="kakaoimg"
+            src="https://developers.kakao.com/assets/img/features/service/p_talk.png"
+            width="20px"
+            padding="100px"
+            alt="카카오톡으로 시작 하기"
+          />
           카카오톡으로 시작 하기
         </Button>
 
-        <div className='signUp'>Copiright @ 2018 MyDiary Inc.All rights reserved</div>
-        <div className='signupBottom'>
-          <Link className='signupBottom' to="/">메인</Link>
-          <span className='signupBottom' >|</span>
-          <Link className='signupBottom' to="/login">로그인</Link>
+        <div className="signUp">
+          Copiright @ 2018 MyDiary Inc.All rights reserved
         </div>
-      </div >
+        <div className="signupBottom">
+          <Link className="signupBottom" to="/">
+            메인
+          </Link>
+          <span className="signupBottom">|</span>
+          <Link className="signupBottom" to="/login">
+            로그인
+          </Link>
+        </div>
+      </div>
     );
   }
 }

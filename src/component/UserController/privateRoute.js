@@ -38,7 +38,7 @@ export default class withPrivateRoute extends Component {
   }
 
   render() {
-    const { component: Component, ...rest } = this.props;
+    const { component: Component, appStateChange, ...rest } = this.props;
     const { loaded, isAuthenticated } = this.state;
 
     if (!loaded) return null;
@@ -47,7 +47,11 @@ export default class withPrivateRoute extends Component {
       <Route
         {...rest}
         render={props =>
-          isAuthenticated ? <Component {...props} /> : <Redirect to="/login" />
+          isAuthenticated ? (
+            <Component {...props} appStateChange={appStateChange} />
+          ) : (
+            <Redirect to="/login" />
+          )
         }
       />
     );
