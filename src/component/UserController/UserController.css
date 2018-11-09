@@ -1,10 +1,10 @@
 
-#SignUp .signUp, #SignIn .signIn {
+#ChangeInfo .ChangeInfo, #SignUp .signUp, #SignIn .signIn {
   width: 100%;
   margin-top: 20px;
 }
 
-#SignUp .signupBottom, #SignIn .signinBottom {
+#ChangeInfo .ChangeInfoBottom, #SignUp .signupBottom, #SignIn .signinBottom {
   margin: 40px;
   margin-top: 20px;
   margin-bottom: 0px;
@@ -13,7 +13,7 @@
 
 }
 
-#SignUp, #SignIn {
+#ChangeInfo, #SignUp, #SignIn {
   margin: auto;
   text-align: center;
   margin-top: 10em;
@@ -23,7 +23,7 @@
 }
 
 
-#SignUp .kakaoimg,#SignIn .kakaoimg  {
+#ChangeInfo .kakaoimg, #SignUp .kakaoimg, #SignIn .kakaoimg  {
   margin: 5px;
 }
 
@@ -31,6 +31,6 @@
   color: green
 }
 
-#SignUp .wrong {
+#ChangeInfo .wrong ,#SignUp .wrong {
   color: red
 }

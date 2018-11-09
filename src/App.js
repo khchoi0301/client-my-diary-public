@@ -13,6 +13,8 @@ import Specific from 'component/Specific/Specific';
 import MakeTag from 'component/Diary/MakeTag';
 import Modify from 'component/Detail/Modify';
 import api from 'api/api';
+import ChangeInfo from './component/UserController/ChangeInfo';
+import Header from 'component/Main/MainHeader';
 
 export default class App extends Component {
   state = {
@@ -184,7 +186,7 @@ export default class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Mainheader />
+          <Header />
           <Switch>
             <Route path="/" exact component={Main} />
             <Route path="/signup" component={SignUp} />
@@ -195,6 +197,7 @@ export default class App extends Component {
               component={Diary}
               appStateChange={this._getCurrentDiarty}
             />
+            <Route path="/changeinfo" component={ChangeInfo} />
             <Route path="/user/:token" component={GetToken} />
             <Route
               path="/specific"
