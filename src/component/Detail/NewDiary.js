@@ -10,6 +10,7 @@ import {
 } from 'reactstrap';
 import api from 'api/api';
 import 'react-dates/initialize';
+import { Redirect } from 'react-router-dom';
 import { SingleDatePicker } from 'react-dates';
 import moment from 'moment';
 import MakeTag from './MakeTag';
@@ -27,6 +28,7 @@ export default class NewArticle extends Component {
     key: '',
     img: '',
     isUploadImg: false,
+    isPosted: false,
   };
 
   _handleSubmit = e => {
@@ -48,7 +50,6 @@ export default class NewArticle extends Component {
         if (res.status === 200) {
           console.log(postDiaryData);
           alert('등록되었습니다!');
-          //   <Redirect to ="/"/>
         } else {
           alert('실패!');
         }
@@ -76,6 +77,12 @@ export default class NewArticle extends Component {
 
     this.setState({
       hashtag: newtag,
+    });
+  };
+
+  _isPosted = () => {
+    this.setState({
+      isPosted: !this.state.isPosted,
     });
   };
 
@@ -126,14 +133,16 @@ export default class NewArticle extends Component {
 
   render() {
     console.log('render', this.state);
-    const { isUploadImg } = this.state;
+    const { isUploadImg, isPosted } = this.state;
 
+    if (isPosted) return <Redirect to="/diary" />;
     return (
       <div id="NewDiary">
         <DetailHeader
           handleSubmit={this._handleSubmit}
           isUploadImg={isUploadImg}
           postInfo={this.state}
+          isPosted={this._isPosted}
         />
         <Form className="form" onSubmit={this._handleSubmit}>
           <FormGroup row>
@@ -241,6 +250,7 @@ export default class NewArticle extends Component {
             </Col>
           </FormGroup>
         </Form>
+        <Label sm={2} />
         {this.state.img ? (
           <img className="image" src={this.state.img} alt="이미지" />
         ) : null}

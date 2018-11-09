@@ -17,7 +17,7 @@ import moment from 'moment';
 
 export default props => (
   <div id="Modify">
-    <Button className="button" color="success" onClick={props.sendModify}>
+    <Button className="button" color="success" onClick={props.modifyDiary}>
       수정
     </Button>
     <div className="header">수정하기 </div>
@@ -92,6 +92,8 @@ export default props => (
             <MakeTag
               tag={props.currentDiary.tag}
               func={tags => {
+                console.log('태그 : ', tags);
+
                 props.changeState('tag', tags);
               }}
             />
