@@ -1,10 +1,10 @@
 
-#ChangeInfo .ChangeInfo, #SignUp .signUp, #SignIn .signIn {
+#DeleteAccount .DeleteAccount, #ChangeInfo .ChangeInfo, #SignUp .signUp, #SignIn .signIn {
   width: 100%;
   margin-top: 20px;
 }
 
-#ChangeInfo .ChangeInfoBottom, #SignUp .signupBottom, #SignIn .signinBottom {
+#DeleteAccount .DeleteAccountBottom, #ChangeInfo .ChangeInfoBottom, #SignUp .signupBottom, #SignIn .signinBottom {
   margin: 40px;
   margin-top: 20px;
   margin-bottom: 0px;
@@ -13,7 +13,7 @@
 
 }
 
-#ChangeInfo, #SignUp, #SignIn {
+#DeleteAccount, #ChangeInfo, #SignUp, #SignIn {
   margin: auto;
   text-align: center;
   margin-top: 10em;
@@ -31,6 +31,6 @@
   color: green
 }
 
-#ChangeInfo .wrong ,#SignUp .wrong {
+#DeleteAccount .wrong, #ChangeInfo .wrong ,#SignUp .wrong {
   color: red
 }

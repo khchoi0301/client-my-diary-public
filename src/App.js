@@ -8,6 +8,9 @@ import Login from 'component/UserController/Login';
 import GetToken from 'component/UserController/GetToken';
 import PrivateRouter from 'component/UserController/privateRoute';
 import NewDiary from 'component/Detail/NewDiary';
+
+import DeleteAccount from 'component/UserController/DeleteAccount';
+
 import Mainheader from 'component/Main/MainHeader';
 import Specific from 'component/Specific/Specific';
 import MakeTag from 'component/Diary/MakeTag';
@@ -36,6 +39,7 @@ export default class App extends Component {
     focused: false,
     clickModified: false,
   };
+
 
   _getCurrentDiarty = curDiary => {
     console.log('실행 되라!', curDiary);
@@ -182,22 +186,49 @@ export default class App extends Component {
       .catch(err => console.error(err));
   };
 
+
+export default class App extends Component {
+  state = {
+    user: 'propsinit',
+  };
+
+  getUserName(user) {
+    console.log('e', user);
+    this.setState({
+      user: user
+    });
+  }
+
+  componentDidMount() {
+  }
+
+
   render() {
     return (
       <Router>
         <div className="App">
-          <Header />
+          <Header user={this.state.user} />
+
           <Switch>
             <Route path="/" exact component={Main} />
             <Route path="/signup" component={SignUp} />
-            <Route path="/login" component={Login} />
+
+            
+            <Route path="/login" render={() => <Login func={this.getUserName.bind(this)} />} />
+            <Route path="/changeinfo" component={ChangeInfo} />
+            <Route path="/deleteaccount" component={DeleteAccount} />
+            
+            
+
+            
             <PrivateRouter path="/post" component={NewDiary} />
             <PrivateRouter
               path="/diary"
               component={Diary}
               appStateChange={this._getCurrentDiarty}
             />
-            <Route path="/changeinfo" component={ChangeInfo} />
+            
+
             <Route path="/user/:token" component={GetToken} />
             <Route
               path="/specific"

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
+import Main from '../Main/Main';
+import App from '../../App';
 import api from 'api/api';
 
 export default class Login extends Component {
@@ -10,7 +12,6 @@ export default class Login extends Component {
     isLoginCorrect: false,
     isEmailCorrect: false,
   };
-
   _handleEmail = e => {
     this.setState({
       email: e.target.value,
@@ -25,12 +26,14 @@ export default class Login extends Component {
 
   _onLogin = e => {
     e.preventDefault();
+
     api
       .loginPost(this.state)
       .then(res => {
         if (res.status === 200) {
           const { token } = res.data;
           localStorage.setItem('token', token);
+          this.props.func(this.state.email);
           alert('환영합니다!');
           window.location = '/';
         } else {
