@@ -158,17 +158,17 @@ export default class App extends Component {
     return Array.isArray(this.state.currentDiary[arg]) ? (
       <MakeTag tag={obj} func={this._onvalueChange} />
     ) : (
-        <Input
-          type="text"
-          value={this.state.currentDiary[arg]}
-          onChange={e => {
-            this.setState({
-              currentDiary: { ...this.state.currentDiary, [arg]: e.target.value },
-            });
-          }}
-          style={{ width: width }}
-        />
-      );
+      <Input
+        type="text"
+        value={this.state.currentDiary[arg]}
+        onChange={e => {
+          this.setState({
+            currentDiary: { ...this.state.currentDiary, [arg]: e.target.value },
+          });
+        }}
+        style={{ width: width }}
+      />
+    );
   };
 
   _onChangeState = (attr, value) => {
@@ -178,10 +178,7 @@ export default class App extends Component {
     console.log('diary 데이터 : ', this.state);
   };
 
-
-  componentDidMount() {
-  }
-
+  componentDidMount() {}
 
   render() {
     console.log('appuser', this.state.user);
@@ -201,7 +198,7 @@ export default class App extends Component {
               component={Diary}
               appStateChange={this._getCurrentDiary}
             />
-            <Route path="/user/:token" component={GetToken} />
+            <Route path="/user" component={GetToken} />
             <Route
               path="/specific"
               render={() => (
