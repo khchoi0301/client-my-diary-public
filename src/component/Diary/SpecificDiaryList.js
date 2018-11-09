@@ -146,8 +146,13 @@ export default class SpecificDiaryList extends Component {
 
   render() {
     if (this.state.current.date) {
-      var localTime = new Date(this.state.current.date);
-      JavascriptTimeAgo.locale(en);
+      console.log('date', this.state.current.date);
+
+      const week = ['일', '월', '화', '수', '목', '금', '토'];
+      var date = this.state.current.date.split('T')[0];
+      var day = week[new Date(date).getDay()];
+
+      console.log('날짜 출력 ', date, day);
     }
 
     return (
@@ -189,8 +194,7 @@ export default class SpecificDiaryList extends Component {
           <ModalBody>
             {this.state.current.date ? (
               <span>
-                <div>{localTime.toDateString()}</div>(
-                <Time className="time" date={localTime} />)
+                <span>{`${date} (${day})`}</span>
               </span>
             ) : null}
             <span className="weather">{this.state.current.weather}</span>
@@ -202,6 +206,7 @@ export default class SpecificDiaryList extends Component {
               alt="User Upload Page"
               src={this.state.current.img}
               width="400px"
+              style={{'margin-left': '2em'}}
             />
             <br />
           </ModalBody>

@@ -1,26 +1,35 @@
-// import React, { Component } from 'react';
-// import Specific from 'component/Specific/Specific';
+import React, { Component } from 'react';
+import Specific from 'component/Specific/Specific';
+import api from 'api/api';
 
-// class SpecificContainer extends Component {
-//   state = {
-//     data: [],
-//   };
+export default class SpecificContainer extends Component {
+  state = {
+    data: [],
+  };
 
-//   _getUserAllData = () => {
-//     api.getUserAllData();
+  _getUserAllData = async () => {
+    const allData = await api.getUserAllDiary();
 
-//     setState()
-//   }
+    if (allData.status === 200) {
+      this.setState({
+        data: this.state.data.concat(allData.data),
+      });
+    } else {
+      alert('에러!');
+    }
+  };
 
-//   render() {
-//     return (
-//       <div>
-//         {this.state.data.map((article, idx) => {
-//           <Specific article={article} key={idx} />;
-//         })}
-//       </div>
-//     );
-//   }
-// }
+  componentDidMount() {
+    this._getUserAllData();
+  }
 
-// export default SpecificContainer;
+  render() {
+    return (
+      <div id="SpecificContainer">
+        {this.state.data.map((article, idx) => {
+          return <Specific currentDiary={article} key={idx} />;
+        })}
+      </div>
+    );
+  }
+}

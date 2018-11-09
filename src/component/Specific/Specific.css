@@ -1,24 +1,30 @@
 #Specific {
   margin: 3em;
+  margin-bottom: 11em;
 }
 
 #Specific .title {
   margin-left: 10px;
-  font-size: 2.1em;
+  font-size: 1.7em;
   font-weight: bold;
 }
 
 #Specific .detailBar {
-  height: 1.7px;
-  background-color: black;
+  height: 0.03em;
+  background-color: gray;
 }
 
 #Specific .button {
   float: right;
-  margin-right: 10px;
+  margin-right: 0.6em;
+  margin-top: 0.5em;
+  background-color: white;
+  border: 0px;
+  cursor: pointer;
 }
 
 #Specific .userImage {
+  margin: 2em;
   width: 500px;
   height: 300px;
 }
@@ -30,6 +36,13 @@
 }
 
 #Specific .createdAt {
+  margin-top: 3em;
   float: right;
   color: gray;
+}
+
+#Specific .content {
+  margin-left: 3.4em;
+  display: inline-block;
+  width: 90%;
 }

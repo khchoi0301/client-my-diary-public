@@ -8,7 +8,10 @@ export default props => (
     <Button
       className="button"
       color="success"
-      onClick={props.handleSubmit}
+      onClick={async e => {
+        await props.handleSubmit(e);
+        props.isPosted();
+      }}
       disabled={props.isUploadImg ? true : false}
     >
       등록

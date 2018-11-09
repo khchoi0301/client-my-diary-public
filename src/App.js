@@ -8,9 +8,7 @@ import Login from 'component/UserController/Login';
 import GetToken from 'component/UserController/GetToken';
 import PrivateRouter from 'component/UserController/privateRoute';
 import NewDiary from 'component/Detail/NewDiary';
-
 import DeleteAccount from 'component/UserController/DeleteAccount';
-
 import Mainheader from 'component/Main/MainHeader';
 import Specific from 'component/Specific/Specific';
 import MakeTag from 'component/Diary/MakeTag';
@@ -18,6 +16,7 @@ import Modify from 'component/Detail/Modify';
 import api from 'api/api';
 import ChangeInfo from './component/UserController/ChangeInfo';
 import Header from 'component/Main/MainHeader';
+import SpecificContainer from 'component/Specific/SpecificContainer';
 
 export default class App extends Component {
   state = {
@@ -40,9 +39,7 @@ export default class App extends Component {
     clickModified: false,
   };
 
-
-
-  _getCurrentDiarty = curDiary => {
+  _getCurrentDiary = curDiary => {
     console.log('실행 되라!', curDiary);
 
     this.setState({
@@ -54,6 +51,8 @@ export default class App extends Component {
     const deleteResult = await api.deleteDiary(this.state.currentDiary);
 
     try {
+      console.log(deleteResult);
+
       if (deleteResult.status === 200) {
         console.log(deleteResult);
 
@@ -100,6 +99,7 @@ export default class App extends Component {
             ...this.state.currentDiary,
             img: imgData.img,
             key: imgData.key,
+            tag: this.state.currentDiary.tag.concat(imgData.tag),
           },
         });
         console.log(this.state.currentDiary.img);
@@ -108,16 +108,21 @@ export default class App extends Component {
   };
 
   _onModifyButtonClick = async () => {
-    let arrayifyHashTag = this.state.currentDiary.tag;
+    let { currentDiary } = this.state;
+    let arrayifyHashTag = currentDiary.tag;
+
+    console.log(arrayifyHashTag);
 
     if (arrayifyHashTag.length && arrayifyHashTag[0].label) {
-      arrayifyHashTag = this.state.current.tag.map(item => {
+      arrayifyHashTag = currentDiary.tag.map(item => {
         return item.label;
       });
     }
 
+    console.log('array화', arrayifyHashTag);
+
     const modifiedDiaryData = {
-      ...this.state.current,
+      ...this.state.currentDiary,
       tag: arrayifyHashTag,
     };
 
@@ -170,21 +175,7 @@ export default class App extends Component {
     this.setState({
       currentDiary: { ...this.state.currentDiary, [attr]: value },
     });
-  };
-
-  _modifyDiary = () => {
-    api
-      .modifyDiary(this.state.currentDiary)
-      .then(res => {
-        if (res.status === 200) {
-          console.log(res);
-
-          alert('수정 성공!');
-        } else {
-          alert('수정 실패!');
-        }
-      })
-      .catch(err => console.error(err));
+    console.log('diary 데이터 : ', this.state);
   };
 
 
@@ -208,7 +199,7 @@ export default class App extends Component {
             <PrivateRouter
               path="/diary"
               component={Diary}
-              appStateChange={this._getCurrentDiarty}
+              appStateChange={this._getCurrentDiary}
             />
             <Route path="/user/:token" component={GetToken} />
             <Route
@@ -226,15 +217,15 @@ export default class App extends Component {
               render={() => (
                 <Modify
                   modifyDiary={this._onModifyButtonClick}
-                  modify={this._modify}
                   changeState={this._onChangeState}
+                  modify={this._modify}
                   currentDiary={this.state.currentDiary}
                   focused={this.state.focused}
                   sendImg={this._sendImage}
-                  sendModify={this._modifyDiary}
                 />
               )}
             />
+            <PrivateRouter path="/alldiary" component={SpecificContainer} />
           </Switch>
         </div>
       </Router>
