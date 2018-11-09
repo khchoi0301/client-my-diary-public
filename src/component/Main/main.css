@@ -10,28 +10,36 @@
 body {
   height: 100%;
 }
-body #main {
+body .main {
   margin: 30px;
   margin-top: 0px;
-  height: 800px;
+  height: 900px;
+  /* background-image: url('https://wovenmagazine.com/content/uploads/2018/05/01_LAM_Wide.jpg'); */
+  background-image: url('https://s3.ap-northeast-2.amazonaws.com/app2app2/ALLOWTO_PHOTO_20181108194839_STANDARD.jpg');
 }
+
 body #title {
   color: white;
-
 	font-size: 60px;
 	text-align: center;
-	height: 100%;
 	position: relative;
-	top: 70%;
-
+  top: 70%;
+	font-family: 'Stardos Stencil', cursive;
+  border: 1px white solid;
+  width: 300px;
+  margin: auto;
+  -webkit-transition:background-color 1s, -webkit-transform 1s;
+  transition: background-color 1s, transform 1s;
+}
+body #title:hover{
+  background-color: white;
+  color: black;
 }
 
 #header {
   margin: auto;
   text-align: center;
-  /* margin: 10px */
   border-bottom: 1px gainsboro solid;
-  /* background-color: #e9e9e7; */
   padding: 0px;
   margin-bottom: 0px;
 }
@@ -43,17 +51,12 @@ body #title {
   padding: 0;
 }
 
-a,
-a:hover,
-a:visited,
-a:link,
-a:active {
+a,a:hover,a:visited,a:link,a:active {
   color: black;
   text-decoration: none !important;
 }
 
 li {
-
 	width:26%;
 	margin: auto;
 	text-align: center;
@@ -63,11 +66,11 @@ li {
 
 
 #header .diarylink, #header .login {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 #header  .home{
-	font-size: 30px;
+	font-size: 32px;
 	font-family: 'Stardos Stencil', cursive;
 	font-weight: bold;
 
@@ -81,10 +84,9 @@ li {
 #dropnick {
 	font-size: 21px;
 	color: black
-
 }
 
-#menuimg {
+#Dropdown #menuimg {
   margin-right: 15px;
 }
 
@@ -105,5 +107,25 @@ li {
 
 #Dropdown {
 	display: inline-block;
+}
+
+#Menu .btn-secondary {
+  margin: auto;
+  padding: 0;
+  background-color: white;
+  border: 0px;
+}
+
+#Menu .dropdown-toggle:focus  {
+  border: 0px white solid;
+  box-shadow: 0 0 0 0.0 rgba(255, 255, 255, 1)
+}
+
+#Menu {
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  border: 0px;
 }
 
