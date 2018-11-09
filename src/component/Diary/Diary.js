@@ -87,7 +87,9 @@ export default class Diary extends Component {
         {!this.state.hashtag ? (
           <p> loading... </p>
         ) : (
-          <span>
+          <span id="Diaryspan">
+            {this.state.isClicked ? <Redirect to="/post" /> : null}
+            <BubbleList tags={this.state.hashtag} clickFunc={this._onClick} />
             <div className="btns">
               <Button className="show newbtn" onClick={this._toggle}>
                   새글쓰기
@@ -102,8 +104,6 @@ export default class Diary extends Component {
                   Show All
               </Button>
             </div>
-            {this.state.isClicked ? <Redirect to="/post" /> : null}
-            <BubbleList tags={this.state.hashtag} clickFunc={this._onClick} />
             <SpecificDiaryList
               articles={this.state.data}
               selectedtag={this.state.selectedTag}

@@ -1,9 +1,9 @@
-@import  '../../../node_modules/react-selectize/themes/index.css';
+@import '../../../node_modules/react-selectize/themes/index.css';
 
 body {
   width: 100%;
-  height:100%;
-  margin:0;
+  height: 100%;
+  margin: 0;
 }
 
 /* .specific {
@@ -20,27 +20,57 @@ body {
   margin: 20px;
 }
 
+
 #TagList{
   width: 100%;
   margin :auto;
   float: left;
 }
 
-svg {
-  display: block;
-  margin:auto;
-}
 
 #Diary .show {
   margin: 5px;
 }
 
-/* #Diary .newbtn {
-  float: center;
-} */
+#bubblechart {
+  margin-left: auto;
+}
+
+#Diary {
+  margin-left: auto;
+
+}
+
+#Diaryspan {
+  margin-left: auto;
+}
+
+#BubbleList #TagList {
+  margin-left: auto;
+  margin-right: auto;
+  /* float: left; */
+}
+
+#Diary svg {
+  display: block;
+  margin: auto;
+}
+
+#Diary {
+  width: 100%;
+}
+
+#showAll {
+  padding: 0px 0px 0px 50px;
+}
 
 #Diary .btns {
-  margin-left: 400px
+  width: 80%;
+  margin: auto;
+}
+
+#Diary #Diaryspan {
+  margin: auto;
 }
 
 #Specificdiary {
@@ -60,29 +90,29 @@ svg {
 }
 
 #DiaryList {
-  border-top: 1px gray solid;
+  /* border-top: 1px gray solid; */
   padding: 15px;
   float: left;
   overflow-x: auto;
   width: 75em;
-  height: 17em
+  height: 17em;
 }
 
 #DiaryList .diarybtn {
   float: left;
   width: 10em;
   height: 13em;
-  border: 3px; 
+  border: 3px;
   margin: 4px;
-  padding: 2px,
+  padding: 2px;
 }
 
 /* weather는 #DiaryList 하위이나 modal 사용으로 별도 처리 */
-.weather {   
+.weather {
   float: right;
-  margin-right: 50px
+  margin-right: 50px;
 }
 /* time는 #DiaryList 하위이나 modal 사용으로 별도 처리 */
-.time{
+.time {
   display: inline;
 }
