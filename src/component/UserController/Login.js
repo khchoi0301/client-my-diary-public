@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, Redirect } from 'react-router-dom';
 import Main from '../Main/Main';
 import App from '../../App';
 import api from 'api/api';
@@ -11,6 +11,7 @@ export default class Login extends Component {
     password: null,
     isLoginCorrect: false,
     isEmailCorrect: false,
+    redir: false,
   };
   _handleEmail = e => {
     this.setState({
@@ -25,17 +26,22 @@ export default class Login extends Component {
   };
 
   _onLogin = e => {
+    console.log('login');
     e.preventDefault();
-
     api
       .loginPost(this.state)
       .then(res => {
         if (res.status === 200) {
-          const { token } = res.data;
+          console.log('login set', res.data);
+          const { token, nick } = res.data;
           localStorage.setItem('token', token);
-          this.props.func(this.state.email);
+          localStorage.setItem('nick', nick);
+
           alert('환영합니다!');
           window.location = '/';
+          // this.setState({
+          //   redir: true
+          // });
         } else {
           alert(res.response.data.message);
         }
@@ -49,6 +55,7 @@ export default class Login extends Component {
     return (
 
       <div id='SignIn'>
+        {this.state.redir ? <Redirect to='/' /> : null}
         <Form onSubmit={this._onLogin}>
           <FormGroup row>
             <Label for="exampleEmail" sm={4}>Email</Label>

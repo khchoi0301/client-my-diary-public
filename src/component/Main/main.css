@@ -1,4 +1,7 @@
-#main {
+
+@import url('https://fonts.googleapis.com/css?family=Old+Standard+TT|Stardos+Stencil:700|Vidaloka');
+
+ #main {
   /* margin: auto; */
   /* width: 50%; */
   /* margin-top: 5%; */
@@ -14,12 +17,13 @@ body #main {
 }
 body #title {
   color: white;
-  font-size: 60px;
-  text-align: center;
-  height: 100%;
-  position: relative;
-  top: 70%;
-  font: italic;
+
+	font-size: 60px;
+	text-align: center;
+	height: 100%;
+	position: relative;
+	top: 70%;
+
 }
 
 #header {
@@ -49,22 +53,35 @@ a:active {
 }
 
 li {
-  width: 26%;
-  margin: auto;
-  text-align: center;
-  /* background-color: red; */
-  color: black;
+
+	width:26%;
+	margin: auto;
+	text-align: center;
+	font-family: 'Vidaloka', serif;
+	color: black
 }
 
-#header .diarylink,
-#header .login {
+
+#header .diarylink, #header .login {
   font-size: 18px;
-  /* font:times; */
-  font: arial;
 }
-#header .home {
-  font-size: 25px;
-  font-weight: bold;
+
+#header  .home{
+	font-size: 30px;
+	font-family: 'Stardos Stencil', cursive;
+	font-weight: bold;
+
+}
+
+#header  #nick {
+	font-family: 'Vidaloka', serif; 
+	margin-right: 10px;
+}
+
+#dropnick {
+	font-size: 21px;
+	color: black
+
 }
 
 #menuimg {
@@ -72,14 +89,11 @@ li {
 }
 
 .nav-link {
-  margin: auto;
-  /* float: right; */
-  /* background-color: red; */
+	margin: auto;
 }
 
 #login {
   position: relative;
-  /* float: right; */
 }
 
 #Dropdown .btn-secondary {
@@ -88,3 +102,8 @@ li {
   background-color: #dee2e6;
   border: #dee2e6;
 }
+
+#Dropdown {
+	display: inline-block;
+}
+

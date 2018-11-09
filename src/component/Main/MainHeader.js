@@ -8,8 +8,7 @@ import DropDown from './DropDown';
 export default class Header extends Component {
   state = {
     isLogined: {},
-    user: 'init',
-    isFirst: true,
+    user: null,
   };
 
   async componentDidMount() {
@@ -22,6 +21,8 @@ export default class Header extends Component {
 
       if (checking.code !== 200) {
         localStorage.removeItem('token');
+        localStorage.removeItem('nick');
+
         alert('로그인 만료! 재로그인 해주세요');
       }
       this.setState({
@@ -31,14 +32,30 @@ export default class Header extends Component {
   }
 
   render() {
-    if (this.props.user !== 'propsinit' && this.state.isFirst) {
+
+    if (localStorage.getItem('nick') && !this.state.user) {
       this.setState({
-        user: this.props.user,
-        isFirst: false,
+        user: localStorage.getItem('nick')
       });
     }
 
-    console.log('nav', this.state.user, this.props.user);
+    console.log(this.state.user);
+    // console.log('nav', this.state.user, this.props.user, localStorage.getItem('token'), this.state.isLogined);
+    // async function func() {
+    //   console.log('func in');
+    //   const checking = await auth.userCheck();
+    //   console.log('checking', checking);
+
+    //   // this.setState({
+    //   //   isLogined: checking,
+    //   //   // isLogined: { code: 200 },
+    //   // });
+    // }
+    // if (localStorage.getItem('token') && this.state.isLogined && this.state.isLogined.code === 407) {
+    //   console.log('tokken exist', this.state.isLogined.code);
+    //   func();
+    // }
+
     const { isLogined } = this.state;
 
     return (
@@ -63,14 +80,13 @@ export default class Header extends Component {
             </NavLink>
           </NavItem>
           <NavItem className="login">
-            <NavLink>
-              {!isLogined.code ? null : !(isLogined.code === 200) ? (
-                <Link to="/login">Login</Link>
-              ) : (
-                <Link to disabled>
-                  <DropDown />
-                </Link>
-              )}
+
+            <NavLink >
+              {(!isLogined.code) ? null :
+                !(isLogined.code === 200) ? (
+                  <Link to="/login">Login</Link>
+                ) : (<Link to disabled><span id='nick'>{this.state.user}</span><DropDown user={this.state.user} /></Link>)}
+
             </NavLink>
           </NavItem>
         </Nav>

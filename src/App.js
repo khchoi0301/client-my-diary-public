@@ -38,7 +38,6 @@ export default class App extends Component {
     },
     focused: false,
     clickModified: false,
-    user: 'propsinit',
   };
 
 
@@ -189,45 +188,28 @@ export default class App extends Component {
   };
 
 
-
-
-  getUserName(user) {
-    console.log('e', user);
-    this.setState({
-      user: user
-    });
-  }
-
   componentDidMount() {
   }
 
 
   render() {
+    console.log('appuser', this.state.user);
     return (
       <Router>
         <div className="App">
           <Header user={this.state.user} />
-
           <Switch>
             <Route path="/" exact component={Main} />
             <Route path="/signup" component={SignUp} />
-
-
-            <Route path="/login" render={() => <Login func={this.getUserName.bind(this)} />} />
+            <Route path="/login" render={() => <Login />} />
             <Route path="/changeinfo" component={ChangeInfo} />
             <Route path="/deleteaccount" component={DeleteAccount} />
-
-
-
-
             <PrivateRouter path="/post" component={NewDiary} />
             <PrivateRouter
               path="/diary"
               component={Diary}
               appStateChange={this._getCurrentDiarty}
             />
-
-
             <Route path="/user/:token" component={GetToken} />
             <Route
               path="/specific"

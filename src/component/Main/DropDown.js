@@ -21,6 +21,7 @@ export default class DropDown extends React.Component {
   }
 
   render() {
+    console.log(this.props.user);
     return (
       <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} id="Dropdown">
         <DropdownToggle caret>
@@ -29,7 +30,7 @@ export default class DropDown extends React.Component {
         </DropdownToggle>
         <DropdownMenu>
           <DropdownItem header>Signed in as</DropdownItem>
-          <DropdownItem header>UserID</DropdownItem>
+          <DropdownItem header id='dropnick'>{this.props.user}</DropdownItem>
 
           <DropdownItem divider />
           {/* <DropdownItem disabled>Action</DropdownItem> */}

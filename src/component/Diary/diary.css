@@ -20,12 +20,25 @@ body {
   margin: 20px;
 }
 
+
+#TagList{
+  width: 100%;
+  margin :auto;
+  float: left;
+}
+
+
+#Diary .show {
+  margin: 5px;
+}
+
 #bubblechart {
   margin-left: auto;
 }
 
 #Diary {
   margin-left: auto;
+
 }
 
 #Diaryspan {
