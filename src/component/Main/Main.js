@@ -5,9 +5,12 @@ import './main.css';
 export default class Main extends Component {
   render() {
     return (
-      <div id="main">
-        <h1 id='title'>My Diary</h1>
-        {/* <img alt="ourService" src="https://picsum.photos/600/400?image=123" /> */}
+      <div class="bg">
+        <img
+          id="mainimg"
+          src="https://s3.ap-northeast-2.amazonaws.com/app2app2/ALLOWTO_PHOTO_20181108194839_STANDARD.jpg"
+          alt="main"
+        />
       </div>
     );
   }
