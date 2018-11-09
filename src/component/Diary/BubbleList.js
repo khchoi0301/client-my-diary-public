@@ -22,42 +22,45 @@ export default class BubbleList extends Component {
 
   render() {
     return (
-      <span id="TagList">
-        <br />
-        <BubbleChart
-          width={1000}
-          height={550}
-          graph={{
-            zoom: 0.65,
-            offsetX: +0.3, // -0.05 means that the offset is -5% of the graph width.
-            offsetY: -0.0,
-          }}
-          fontFamily="Arial"
-          data={this.props.tags}
-          showLegend={true} // optional value, pass false to disable the legend.
-          legendPercentage={20} // number that represent the % of with that legend going to use.
-          legendFont={{
-            family: 'Arial',
-            size: 12,
-            color: '#000',
-            weight: 'bold',
-          }}
-          valueFont={{
-            family: 'Arial',
-            size: 12,
-            color: '#fff',
-            weight: 'bold',
-          }}
-          labelFont={{
-            family: 'Arial',
-            size: 18,
-            color: '#fff',
-            weight: 'bold',
-          }}
-          bubbleClickFun={this.bubbleClick}
-          legendClickFun={this.legendClick}
-        />
-      </span>
+      <div id="BubbleList">
+        <span id="TagList" width="100%">
+          <br />
+
+          <BubbleChart
+            width={1000}
+            height={550}
+            graph={{
+              zoom: 0.65,
+              offsetX: +0.3, // -0.05 means that the offset is -5% of the graph width.
+              offsetY: -0.0,
+            }}
+            fontFamily="Arial"
+            data={this.props.tags}
+            showLegend={true} // optional value, pass false to disable the legend.
+            legendPercentage={20} // number that represent the % of with that legend going to use.
+            legendFont={{
+              family: 'Arial',
+              size: 12,
+              color: '#000',
+              weight: 'bold',
+            }}
+            valueFont={{
+              family: 'Arial',
+              size: 12,
+              color: '#fff',
+              weight: 'bold',
+            }}
+            labelFont={{
+              family: 'Arial',
+              size: 18,
+              color: '#fff',
+              weight: 'bold',
+            }}
+            bubbleClickFun={this.bubbleClick}
+            legendClickFun={this.legendClick}
+          />
+        </span>
+      </div>
     );
   }
 }
