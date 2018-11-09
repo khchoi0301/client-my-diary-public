@@ -11,6 +11,7 @@ export default class Diary extends Component {
     hashtag: [],
     selectedTag: null,
     isClicked: false,
+    golist: false,
   };
 
   _changeTitle = () => {
@@ -43,9 +44,9 @@ export default class Diary extends Component {
     }
   };
 
-  _toggle = () => {
+  _toggle = attr => {
     this.setState({
-      isClicked: !this.state.isClicked,
+      [attr]: !this.state.attr,
     });
   };
 
@@ -89,9 +90,13 @@ export default class Diary extends Component {
         ) : (
           <span>
             <div className="btns">
-              <Button className="show newbtn" onClick={this._toggle}>
+              <Button
+                className="show newbtn"
+                onClick={() => this._toggle('isClicked')}
+              >
                 새글쓰기
               </Button>
+              {this.state.isClicked ? <Redirect to="/post" /> : null}
               <Button
                 className="show All"
                 onClick={() => {
@@ -101,8 +106,14 @@ export default class Diary extends Component {
               >
                 Show All
               </Button>
+              <Button
+                className="show newbtn"
+                onClick={() => this._toggle('golist')}
+              >
+                전체리스트
+              </Button>
+              {this.state.golist ? <Redirect to="/alldiary" /> : null}
             </div>
-            {this.state.isClicked ? <Redirect to="/post" /> : null}
             <BubbleList tags={this.state.hashtag} clickFunc={this._onClick} />
             <SpecificDiaryList
               articles={this.state.data}

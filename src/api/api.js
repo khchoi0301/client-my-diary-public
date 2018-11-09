@@ -117,6 +117,13 @@ const routeKakaoLogin = () => {
     .catch(err => err);
 };
 
+const getUserAllDiary = () => {
+  return axios
+    .get(`${url}/post`, TokenHeader)
+    .then(res => res)
+    .catch(err => err);
+};
+
 export default {
   loginPost,
   modifyDiary,
@@ -131,4 +138,5 @@ export default {
   emailCheck,
   url,
   changeInfoPost,
+  getUserAllDiary,
 };

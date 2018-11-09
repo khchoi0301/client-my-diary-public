@@ -14,6 +14,7 @@ import Modify from 'component/Detail/Modify';
 import api from 'api/api';
 import ChangeInfo from './component/UserController/ChangeInfo';
 import Header from 'component/Main/MainHeader';
+import SpecificContainer from 'component/Specific/SpecificContainer';
 
 export default class App extends Component {
   state = {
@@ -172,6 +173,7 @@ export default class App extends Component {
     this.setState({
       currentDiary: { ...this.state.currentDiary, [attr]: value },
     });
+    console.log('diary 데이터 : ', this.state);
   };
 
   render() {
@@ -214,6 +216,7 @@ export default class App extends Component {
                 />
               )}
             />
+            <PrivateRouter path="/alldiary" component={SpecificContainer} />
           </Switch>
         </div>
       </Router>
