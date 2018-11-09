@@ -38,7 +38,9 @@ export default class App extends Component {
     },
     focused: false,
     clickModified: false,
+    user: 'propsinit',
   };
+
 
 
   _getCurrentDiarty = curDiary => {
@@ -152,17 +154,17 @@ export default class App extends Component {
     return Array.isArray(this.state.currentDiary[arg]) ? (
       <MakeTag tag={obj} func={this._onvalueChange} />
     ) : (
-      <Input
-        type="text"
-        value={this.state.currentDiary[arg]}
-        onChange={e => {
-          this.setState({
-            currentDiary: { ...this.state.currentDiary, [arg]: e.target.value },
-          });
-        }}
-        style={{ width: width }}
-      />
-    );
+        <Input
+          type="text"
+          value={this.state.currentDiary[arg]}
+          onChange={e => {
+            this.setState({
+              currentDiary: { ...this.state.currentDiary, [arg]: e.target.value },
+            });
+          }}
+          style={{ width: width }}
+        />
+      );
   };
 
   _onChangeState = (attr, value) => {
@@ -187,10 +189,7 @@ export default class App extends Component {
   };
 
 
-export default class App extends Component {
-  state = {
-    user: 'propsinit',
-  };
+
 
   getUserName(user) {
     console.log('e', user);
@@ -213,21 +212,21 @@ export default class App extends Component {
             <Route path="/" exact component={Main} />
             <Route path="/signup" component={SignUp} />
 
-            
+
             <Route path="/login" render={() => <Login func={this.getUserName.bind(this)} />} />
             <Route path="/changeinfo" component={ChangeInfo} />
             <Route path="/deleteaccount" component={DeleteAccount} />
-            
-            
 
-            
+
+
+
             <PrivateRouter path="/post" component={NewDiary} />
             <PrivateRouter
               path="/diary"
               component={Diary}
               appStateChange={this._getCurrentDiarty}
             />
-            
+
 
             <Route path="/user/:token" component={GetToken} />
             <Route
