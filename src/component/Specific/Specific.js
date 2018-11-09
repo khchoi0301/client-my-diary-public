@@ -3,26 +3,16 @@ import { Button } from 'reactstrap';
 import './Specific.css';
 import { Redirect } from 'react-router-dom';
 
-const week = [
-  '일요일',
-  '월요일',
-  '화요일',
-  '수요일',
-  '목요일',
-  '금요일',
-  '토요일',
-];
+const week = ['일', '월', '화', '수', '목', '금', '토'];
 
 export default props => {
-  // if (!props.currentDiary.code === 1) {
-  //   props.currentDiary = testData;
-  // }
-
   console.log('받아온 데이터 : ', props.currentDiary);
   if (props.currentDiary.content) {
     var addHashTag = '#' + props.currentDiary.tag.join(' # ');
     var date = props.currentDiary.date.split('T')[0];
+    var createdAt = props.currentDiary.createdAt.split('T')[0];
     var day = week[new Date(date).getDay()];
+    var createdday = week[new Date(createdAt).getDay()];
   }
   if (!props.currentDiary.content) return <Redirect to="/diary" />;
   if (props.currentDiary.clickModified) return <Redirect to="/modify" />;
@@ -54,7 +44,7 @@ export default props => {
       <div>
         <span className="content">{props.currentDiary.content}</span>
       </div>
-      <span className="createdAt">{props.currentDiary.createdAt} </span>
+      <span className="createdAt">{`${createdAt} (${createdday}) 작성`} </span>
     </div>
   );
 };
