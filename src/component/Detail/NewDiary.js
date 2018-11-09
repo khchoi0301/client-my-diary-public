@@ -67,6 +67,18 @@ export default class NewArticle extends Component {
     });
   };
 
+  _setHashtagState = hashtags => {
+    const changed = hashtags.map(text => {
+      return { label: text, value: text };
+    });
+    const newtag = this.state.hashtag.concat(changed);
+    console.log(newtag);
+
+    this.setState({
+      hashtag: newtag,
+    });
+  };
+
   _sendImage = () => {
     let imageForm = new FormData();
 
@@ -229,7 +241,9 @@ export default class NewArticle extends Component {
             </Col>
           </FormGroup>
         </Form>
-        {this.state.img ? <img className="image" src={this.state.img} /> : null}
+        {this.state.img ? (
+          <img className="image" src={this.state.img} alt="이미지" />
+        ) : null}
       </div>
     );
   }
