@@ -33,7 +33,7 @@ export default class DropDown extends React.Component {
 
           <DropdownItem divider />
           {/* <DropdownItem disabled>Action</DropdownItem> */}
-          <DropdownItem><Link to='/deleteaccount'>Profile</Link>  </DropdownItem>
+          <DropdownItem><Link to='/deleteaccount'>Delete Account</Link>  </DropdownItem>
           <DropdownItem>Help</DropdownItem>
           <DropdownItem divider />
           <DropdownItem onClick={api.userLogout}><span >Log Out</span></DropdownItem>

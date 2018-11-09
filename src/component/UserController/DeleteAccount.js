@@ -19,7 +19,7 @@ export default class DeleteAccount extends Component {
   _onDeleteAccount = e => {
     console.log('change', e);
     e.preventDefault();
-    api.deleteAccountPost()
+    api.deleteAccountGet()
       .then(res => {
         if (res.status === 200) {
           console.log(res);
