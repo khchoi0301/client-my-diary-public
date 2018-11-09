@@ -20,21 +20,44 @@ body {
   margin: 20px;
 }
 
-#TagList {
-  margin-left: 100px;
-  float: left;
+#bubblechart {
+  margin-left: auto;
 }
 
-#Diary .show {
-  margin: 5px;
+#Diary {
+  margin-left: auto;
 }
 
-/* #Diary .newbtn {
-  float: center;
-} */
+#Diaryspan {
+  margin-left: auto;
+}
+
+#BubbleList #TagList {
+  margin-left: auto;
+  margin-right: auto;
+  /* float: left; */
+}
+
+#Diary svg {
+  display: block;
+  margin: auto;
+}
+
+#Diary {
+  width: 100%;
+}
+
+#showAll {
+  padding: 0px 0px 0px 50px;
+}
 
 #Diary .btns {
-  margin-left: 400px;
+  width: 80%;
+  margin: auto;
+}
+
+#Diary #Diaryspan {
+  margin: auto;
 }
 
 #Specificdiary {
