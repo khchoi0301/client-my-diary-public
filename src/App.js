@@ -7,7 +7,7 @@ import Login from 'component/UserController/Login';
 import GetToken from 'component/UserController/GetToken';
 import PrivateRouter from 'component/UserController/privateRoute';
 import NewDiary from 'component/Detail/NewDiary';
-
+import DeleteAccount from 'component/UserController/DeleteAccount';
 
 import ChangeInfo from './component/UserController/ChangeInfo';
 
@@ -42,6 +42,7 @@ export default class App extends Component {
             {/* <Route path="/login" component={Login} /> */}
             <Route path="/login" render={() => <Login func={this.getUserName.bind(this)} />} />
             <Route path="/changeinfo" component={ChangeInfo} />
+            <Route path="/deleteaccount" component={DeleteAccount} />
             <Route path="/post" component={NewDiary} />
             <PrivateRouter path="/diary" component={Diary} />
             <Route path="/user/:token" component={GetToken} />

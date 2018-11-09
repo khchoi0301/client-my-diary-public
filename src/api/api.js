@@ -62,6 +62,15 @@ const userDiaryPost = data => {
     .catch(err => err);
 };
 
+
+
+const deleteAccountPost = () => {
+  return axios
+    .post(`${url}/post/img`, TokenHeader)
+    .then(res => res)
+    .catch(err => err);
+};
+
 const uploadImage = (data, callback) => {
   return axios
     .post(`${url}/post/img`, data, TokenHeader)

@@ -44,18 +44,23 @@ export default class Header extends Component {
     return (
       <div id="header">
         <Nav id="navbar" color="black">
-          <NavItem>
+          <NavItem className="diarylink">
             <NavLink>
-              <Link to="/">My Log</Link>
-            </NavLink>
-          </NavItem>
-          <NavItem id="diarylink">
-            <NavLink>
+              {/* <img id='menuimg' src='https://cdn2.iconfinder.com/data/icons/music-player-icons-filled/50/Menu_Bar_2-512.png' width='25px' /> */}
+              {/* <img id='menuimg' src='https://cdn.onlinewebfonts.com/svg/img_510724.png' width='20px' /> */}
+              <img id='menuimg' src='https://cdn3.iconfinder.com/data/icons/mini-icon-set-web-design-device/91/Web_-_Design_-_Device_81-512.png' width='45px' />
+
+
               <Link to="/diary">My Diary</Link>
             </NavLink>
           </NavItem>
-          <NavItem id="login">
-            <NavLink id="navlink">
+          <NavItem className='home'>
+            <NavLink >
+              <Link to="/">My Log</Link>
+            </NavLink>
+          </NavItem>
+          <NavItem className="login">
+            <NavLink >
               {(!isLogined.code) ? null :
                 !(isLogined.code === 200) ? (
                   <Link to="/login">Login</Link>

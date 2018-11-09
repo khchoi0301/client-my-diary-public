@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import api from '../../api/api';
+import { Link } from 'react-router-dom';
 
 
 export default class DropDown extends React.Component {
@@ -32,7 +33,7 @@ export default class DropDown extends React.Component {
 
           <DropdownItem divider />
           {/* <DropdownItem disabled>Action</DropdownItem> */}
-          <DropdownItem>Profile</DropdownItem>
+          <DropdownItem><Link to='/deleteaccount'>Profile</Link>  </DropdownItem>
           <DropdownItem>Help</DropdownItem>
           <DropdownItem divider />
           <DropdownItem onClick={api.userLogout}><span >Log Out</span></DropdownItem>
