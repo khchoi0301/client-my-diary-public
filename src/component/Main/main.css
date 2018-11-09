@@ -1,32 +1,131 @@
-#header {
-  /* margin: 10px */
-  background-color: #e9e9e7;
-  padding: 10px;
+
+@import url('https://fonts.googleapis.com/css?family=Old+Standard+TT|Stardos+Stencil:700|Vidaloka');
+
+ #main {
+  /* margin: auto; */
+  /* width: 50%; */
+  /* margin-top: 5%; */
 }
 
-#mainheader {
-  /* background-color: black; */
+body {
+  height: 100%;
+}
+body .main {
+  margin: 30px;
+  margin-top: 0px;
+  height: 900px;
+  /* background-image: url('https://wovenmagazine.com/content/uploads/2018/05/01_LAM_Wide.jpg'); */
+  background-image: url('https://s3.ap-northeast-2.amazonaws.com/app2app2/ALLOWTO_PHOTO_20181108194839_STANDARD.jpg');
 }
 
-#header #login {
+body #title {
   color: white;
-}
-
-#main {
+	font-size: 60px;
+	text-align: center;
+	position: relative;
+  top: 70%;
+	font-family: 'Stardos Stencil', cursive;
+  border: 1px white solid;
+  width: 300px;
   margin: auto;
-  width: 50%;
-  margin-top: 5%;
+  -webkit-transition:background-color 1s, -webkit-transform 1s;
+  transition: background-color 1s, transform 1s;
 }
-
-#navbar {
+body #title:hover{
+  background-color: white;
   color: black;
 }
 
-#id {
-  position: relative;
-  right: 10px;
+#header {
+  margin: auto;
+  text-align: center;
+  border-bottom: 1px gainsboro solid;
+  padding: 0px;
+  margin-bottom: 0px;
 }
 
-#navitem-login #navitem-navlink {
-  color: black !important;
+#navbar {
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  padding: 0;
 }
+
+a,a:hover,a:visited,a:link,a:active {
+  color: black;
+  text-decoration: none !important;
+}
+
+li {
+	width:26%;
+	margin: auto;
+	text-align: center;
+	font-family: 'Vidaloka', serif;
+	color: black
+}
+
+
+#header .diarylink, #header .login {
+  font-size: 20px;
+}
+
+#header  .home{
+	font-size: 32px;
+	font-family: 'Stardos Stencil', cursive;
+	font-weight: bold;
+
+}
+
+#header  #nick {
+	font-family: 'Vidaloka', serif; 
+	margin-right: 10px;
+}
+
+#dropnick {
+	font-size: 21px;
+	color: black
+}
+
+#Dropdown #menuimg {
+  margin-right: 15px;
+}
+
+.nav-link {
+	margin: auto;
+}
+
+#login {
+  position: relative;
+}
+
+#Dropdown .btn-secondary {
+  margin: auto;
+  padding: 0;
+  background-color: #dee2e6;
+  border: #dee2e6;
+}
+
+#Dropdown {
+	display: inline-block;
+}
+
+#Menu .btn-secondary {
+  margin: auto;
+  padding: 0;
+  background-color: white;
+  border: 0px;
+}
+
+#Menu .dropdown-toggle:focus  {
+  border: 0px white solid;
+  box-shadow: 0 0 0 0.0 rgba(255, 255, 255, 1)
+}
+
+#Menu {
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  border: 0px;
+}
+

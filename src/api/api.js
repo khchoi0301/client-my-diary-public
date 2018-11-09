@@ -9,8 +9,6 @@ const url = 'http://10.130.151.17:3001'; //bbk
 //   'http://ec2-13-209-41-118.ap-northeast-2.compute.amazonaws.com:3001'; // 주연님 AWS 서버
 // const url = 'http://ec2-54-191-92-219.us-west-2.compute.amazonaws.com'; //
 
-// window.url = url;
-
 const TokenHeader = {
   headers: {
     authorization: localStorage.token,
@@ -50,7 +48,10 @@ const emailCheck = email => {
 
 // 성공 (보통 로그아웃시 별다른 이벤트가 없기 때문에 리팩토링 X)
 const userLogout = () => {
+  console.log('logout');
   localStorage.removeItem('token');
+  localStorage.removeItem('nick');
+
   window.location = '/';
   alert('로그아웃 되었습니다!');
 };
@@ -61,6 +62,15 @@ const userDiaryPost = data => {
 
   return axios
     .post(`${url}/post/write`, data, TokenHeader)
+    .then(res => res)
+    .catch(err => err);
+};
+
+
+
+const deleteAccountGet = () => {
+  return axios
+    .get(`${url}/user/delete`, TokenHeader)
     .then(res => res)
     .catch(err => err);
 };
@@ -136,6 +146,9 @@ export default {
   getWeather,
   routeKakaoLogin,
   emailCheck,
+
+  deleteAccountGet,
+
   url,
   changeInfoPost,
   getUserAllDiary,

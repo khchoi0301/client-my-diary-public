@@ -8,6 +8,8 @@ import Login from 'component/UserController/Login';
 import GetToken from 'component/UserController/GetToken';
 import PrivateRouter from 'component/UserController/privateRoute';
 import NewDiary from 'component/Detail/NewDiary';
+import DeleteAccount from 'component/UserController/DeleteAccount';
+import Mainheader from 'component/Main/MainHeader';
 import Specific from 'component/Specific/Specific';
 import MakeTag from 'component/Diary/MakeTag';
 import Modify from 'component/Detail/Modify';
@@ -156,17 +158,17 @@ export default class App extends Component {
     return Array.isArray(this.state.currentDiary[arg]) ? (
       <MakeTag tag={obj} func={this._onvalueChange} />
     ) : (
-      <Input
-        type="text"
-        value={this.state.currentDiary[arg]}
-        onChange={e => {
-          this.setState({
-            currentDiary: { ...this.state.currentDiary, [arg]: e.target.value },
-          });
-        }}
-        style={{ width: width }}
-      />
-    );
+        <Input
+          type="text"
+          value={this.state.currentDiary[arg]}
+          onChange={e => {
+            this.setState({
+              currentDiary: { ...this.state.currentDiary, [arg]: e.target.value },
+            });
+          }}
+          style={{ width: width }}
+        />
+      );
   };
 
   _onChangeState = (attr, value) => {
@@ -176,22 +178,29 @@ export default class App extends Component {
     console.log('diary 데이터 : ', this.state);
   };
 
+
+  componentDidMount() {
+  }
+
+
   render() {
+    console.log('appuser', this.state.user);
     return (
       <Router>
         <div className="App">
-          <Header />
+          <Header user={this.state.user} />
           <Switch>
             <Route path="/" exact component={Main} />
             <Route path="/signup" component={SignUp} />
-            <Route path="/login" component={Login} />
+            <Route path="/login" render={() => <Login />} />
+            <Route path="/changeinfo" component={ChangeInfo} />
+            <Route path="/deleteaccount" component={DeleteAccount} />
             <PrivateRouter path="/post" component={NewDiary} />
             <PrivateRouter
               path="/diary"
               component={Diary}
               appStateChange={this._getCurrentDiary}
             />
-            <Route path="/changeinfo" component={ChangeInfo} />
             <Route path="/user/:token" component={GetToken} />
             <Route
               path="/specific"

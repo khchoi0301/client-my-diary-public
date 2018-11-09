@@ -88,7 +88,9 @@ export default class Diary extends Component {
         {!this.state.hashtag ? (
           <p> loading... </p>
         ) : (
-          <span>
+          <span id="Diaryspan">
+            {this.state.isClicked ? <Redirect to="/post" /> : null}
+            <BubbleList tags={this.state.hashtag} clickFunc={this._onClick} />
             <div className="btns">
               <Button
                 className="show newbtn"
@@ -104,7 +106,7 @@ export default class Diary extends Component {
                   this._onClick('');
                 }}
               >
-                Show All
+                  Show All
               </Button>
               <Button
                 className="show newbtn"
