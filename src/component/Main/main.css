@@ -1,26 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Old+Standard+TT|Stardos+Stencil:700|Vidaloka|PT+Serif+Caption:400i');
 
-@import url('https://fonts.googleapis.com/css?family=Old+Standard+TT|Stardos+Stencil:700|Vidaloka');
 
- #main {
-  /* margin: auto; */
-  /* width: 50%; */
-  /* margin-top: 5%; */
+.App {
+  float: left;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
 }
 
 body {
+  margin: 0;
+  padding: 0;
   height: 100%;
 }
+
 body .main {
   margin: 30px;
   margin-top: 0px;
-  height: 900px;
+  height: 700px;
   /* background-image: url('https://wovenmagazine.com/content/uploads/2018/05/01_LAM_Wide.jpg'); */
-  background-image: url('https://s3.ap-northeast-2.amazonaws.com/app2app2/ALLOWTO_PHOTO_20181108194839_STANDARD.jpg');
+  background: url('https://s3.ap-northeast-2.amazonaws.com/app2app2/ALLOWTO_PHOTO_20181108194839_STANDARD.jpg');
+}
+
+body .middle {
+  background-color: white;
+  /* height: 200px; */
+  position: relative;
+  margin: 0;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  text-align: center;
+}
+
+.middle .left {
+	font-family: 'Vidaloka', serif;
+  display: inline-block;
+  width: 40%;
+  font-size: 60px;
+}
+
+.middle .left #and {
+  font-size: 30px;
+  font-family: 'PT Serif Caption', serif;
+}
+
+.middle .right {
+  text-align: left;
+  display: inline-block;
+  width: 40%;
+}
+
+
+body .bottom {
+  background: url('https://wovenmagazine.com/content/uploads/2018/05/01_LAM_Wide.jpg');
+
+/* Set a specific height */
+  height: 650px; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 body #title {
   color: white;
-	font-size: 60px;
+	font-size: 40px;
 	text-align: center;
 	position: relative;
   top: 70%;
@@ -28,20 +75,14 @@ body #title {
   border: 1px white solid;
   width: 300px;
   margin: auto;
-  -webkit-transition:background-color 1s, -webkit-transform 1s;
-  transition: background-color 1s, transform 1s;
+  -webkit-transition:background-color 0.5s;
+  /* , -webkit-transform 1s; */
+  transition: background-color 0.5s;
+  /* , transform 1s; */
 }
 body #title:hover{
   background-color: white;
   color: black;
-}
-
-#header {
-  margin: auto;
-  text-align: center;
-  border-bottom: 1px gainsboro solid;
-  padding: 0px;
-  margin-bottom: 0px;
 }
 
 #navbar {
@@ -54,78 +95,5 @@ body #title:hover{
 a,a:hover,a:visited,a:link,a:active {
   color: black;
   text-decoration: none !important;
-}
-
-li {
-	width:26%;
-	margin: auto;
-	text-align: center;
-	font-family: 'Vidaloka', serif;
-	color: black
-}
-
-
-#header .diarylink, #header .login {
-  font-size: 20px;
-}
-
-#header  .home{
-	font-size: 32px;
-	font-family: 'Stardos Stencil', cursive;
-	font-weight: bold;
-
-}
-
-#header  #nick {
-	font-family: 'Vidaloka', serif; 
-	margin-right: 10px;
-}
-
-#dropnick {
-	font-size: 21px;
-	color: black
-}
-
-#Dropdown #menuimg {
-  margin-right: 15px;
-}
-
-.nav-link {
-	margin: auto;
-}
-
-#login {
-  position: relative;
-}
-
-#Dropdown .btn-secondary {
-  margin: auto;
-  padding: 0;
-  background-color: #dee2e6;
-  border: #dee2e6;
-}
-
-#Dropdown {
-	display: inline-block;
-}
-
-#Menu .btn-secondary {
-  margin: auto;
-  padding: 0;
-  background-color: white;
-  border: 0px;
-}
-
-#Menu .dropdown-toggle:focus  {
-  border: 0px white solid;
-  box-shadow: 0 0 0 0.0 rgba(255, 255, 255, 1)
-}
-
-#Menu {
-  background-color: white;
-  margin: 0;
-  padding: 0;
-  display: inline-block;
-  border: 0px;
 }
 
