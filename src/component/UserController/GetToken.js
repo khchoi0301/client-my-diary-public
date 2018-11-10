@@ -8,7 +8,9 @@ export default class GetToken extends Component {
   };
 
   _getKakaoToken = () => {
+    console.log('kakakologin', this.props.location.search);
     const userInfo = queryString.parse(this.props.location.search);
+    console.log('kakakologin2', userInfo);
 
     console.log('kakao token', userInfo.token);
     if (userInfo.token) {
@@ -27,6 +29,7 @@ export default class GetToken extends Component {
   }
 
   render() {
+    console.log('redirect');
     return <div>{this.state.isGetToken ? <div /> : <Redirect to="/" />}</div>;
   }
 }
