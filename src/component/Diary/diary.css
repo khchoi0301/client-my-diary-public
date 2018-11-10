@@ -17,7 +17,7 @@ body {
   float: left;
 }
 #TagList:after {
-  content : "";
+  content: '';
   display: block;
   position: absolute;
   top: 0;
@@ -105,8 +105,7 @@ body {
   margin-top: 2%;
   margin: auto;
   /* background: url('https://wovenmagazine.com/content/uploads/2018/05/01_LAM_Wide.jpg'); */
-  background-color: white
-  
+  background-color: white;
 }
 
 #DiaryList .diarybtn {
@@ -136,12 +135,11 @@ body {
 
 #modalImg {
   margin: auto;
+  width: 800px;
 }
 
- 
 .modal-body {
   line-height: 1.8em;
   padding: 25px;
   margin: 25px;
 }
-
