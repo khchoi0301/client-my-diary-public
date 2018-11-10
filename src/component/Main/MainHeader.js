@@ -69,7 +69,7 @@ export default class Header extends Component {
       });
 
       console.log('checkToken');
-      this._checkToken();
+      this._tokenCheck();
     }
 
 
