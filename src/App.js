@@ -16,6 +16,8 @@ import Modify from 'component/Detail/Modify';
 import api from 'api/api';
 import ChangeInfo from './component/UserController/ChangeInfo';
 import Header from 'component/Main/MainHeader';
+import Help from 'component/Main/Help';
+
 import SpecificContainer from 'component/Specific/SpecificContainer';
 
 export default class App extends Component {
@@ -198,6 +200,8 @@ export default class App extends Component {
             <Route path="/login" render={() => <Login />} />
             <Route path="/changeinfo" component={ChangeInfo} />
             <Route path="/deleteaccount" component={DeleteAccount} />
+            <Route path="/help" component={Help} />
+
             <PrivateRouter path="/post" component={NewDiary} />
             <PrivateRouter
               path="/diary"

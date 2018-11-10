@@ -32,6 +32,12 @@ body .middle {
   text-align: center;
 }
 
+
+#help {
+  margin-top: 10em;
+  text-align: center;
+  font-size: 50px;
+}
 .middle .left {
   font-family: 'Vidaloka', serif;
   display: inline-block;
