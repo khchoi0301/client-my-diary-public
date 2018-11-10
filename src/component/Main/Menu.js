@@ -39,7 +39,7 @@ export default class DropDown extends React.Component {
             width="45px"
           />
         </DropdownToggle>
-        <DropdownMenu>
+        <DropdownMenu id='menu-item'>
           <DropdownItem header>My Diary</DropdownItem>
           <DropdownItem divider />
           <DropdownItem>
@@ -47,6 +47,9 @@ export default class DropDown extends React.Component {
           </DropdownItem>
           <DropdownItem>
             <Link to="/diary">Tags</Link>
+          </DropdownItem>
+          <DropdownItem>
+            <Link to="/post">New Diary</Link>
           </DropdownItem>
         </DropdownMenu>
       </Dropdown>

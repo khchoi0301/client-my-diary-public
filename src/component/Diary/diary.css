@@ -11,9 +11,25 @@ body {
 }
 
 #TagList {
+  margin-top: 10em;
   width: 100%;
   margin: auto;
   float: left;
+}
+#TagList:after {
+  content : "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 96%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.2;
+  margin: 30px;
+  background: url('https://wovenmagazine.com/content/uploads/2018/05/01_LAM_Wide.jpg');
+  background-position: center;
+  /* background-repeat: no-repeat; */
 }
 
 #Diary .show {
@@ -82,11 +98,15 @@ body {
   /* border-top: 1px gray solid; */
   padding: 15px;
   /* padding: 10%; */
-  float: left;
+  /* float: left; */
   overflow-x: auto;
-  width: 75em;
+  /* width: 75em; */
   height: 17em;
   margin-top: 2%;
+  margin: auto;
+  /* background: url('https://wovenmagazine.com/content/uploads/2018/05/01_LAM_Wide.jpg'); */
+  background-color: white
+  
 }
 
 #DiaryList .diarybtn {
@@ -115,14 +135,13 @@ body {
 }
 
 #modalImg {
-
   margin: auto;
 }
 
-/* 
-.modal-dialog {
-  max-width: 850px !important;
-  background-color: blue;
-  
-} */
+ 
+.modal-body {
+  line-height: 1.8em;
+  padding: 25px;
+  margin: 25px;
+}
 

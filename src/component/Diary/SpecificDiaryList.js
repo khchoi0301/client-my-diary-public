@@ -206,7 +206,7 @@ export default class SpecificDiaryList extends Component {
             <img
               alt="User Upload Page"
               src={this.state.current.img}
-              height="650px"
+              max-width="900px"
             />
             <br />
           </ModalBody>
