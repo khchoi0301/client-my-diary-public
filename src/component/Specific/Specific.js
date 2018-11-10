@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from 'reactstrap';
 import './Specific.css';
 import { Redirect } from 'react-router-dom';
+// import { App } from '.../App';
 
 const week = ['일', '월', '화', '수', '목', '금', '토'];
 
@@ -17,8 +18,6 @@ export default props => {
   if (!props.currentDiary.content) return <Redirect to="/diary" />;
   if (props.currentDiary.clickModified) return <Redirect to="/modify" />;
 
-  console.log('IMGIMGIMG', props.currentDiary.img);
-
   return (
     <div id="Specific">
       <button className="button" onClick={props.deleteDiary}>
@@ -27,6 +26,7 @@ export default props => {
       <button
         className="button"
         onClick={() => {
+          console.log('props: ', props);
           props.changeState('clickModified', true);
         }}
       >

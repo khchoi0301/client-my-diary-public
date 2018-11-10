@@ -110,13 +110,6 @@ export default class Diary extends Component {
               >
                 Show All
               </Button>
-              <Button
-                className="show newbtn"
-                onClick={() => this._toggle('golist')}
-              >
-                전체리스트
-              </Button>
-              {this.state.golist ? <Redirect to="/alldiary" /> : null}
             </div>
             <SpecificDiaryList
               articles={this.state.data}
