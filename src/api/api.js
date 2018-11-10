@@ -2,7 +2,8 @@
 // 현재 통신에 성공하면 alert, 실패하면 console.error을 띄움. 추후에 어떤 이벤트를 발생할지 생각해야 함.
 import axios from 'axios';
 
-const url = 'http://10.130.151.17:3001'; //bbk
+// const url = 'http://10.130.151.17:3001'; //bbk
+const url = 'http://13.209.41.118:3001'; //
 // const url = 'http://10.130.151.10:3001';//JY
 // window.url = 'http://13.209.41.118:3001'; //aws
 // const url =
@@ -65,8 +66,6 @@ const userDiaryPost = data => {
     .then(res => res)
     .catch(err => err);
 };
-
-
 
 const deleteAccountGet = () => {
   return axios
