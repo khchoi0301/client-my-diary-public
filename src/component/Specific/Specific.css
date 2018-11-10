@@ -42,7 +42,12 @@
 }
 
 #Specific .content {
-  margin-left: 3.4em;
+  margin: auto;
   display: inline-block;
   width: 90%;
+  max-width: 800px;
+}
+
+#Specific .contentContainer{
+  text-align: center;
 }

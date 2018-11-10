@@ -60,7 +60,7 @@ export default props => {
           />
         )}
       </p>
-      <div>
+      <div className="contentContainer">
         <span className="content">{props.currentDiary.content}</span>
       </div>
       <span className="createdAt">{`${createdAt} (${createdday}) 작성`} </span>
