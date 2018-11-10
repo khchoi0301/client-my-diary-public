@@ -14,13 +14,36 @@ export default class Header extends Component {
     user: null,
   };
 
+
+
+  async _checkToken() {
+    console.log('_checkTokencalled');
+    const checking = await auth.userCheck();
+    console.log('token exist', checking.code);
+
+    if (checking.code !== 200) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('nick');
+
+      alert('로그인 만료! 재로그인 해주세요');
+    }
+    this.setState({
+      isLogined: checking,
+    });
+  }
+
+
   async componentDidMount() {
+    console.log('comDid');
     if (!localStorage.getItem('token')) {
+      console.log('no token');
       this.setState({
         isLogined: { code: 407 },
       });
     } else {
+      console.log('token exist');
       const checking = await auth.userCheck();
+      console.log('token exist check', checking.code);
 
       if (checking.code !== 200) {
         localStorage.removeItem('token');
@@ -36,13 +59,19 @@ export default class Header extends Component {
 
   render() {
 
+    const { isLogined } = this.state;
+    console.log('loginrender', isLogined);
+
     if (localStorage.getItem('nick') && !this.state.user) {
+
       this.setState({
         user: localStorage.getItem('nick')
       });
+      console.log('checkToken');
+      this._checkToken();
     }
 
-    const { isLogined } = this.state;
+
 
     return (
       <div id="header">
