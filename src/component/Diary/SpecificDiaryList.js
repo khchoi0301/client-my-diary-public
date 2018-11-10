@@ -206,7 +206,7 @@ export default class SpecificDiaryList extends Component {
               alt="User Upload Page"
               src={this.state.current.img}
               width="400px"
-              style={{'margin-left': '2em'}}
+              style={{ 'margin-left': '2em' }}
             />
             <br />
           </ModalBody>

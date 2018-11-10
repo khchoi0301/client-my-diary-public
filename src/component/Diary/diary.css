@@ -6,27 +6,15 @@ body {
   margin: 0;
 }
 
-/* .specific {
-  margin: 30px;
-} */
-
-/* 
-.bubble {
-  position: relative;
-  left: 45%
-} */
-
 #Newarticlemodal .form {
   margin: 20px;
 }
 
-
-#TagList{
+#TagList {
   width: 100%;
-  margin :auto;
+  margin: auto;
   float: left;
 }
-
 
 #Diary .show {
   margin: 5px;
@@ -38,7 +26,6 @@ body {
 
 #Diary {
   margin-left: auto;
-
 }
 
 #Diaryspan {
@@ -53,7 +40,9 @@ body {
 
 #Diary svg {
   display: block;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
 }
 
 #Diary {

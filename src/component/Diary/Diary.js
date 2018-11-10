@@ -90,6 +90,8 @@ export default class Diary extends Component {
         ) : (
           <span id="Diaryspan">
             {this.state.isClicked ? <Redirect to="/post" /> : null}
+            {/* <BubbleList tags={this.state.hashtag} clickFunc={this._onClick} /> */}
+
             <BubbleList tags={this.state.hashtag} clickFunc={this._onClick} />
             <div className="btns">
               <Button
@@ -106,7 +108,7 @@ export default class Diary extends Component {
                   this._onClick('');
                 }}
               >
-                  Show All
+                Show All
               </Button>
               <Button
                 className="show newbtn"
@@ -116,7 +118,6 @@ export default class Diary extends Component {
               </Button>
               {this.state.golist ? <Redirect to="/alldiary" /> : null}
             </div>
-            <BubbleList tags={this.state.hashtag} clickFunc={this._onClick} />
             <SpecificDiaryList
               articles={this.state.data}
               selectedtag={this.state.selectedTag}

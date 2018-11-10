@@ -7,7 +7,6 @@ import DropDown from './DropDown';
 import Menu from './Menu';
 import './mainheader.css';
 
-
 export default class Header extends Component {
   state = {
     isLogined: {},
@@ -53,7 +52,6 @@ export default class Header extends Component {
   }
 
   render() {
-
     if (localStorage.getItem('nick') && !this.state.user) {
 
       this.setState({
@@ -81,11 +79,15 @@ export default class Header extends Component {
             </NavLink>
           </NavItem>
           <NavItem className="login">
-            <NavLink >
-              {(!isLogined.code) ? null :
-                !(isLogined.code === 200) ? (
-                  <Link to="/login">Login</Link>
-                ) : (<Link to disabled><span id='nick'>{this.state.user}</span><DropDown user={this.state.user} /></Link>)}
+            <NavLink>
+              {!isLogined.code ? null : !(isLogined.code === 200) ? (
+                <Link to="/login">Login</Link>
+              ) : (
+                <Link to disabled>
+                  <span id="nick">{this.state.user}</span>
+                  <DropDown user={this.state.user} />
+                </Link>
+              )}
             </NavLink>
           </NavItem>
         </Nav>
