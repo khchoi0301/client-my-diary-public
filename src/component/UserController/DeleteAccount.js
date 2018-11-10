@@ -29,6 +29,8 @@ export default class DeleteAccount extends Component {
             alert('계정이 삭제 되었습니다.');
             localStorage.removeItem('token');
             localStorage.removeItem('nick');
+            localStorage.removeItem('profile');
+
             window.location = '/';
           }
         } else {

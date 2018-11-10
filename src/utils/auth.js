@@ -15,6 +15,7 @@ const getToken = () => {
 };
 
 const userCheck = async () => {
+  console.log('userCheck', TokenHeader);
   const result = await axios.get(`${url}/auth/check`, TokenHeader);
   return result.data;
 };
