@@ -17,6 +17,8 @@ export default props => {
   if (!props.currentDiary.content) return <Redirect to="/diary" />;
   if (props.currentDiary.clickModified) return <Redirect to="/modify" />;
 
+  console.log('IMGIMGIMG', props.currentDiary.img);
+
   return (
     <div id="Specific">
       <button className="button" onClick={props.deleteDiary}>
@@ -50,7 +52,13 @@ export default props => {
         props.currentDiary.weather
       }`}</span>
       <p className="imageContainer">
-        <img className="userImage" src={props.currentDiary.img} alt="이미지" />
+        {props.currentDiary.img === '' ? null : (
+          <img
+            className="userImage"
+            src={props.currentDiary.img}
+            alt="이미지"
+          />
+        )}
       </p>
       <div>
         <span className="content">{props.currentDiary.content}</span>

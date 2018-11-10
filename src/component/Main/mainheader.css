@@ -1,5 +1,6 @@
 #header {
   background-color: white;
+
   width: 100%;
   position: fixed;
   margin-top:0;
@@ -16,7 +17,7 @@
 	margin: auto;
 	text-align: center;
 	font-family: 'Vidaloka', serif;
-	color: black
+	color: black;
 }
 
 #header .diarylink, #header .login {

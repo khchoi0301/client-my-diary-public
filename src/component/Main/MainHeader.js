@@ -7,7 +7,6 @@ import DropDown from './DropDown';
 import Menu from './Menu';
 import './mainheader.css';
 
-
 export default class Header extends Component {
   state = {
     isLogined: {},
@@ -16,39 +15,17 @@ export default class Header extends Component {
 
 
 
-  async _checkToken() {
-    console.log('_checkTokencalled');
-    const checking = await auth.userCheck();
-    console.log('token exist', checking.code);
-
-    if (checking.code !== 200) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('nick');
-
-      alert('로그인 만료! 재로그인 해주세요');
-    }
-    this.setState({
-      isLogined: checking,
-    });
-  }
-
-
-  async componentDidMount() {
-    console.log('comDid');
+  async _tokenCheck() {
     if (!localStorage.getItem('token')) {
-      console.log('no token');
       this.setState({
         isLogined: { code: 407 },
       });
     } else {
-      console.log('token exist');
       const checking = await auth.userCheck();
-      console.log('token exist check', checking.code);
-
       if (checking.code !== 200) {
         localStorage.removeItem('token');
         localStorage.removeItem('nick');
-
+        localStorage.removeItem('profile');
         alert('로그인 만료! 재로그인 해주세요');
       }
       this.setState({
@@ -57,20 +34,43 @@ export default class Header extends Component {
     }
   }
 
+  async componentDidMount() {
+    if (!localStorage.getItem('token')) {
+      this.setState({
+        isLogined: { code: 407 },
+      });
+    } else {
+      const checking = await auth.userCheck();
+      if (checking.code !== 200) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('nick');
+        localStorage.removeItem('profile');
+        alert('로그인 만료! 재로그인 해주세요');
+      }
+      this.setState({
+        isLogined: checking,
+      });
+    }
+  }
+
+
+
   render() {
+
 
     const { isLogined } = this.state;
     console.log('loginrender', isLogined);
 
+
     if (localStorage.getItem('nick') && !this.state.user) {
 
       this.setState({
-        user: localStorage.getItem('nick')
+        user: localStorage.getItem('nick'),
       });
+
       console.log('checkToken');
       this._checkToken();
     }
-
 
 
     return (
@@ -89,11 +89,15 @@ export default class Header extends Component {
             </NavLink>
           </NavItem>
           <NavItem className="login">
-            <NavLink >
-              {(!isLogined.code) ? null :
-                !(isLogined.code === 200) ? (
-                  <Link to="/login">Login</Link>
-                ) : (<Link to disabled><span id='nick'>{this.state.user}</span><DropDown user={this.state.user} /></Link>)}
+            <NavLink>
+              {!isLogined.code ? null : !(isLogined.code === 200) ? (
+                <Link to="/login">Login</Link>
+              ) : (
+                <Link to disabled>
+                  <span id="nick">{this.state.user}</span>
+                  <DropDown user={this.state.user} />
+                </Link>
+              )}
             </NavLink>
           </NavItem>
         </Nav>

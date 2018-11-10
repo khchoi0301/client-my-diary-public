@@ -26,6 +26,7 @@ export default class SpecificContainer extends Component {
   render() {
     return (
       <div id="SpecificContainer">
+        <br />
         {this.state.data.map((article, idx) => {
           return <Specific currentDiary={article} key={idx} />;
         })}
