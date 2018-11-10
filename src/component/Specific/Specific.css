@@ -1,7 +1,9 @@
 #Specific {
-  margin: 3em;
+  /* margin: 3em; */
+  margin: auto; 
   margin-bottom: 11em;
-  margin-top: 6.5em;
+  max-width: 1000px;
+
 }
 
 #Specific .title {
@@ -43,9 +45,12 @@
 }
 
 #Specific .content {
-  margin-left: 3.4em;
+  margin: auto;
   display: inline-block;
-  width: 90%;
+}
+
+#Specific .contentContainer{
+  text-align: center;
 }
 
 #SpecificContainer {
