@@ -17,8 +17,6 @@ export default props => {
   if (!props.currentDiary.content) return <Redirect to="/diary" />;
   if (props.currentDiary.clickModified) return <Redirect to="/modify" />;
 
-  console.log('IMGIMGIMG', props.currentDiary.img);
-
   return (
     <div id="Specific">
       <button className="button" onClick={props.deleteDiary}>

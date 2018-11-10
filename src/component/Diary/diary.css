@@ -81,10 +81,12 @@ body {
 #DiaryList {
   /* border-top: 1px gray solid; */
   padding: 15px;
+  /* padding: 10%; */
   float: left;
   overflow-x: auto;
   width: 75em;
   height: 17em;
+  margin-top: 2%;
 }
 
 #DiaryList .diarybtn {

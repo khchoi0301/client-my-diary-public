@@ -36,13 +36,13 @@ export default class DropDown extends React.Component {
           />
         </DropdownToggle>
         <DropdownMenu>
-          <DropdownItem header>My Log</DropdownItem>
+          <DropdownItem header>My Diary</DropdownItem>
           <DropdownItem divider />
           <DropdownItem>
-            <Link to="/">Home</Link>
+            <Link to="/alldiary">Diaries</Link>
           </DropdownItem>
           <DropdownItem>
-            <Link to="/diary">My Diary</Link>
+            <Link to="/diary">Tags</Link>
           </DropdownItem>
         </DropdownMenu>
       </Dropdown>
