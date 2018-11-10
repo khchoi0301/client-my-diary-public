@@ -6,6 +6,7 @@ import auth from 'utils/auth';
 import DropDown from './DropDown';
 import Menu from './Menu';
 import './mainheader.css';
+import Hamburger from '../Detail/Hamburger';
 
 export default class Header extends Component {
   state = {
@@ -79,6 +80,7 @@ export default class Header extends Component {
           <NavItem className="diarylink">
             <NavLink>
               <Menu />
+              {/* <Hamburger /> */}
               {/* <img id="menuimg" src="https://cdn3.iconfinder.com/data/icons/mini-icon-set-web-design-device/91/Web_-_Design_-_Device_81-512.png" width="45px" /> */}
               <Link to="/diary">My Diary</Link>
             </NavLink>

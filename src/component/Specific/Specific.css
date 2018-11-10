@@ -1,7 +1,6 @@
 #Specific {
   /* margin: 3em; */
-  margin: auto;
-  margin-top:5rem;
+  margin: auto; 
   margin-bottom: 11em;
   max-width: 1000px;
 
@@ -52,4 +51,8 @@
 
 #Specific .contentContainer{
   text-align: center;
+}
+
+#SpecificContainer {
+  margin-top: 5%;
 }
