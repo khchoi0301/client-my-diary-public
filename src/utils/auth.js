@@ -4,18 +4,27 @@ import api from '../api/api';
 const url = api.url;
 console.log(url);
 
-const TokenHeader = {
+
+var TokenHeader = {
   headers: {
     authorization: localStorage.token || null,
   },
 };
+
 
 const getToken = () => {
   return localStorage.getItem('token');
 };
 
 const userCheck = async () => {
-  console.log('userCheck', TokenHeader);
+
+  TokenHeader = {
+    headers: {
+      authorization: localStorage.token || null,
+    },
+  };
+
+  console.log('TokenHeader', TokenHeader.headers);
   const result = await axios.get(`${url}/auth/check`, TokenHeader);
   return result.data;
 };

@@ -13,6 +13,8 @@ export default class Header extends Component {
     user: null,
   };
 
+
+
   async _tokenCheck() {
     if (!localStorage.getItem('token')) {
       this.setState({
@@ -51,17 +53,25 @@ export default class Header extends Component {
     }
   }
 
+
+
   render() {
+
+
+    const { isLogined } = this.state;
+    console.log('loginrender', isLogined);
+
+
     if (localStorage.getItem('nick') && !this.state.user) {
 
       this.setState({
         user: localStorage.getItem('nick'),
       });
-      // window.location = '/';
+
+      console.log('checkToken');
+      this._checkToken();
     }
 
-    const { isLogined } = this.state;
-    console.log('header', isLogined);
 
     return (
       <div id="header">
