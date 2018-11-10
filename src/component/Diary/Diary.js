@@ -94,13 +94,13 @@ export default class Diary extends Component {
 
             <BubbleList tags={this.state.hashtag} clickFunc={this._onClick} />
             <div className="btns">
-              <Button
+              {/* <Button
                 className="show newbtn"
                 onClick={() => this._toggle('isClicked')}
               >
                 새글쓰기
               </Button>
-              {this.state.isClicked ? <Redirect to="/post" /> : null}
+              {this.state.isClicked ? <Redirect to="/post" /> : null} */}
               <Button
                 className="show All"
                 onClick={() => {
@@ -108,7 +108,7 @@ export default class Diary extends Component {
                   this._onClick('');
                 }}
               >
-                Show All
+                  Show All list
               </Button>
             </div>
             <SpecificDiaryList
