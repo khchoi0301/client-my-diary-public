@@ -26,6 +26,8 @@ export default class DropDown extends React.Component {
 
   render() {
     console.log(this.props.user);
+    let profileImg = localStorage.getItem('profile') || 'https://post-phinf.pstatic.net/MjAxNzEwMDNfMjE3/MDAxNTA3MDA3MjI1MTYw.TaU5VcfHOapwEBML6YpDx9FaJRru9-Cu_SvXJWC55kQg.NJ3jP1Rdh5TkvAqxo7VfUQOSD8bnKJpdyiQ8WGFFj4sg.PNG/%EB%B8%8C%EB%9F%B0%EC%B9%98%EB%A1%9C%EA%B3%A0.png?type=w1200';
+
     return (
       <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} id="Menu">
         <DropdownToggle caret>
@@ -36,7 +38,9 @@ export default class DropDown extends React.Component {
           />
         </DropdownToggle>
         <DropdownMenu>
-          <DropdownItem header>My Log</DropdownItem>
+          <DropdownItem header>
+            My Log
+          </DropdownItem>
           <DropdownItem divider />
           <DropdownItem>
             <Link to="/">Home</Link>

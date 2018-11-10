@@ -29,6 +29,7 @@ export default class withPrivateRoute extends Component {
 
           localStorage.removeItem('token');
           localStorage.removeItem('nick');
+          localStorage.removeItem('profile');
 
           this.setState({
             loaded: !this.state.loaded,

@@ -13,6 +13,25 @@ export default class Header extends Component {
     user: null,
   };
 
+  async _tokenCheck() {
+    if (!localStorage.getItem('token')) {
+      this.setState({
+        isLogined: { code: 407 },
+      });
+    } else {
+      const checking = await auth.userCheck();
+      if (checking.code !== 200) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('nick');
+        localStorage.removeItem('profile');
+        alert('로그인 만료! 재로그인 해주세요');
+      }
+      this.setState({
+        isLogined: checking,
+      });
+    }
+  }
+
   async componentDidMount() {
     if (!localStorage.getItem('token')) {
       this.setState({
@@ -20,11 +39,10 @@ export default class Header extends Component {
       });
     } else {
       const checking = await auth.userCheck();
-
       if (checking.code !== 200) {
         localStorage.removeItem('token');
         localStorage.removeItem('nick');
-
+        localStorage.removeItem('profile');
         alert('로그인 만료! 재로그인 해주세요');
       }
       this.setState({
@@ -35,12 +53,15 @@ export default class Header extends Component {
 
   render() {
     if (localStorage.getItem('nick') && !this.state.user) {
+
       this.setState({
         user: localStorage.getItem('nick'),
       });
+      // window.location = '/';
     }
 
     const { isLogined } = this.state;
+    console.log('header', isLogined);
 
     return (
       <div id="header">
