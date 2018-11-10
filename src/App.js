@@ -37,6 +37,7 @@ export default class App extends Component {
     },
     focused: false,
     clickModified: false,
+    isModified: false,
   };
 
   _getCurrentDiary = curDiary => {
@@ -178,10 +179,15 @@ export default class App extends Component {
     console.log('diary 데이터 : ', this.state);
   };
 
-  componentDidMount() {}
+  _onAppChangeState = currentDiary => {
+    this.setState({
+      currentDiary: currentDiary,
+    });
+  };
 
   render() {
-    console.log('appuser', this.state.user);
+    console.log('app', this.state);
+
     return (
       <Router>
         <div className="App">
@@ -219,10 +225,20 @@ export default class App extends Component {
                   currentDiary={this.state.currentDiary}
                   focused={this.state.focused}
                   sendImg={this._sendImage}
+                  isModified={this.state.isModified}
                 />
               )}
             />
-            <PrivateRouter path="/alldiary" component={SpecificContainer} />
+            <Route
+              path="/alldiary"
+              render={() => (
+                <SpecificContainer
+                  deleteDiary={this._onDeleteButtonClick}
+                  changeState={this._onChangeState}
+                  appChangeState={this._onAppChangeState}
+                />
+              )}
+            />
           </Switch>
         </div>
       </Router>

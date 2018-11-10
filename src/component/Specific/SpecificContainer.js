@@ -5,6 +5,8 @@ import api from 'api/api';
 export default class SpecificContainer extends Component {
   state = {
     data: [],
+    clickModified: false,
+    list: false,
   };
 
   _getUserAllData = async () => {
@@ -19,6 +21,12 @@ export default class SpecificContainer extends Component {
     }
   };
 
+  _handleState = (attr, value) => {
+    this.setState({
+      [attr]: value,
+    });
+  };
+
   componentDidMount() {
     this._getUserAllData();
   }
@@ -28,7 +36,20 @@ export default class SpecificContainer extends Component {
       <div id="SpecificContainer">
         <br />
         {this.state.data.map((article, idx) => {
-          return <Specific currentDiary={article} key={idx} />;
+          return (
+            <Specific
+              currentDiary={{
+                ...article,
+                clickModified: this.state.clickModified,
+              }}
+              changeState={this._redirectModify}
+              appChangeState={this.props.appChangeState}
+              deleteDiary={this.props.deleteDiary}
+              list={this.state.list}
+              handleState={this._handleState}
+              key={idx}
+            />
+          );
         })}
       </div>
     );
