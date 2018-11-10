@@ -184,7 +184,7 @@ export default class SpecificDiaryList extends Component {
           })}
         </HorizontalScroll>
         <Modal
-          id='modalselect'
+          id="modalselect"
           isOpen={this.state.modal}
           toggle={this.toggle}
           className={this.props.className}
@@ -202,11 +202,11 @@ export default class SpecificDiaryList extends Component {
 
             <br />
           </ModalBody>
-          <ModalBody id='modalImg'>
+          <ModalBody id="modalImg">
             <img
               alt="User Upload Page"
               src={this.state.current.img}
-              height="650px"
+              max-width="800px"
             />
             <br />
           </ModalBody>
