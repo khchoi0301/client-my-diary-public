@@ -25,11 +25,7 @@ export default () => {
         </FormGroup>
         <Button>Submit</Button>
       </Form>
-      <div>
-        {' '}
-        <a href="/signup">회원가입</a>
-      </div>
-
+      <a href="/signup">회원가입</a>
       <a href="/">메인</a>
     </div>
   );
