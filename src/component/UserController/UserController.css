@@ -1,0 +1,36 @@
+
+#DeleteAccount .DeleteAccount, #ChangeInfo .ChangeInfo, #SignUp .signUp, #SignIn .signIn {
+  width: 100%;
+  margin-top: 20px;
+}
+
+#DeleteAccount .DeleteAccountBottom, #ChangeInfo .ChangeInfoBottom, #SignUp .signupBottom, #SignIn .signinBottom {
+  margin: 40px;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  color:gray
+
+
+}
+
+#DeleteAccount, #ChangeInfo, #SignUp, #SignIn {
+  margin: auto;
+  text-align: center;
+  margin-top: 10em;
+  padding: 30px;
+  border: 1px gainsboro solid;
+  width:700px;  
+}
+
+
+#ChangeInfo .kakaoimg, #SignUp .kakaoimg, #SignIn .kakaoimg  {
+  margin: 5px;
+}
+
+#SignUp .correct {
+  color: green
+}
+
+#DeleteAccount .wrong, #ChangeInfo .wrong ,#SignUp .wrong {
+  color: red
+}

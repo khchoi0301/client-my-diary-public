@@ -1,0 +1,58 @@
+#Specific {
+  margin: auto;
+  margin-bottom: 11em;
+  margin-top: 5em;
+  max-width: 1000px;
+}
+
+#Specific .title {
+  margin-left: 10px;
+  font-size: 1.7em;
+  font-weight: bold;
+}
+
+#Specific .detailBar {
+  height: 0.03em;
+  background-color: gray;
+}
+
+#Specific .button {
+  float: right;
+  margin-right: 0.6em;
+  margin-top: 0.5em;
+  background-color: white;
+  border: 0px;
+  cursor: pointer;
+}
+
+#Specific .userImage {
+  margin: 2em;
+  max-width: 500px;
+  /* height: 300px; */
+}
+
+#Specific .imageContainer,
+#Specific .weather {
+  text-align: center;
+  font-weight: bold;
+}
+
+#Specific .createdAt {
+  margin-top: 3em;
+  float: right;
+  color: gray;
+}
+
+#Specific .content {
+  margin: auto;
+  display: inline-block;
+}
+
+#Specific .contentContainer {
+  line-height: 1.8em;
+  text-align: left;
+}
+
+#SpecificContainer {
+  margin-top: 5%;
+}

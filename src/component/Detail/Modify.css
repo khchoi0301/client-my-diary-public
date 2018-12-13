@@ -1,0 +1,41 @@
+#Modify {
+  margin: 4em;
+  margin-bottom: 40px;
+  margin-top: 6.5em;
+}
+
+#Modify .image {
+  margin-top: 10px;
+  width: 200px;
+  height: 200px;
+}
+
+#Modify .header {
+  margin-left: 10px;
+  font-size: 1.7em;
+  font-weight: bold;
+}
+
+#Modify .form-group {
+  margin-top: 7px;
+}
+
+#Modify #CustomSelect {
+  width: 200px;
+}
+
+#Modify .button {
+  float: right;
+  margin-right: 10px;
+  border: 0px;
+}
+
+#Modify .detailBar {
+  margin-bottom: 40px;
+  height: 0.03em;
+  background-color: gray;
+}
+
+.custom-file {
+  width: 400px !important;
+}

@@ -1,0 +1,18 @@
+#DetailHeader {
+  margin-bottom: 40px;
+}
+
+#DetailHeader .date {
+  margin-left: 10px;
+  font-size: 1.5em;
+}
+
+#DetailHeader .detailBar {
+  height: 0.03em;
+  background-color: black;
+}
+
+#DetailHeader .button {
+  float: right;
+  margin-right: 10px;
+}

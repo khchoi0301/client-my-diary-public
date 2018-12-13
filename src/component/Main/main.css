@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css?family=Old+Standard+TT|Stardos+Stencil:700|Vidaloka|PT+Serif+Caption:400i');
+
+.App {
+  float: left;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body .main {
+  margin: 30px;
+  margin-top: 0px;
+  height: 700px;
+  /* background-image: url('https://wovenmagazine.com/content/uploads/2018/05/01_LAM_Wide.jpg'); */
+  background: url('https://s3.ap-northeast-2.amazonaws.com/app2app2/ALLOWTO_PHOTO_20181108194839_STANDARD.jpg');
+}
+
+body .middle {
+  background-color: white;
+  /* height: 200px; */
+  position: relative;
+  margin: 0;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  text-align: center;
+}
+
+
+#help {
+  margin-top: 10em;
+  text-align: center;
+  font-size: 50px;
+}
+.middle .left {
+  font-family: 'Vidaloka', serif;
+  display: inline-block;
+  width: 40%;
+  font-size: 60px;
+}
+
+.middle .left #and {
+  font-size: 30px;
+  font-family: 'PT Serif Caption', serif;
+}
+
+.middle .right {
+  text-align: left;
+  display: inline-block;
+  width: 40%;
+}
+
+body .bottom {
+  background: url('https://wovenmagazine.com/content/uploads/2018/05/01_LAM_Wide.jpg');
+
+  /* Set a specific height */
+  height: 650px;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+body #title {
+  color: white;
+  font-size: 40px;
+  text-align: center;
+  position: relative;
+  top: 70%;
+  font-family: 'Stardos Stencil', cursive;
+  border: 1px white solid;
+  width: 300px;
+  margin: auto;
+  -webkit-transition: background-color 0.5s;
+  /* , -webkit-transform 1s; */
+  transition: background-color 0.5s;
+  /* , transform 1s; */
+}
+body #title:hover {
+  background-color: white;
+  color: black;
+}
+
+#navbar {
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  padding: 0;
+}
+
+a,
+a:hover,
+a:visited,
+a:link,
+a:active {
+  color: black;
+  text-decoration: none !important;
+}
+
+#Dropdown {
+  position: relative;
+  z-index: 99999999999999;
+}
+
+.form {
+  width: 90%;
+}

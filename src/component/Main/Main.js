@@ -1,35 +1,37 @@
 import React, { Component } from 'react';
-import { Nav, NavItem, NavLink } from 'reactstrap';
+import auth from 'utils/auth';
+import './main.css';
 import { Link } from 'react-router-dom';
 
-class UserController extends Component {
+
+export default class Main extends Component {
   render() {
     return (
       <div>
-        <Nav>
-          <NavItem>
-            <NavLink href="/login">Login</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink>
-              <Link to="/signup">Sign Up</Link>
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="#">
-              <Link to="/diary">Diary Link</Link>
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink disabled href="#">
-              Disabled Link
-            </NavLink>
-          </NavItem>
-        </Nav>
-        <img src="https://picsum.photos/600/400?image=123" />
+        <div className="main">
+          {/* <img
+          id="mainimg"
+          src="https://s3.ap-northeast-2.amazonaws.com/app2app2/ALLOWTO_PHOTO_20181108194839_STANDARD.jpg"
+          alt="main"
+        /> */}
+          <div id='title'><Link to='/diary'>My Diary</Link></div>
+        </div>
+        <div className='middle'>
+          <div>
+            <div className='left'>
+              design <span id='and'>and</span> travel
+            </div>
+            <div className='right'>
+              <h3>ABOUT US</h3>
+              {/* 돌아가는 길은 외로운 여행이 될 듯 했다. */}
+              {/* It was going to be a lonely trip back. */}
+              Woven Magazine celebrates artists, designers, and entrepreneurs while exploring the history of design through travel.
+            </div>
+          </div>
+        </div>
+        <div className='bottom'></div>
       </div>
+
     );
   }
 }
-
-export default UserController;

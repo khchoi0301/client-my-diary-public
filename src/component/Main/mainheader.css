@@ -1,0 +1,90 @@
+#header {
+  background-color: white;
+
+  width: 100%;
+  position: fixed;
+  margin-top:0;
+  margin: auto;
+  text-align: center;
+  border-bottom: 1px gainsboro solid;
+  padding: 0px;
+  margin-bottom: 0px;
+}
+
+
+#header li {
+	width:26%;
+	margin: auto;
+	text-align: center;
+	font-family: 'Vidaloka', serif;
+	color: black;
+}
+
+#header .diarylink, #header .login {
+  font-size: 20px;
+}
+
+#header  .home{
+	font-size: 32px;
+	font-family: 'Stardos Stencil', cursive;
+	font-weight: bold;
+
+}
+
+#header  #nick {
+	font-family: 'Vidaloka', serif; 
+	margin-right: 10px;
+}
+
+#dropnick {
+	font-size: 21px;
+	color: black
+}
+
+#Dropdown #menuimg {
+  margin-right: 15px;
+}
+
+.nav-link {
+	margin: auto;
+}
+
+#login {
+  position: relative;
+}
+
+#Dropdown .btn-secondary {
+  margin: auto;
+  padding: 0;
+  background-color: #dee2e6;
+  border: #dee2e6;
+}
+
+#Dropdown {
+  display: inline-block;
+}
+
+#Menu .btn-secondary {
+  margin: auto;
+  padding: 0;
+  background-color: white;
+  border: 0px;
+}
+
+#Menu .dropdown-toggle:focus  {
+  border: 0px white solid;
+  box-shadow: 0 0 0 0.0 rgba(255, 255, 255, 1)
+}
+
+#Menu {
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  border: 0px;
+} 
+
+
+#Menu #menu-item {
+  font-size: 20px;
+}

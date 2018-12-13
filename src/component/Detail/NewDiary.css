@@ -1,0 +1,26 @@
+#NewDiary {
+  margin: 4em;
+  margin-top: 6.5em;
+}
+
+#NewDiary .image {
+  margin-top: 10px;
+  width: 200px;
+  height: 200px;
+}
+
+#NewDiary .form-group {
+  margin-top: 7px;
+}
+
+/* #exampleCustomFileBrowser {
+  display: none !important; 
+ } */
+
+.custom-file {
+  width: 400px !important;
+}
+
+#NewDiary #CustomSelect {
+  width: 200px;
+}
