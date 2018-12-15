@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import api from 'api/api';
 import auth from 'utils/auth';
 import DropDown from './DropDown';
 import Menu from './Menu';
 import './mainheader.css';
-import Hamburger from '../Detail/Hamburger';
 
 export default class Header extends Component {
   state = {
     isLogined: {},
     user: null,
   };
-
-
 
   async _tokenCheck() {
     if (!localStorage.getItem('token')) {
@@ -54,17 +50,11 @@ export default class Header extends Component {
     }
   }
 
-
-
   render() {
-
-
     const { isLogined } = this.state;
     console.log('loginrender', isLogined);
 
-
     if (localStorage.getItem('nick') && !this.state.user) {
-
       this.setState({
         user: localStorage.getItem('nick'),
       });
@@ -73,15 +63,12 @@ export default class Header extends Component {
       this._tokenCheck();
     }
 
-
     return (
       <div id="header">
         <Nav id="navbar" color="black">
           <NavItem className="diarylink">
             <NavLink>
               <Menu />
-              {/* <Hamburger /> */}
-              {/* <img id="menuimg" src="https://cdn3.iconfinder.com/data/icons/mini-icon-set-web-design-device/91/Web_-_Design_-_Device_81-512.png" width="45px" /> */}
               <Link to="/diary">My Diary</Link>
             </NavLink>
           </NavItem>
