@@ -79,9 +79,12 @@ export default class Header extends Component {
           </NavItem>
           <NavItem className="login">
             <NavLink>
-              {!isLogined.code ? null : !(isLogined.code === 200) ? (
+              {!isLogined.code ? (
                 <Link to="/login">Login</Link>
               ) : (
+                // : !(isLogined.code === 200) ? (
+                //   <Link to="/login">Login</Link>
+                // )
                 <Link to disabled>
                   <span id="nick">{this.state.user}</span>
                   <DropDown user={this.state.user} />

@@ -7,11 +7,7 @@ export default class Main extends Component {
     return (
       <div>
         <div className="main">
-          <img
-            id="mainimg"
-            src="https://s3.ap-northeast-2.amazonaws.com/app2app2/ALLOWTO_PHOTO_20181108194839_STANDARD.jpg"
-            alt="main"
-          />
+          <img id="mainimg" src="./main.jpg" alt="main" />
           <div id="title">
             <Link to="/diary">My Diary</Link>
           </div>
