@@ -15,12 +15,12 @@ export default class Main extends Component {
         <div className="middle">
           <div>
             <div className="left">
-              design <span id="and">and</span> travel
+              diary <span id="and">and</span> travel
             </div>
             <div className="right">
               <h3>ABOUT US</h3>
-              Woven Magazine celebrates artists, designers, and entrepreneurs
-              while exploring the history of design through travel.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
             </div>
           </div>
         </div>

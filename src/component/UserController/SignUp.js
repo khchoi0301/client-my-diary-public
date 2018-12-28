@@ -167,10 +167,10 @@ export default class SignUp extends Component {
                 ) : this.state.isPwSame ? (
                   <span className="correct">비밀 번호가 확인 되었습니다</span>
                 ) : (
-                  <span className="wrong">
-                    x 비밀 번호가 동일 하지 않습니다
+                      <span className="wrong">
+                        x 비밀 번호가 동일 하지 않습니다
                   </span>
-                )}
+                    )}
               </FormText>
             </Col>
           </FormGroup>
@@ -190,7 +190,7 @@ export default class SignUp extends Component {
         </Form>
         <Button
           color="warning"
-          href="http://13.209.41.118:3001/auth/kakao"
+          href="52.33.30.43:3001/auth/kakao"
           size="lg"
           className="signUp btnkakao white"
         >

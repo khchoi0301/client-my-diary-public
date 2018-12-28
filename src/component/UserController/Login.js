@@ -89,7 +89,7 @@ export default class Login extends Component {
           </Button>
           <Button
             color="warning"
-            href="http://13.209.41.118:3001/auth/kakao"
+            href="http://52.33.30.43:3001/auth/kakao"
             size="lg"
             className="signIn btnkakao white"
           >
